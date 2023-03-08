@@ -1,4 +1,5 @@
 #include "vecteur.h"
+#include"math.h"
 
 Vecteur::Vecteur ()
 {
@@ -41,7 +42,7 @@ int Vecteur:: GetX() const
 
 int Vecteur :: GetY() const 
 {
-    return y;
+    return ;
 }
 /// possible problem de mémoire avec  des échanges lourds; penser a le modifier 
 
@@ -50,4 +51,33 @@ Vecteur& Vecteur::operator = (const Vecteur& v)
    x=v.x;
    y=v.y;
    return *this;
+}
+
+Vecteur& Vecteur ::operator / (double scalar) const {
+        return Vecteur(x / scalar, y / scalar);
+    }
+
+double Vecteur :: magnitude()const 
+{
+  return sqrt(x*x + y*y);
+}
+
+Vecteur Vecteur :: normalized() const 
+{
+    double mag = magnitude();
+        if (mag > 0) {
+            return *this / mag;
+        } else {
+            return Vecteur(0, 0);
+        }
+        
+     }
+
+
+double Vecteur :: Recupangle()const
+{
+   double temp;
+    temp = acos(x/magnitude());
+    return temp;
+
 }

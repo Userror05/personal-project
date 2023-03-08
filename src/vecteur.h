@@ -26,13 +26,21 @@ class Vecteur
     
     Vecteur& operator - (const Vecteur &v1);
 
+    Vecteur& operator / (double scalar);
+
     ///@brief recupere et retourne les données x et y 
 
     int GetX()const;
 
     int GetY()const;
 
+    double magnitude()const;
 
+    Vecteur normalized() const;
+
+    double Recupangle()const;
+    
+    
 
 
 
