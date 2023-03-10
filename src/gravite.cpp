@@ -4,11 +4,21 @@
 #include<cassert>
 #include"SDL2/SDL.h"
 
-void gravite :: gravite (Balle B)
+void gravite :: graviteConstante (Balle B)
 {
+
+    B.gravite.x=B.gravite.x*g;
+
+    B.gravite.y=B.gravite.y*g;
 
      //velocity += g * dt;
 
+}
+
+void gravite::actualiseVecteur(Balle b)
+{
+    b.mouvement.x+=0.1;
+    b.mouvement.y+=0.1;
 }
 
 
@@ -44,8 +54,8 @@ Vecteur gravite :: accelerationBalle()
 
     //pas sur a propos de ce qui est écris ci-dessous, ce que je veux traduire une accélération en vecteur avec un angle choisis, et le veceteur qui appartient a la balle 
     Balle b;
-    b.mouvement.GetX()*cos(angleChoisis(touche));
-    b.mouvement.GetY()*sin(angleChoisis(touche));
+    //b.mouvement.GetX()*cos(angleChoisis(touche));
+    //b.mouvement.GetY()*sin(angleChoisis(touche));
 }
 
 

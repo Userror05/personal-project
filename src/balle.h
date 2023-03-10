@@ -4,7 +4,7 @@
 #include"gravite.h"
 #include"cellule.h"
 
-class Balle
+class Balle 
 {
     private:
 
@@ -16,13 +16,15 @@ class Balle
     public:
     
     Vecteur mouvement;
+    Vecteur gravite;
 
     Balle();
+    
     
 
 
 
-    void ActionJoueur(Cellule balle,Vecteur mouvement);
+    
 
     /*  fonction qui fait bouger la balle en fonction de touche appuyée 
     fonctions qui utilisent gravite pour avancer et changer le vecteur de positions*/

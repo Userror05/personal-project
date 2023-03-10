@@ -13,12 +13,15 @@ class Gravite
 
     
     Terrain ter;
-    float g =9.81;
+    
 
     public:
+    
+    float g = -9.81;
 
-    void gravite(Balle b);
+    void graviteConstante (Balle& b);
 
+    void actualiseVecteur(Balle b);
 
     float angleChoisis(const char touche);
 
