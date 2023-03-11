@@ -18,7 +18,7 @@ class Terrain
 
       Cellule * tab[20][20] ;
       //Obstacle obs;
-      Balle ply;
+      Balle player;
       
       
 
@@ -32,7 +32,7 @@ class Terrain
     
      void SetCellule(int x, int y,const Cellule& c);
 
-     Cellule& GetCellule()const;
+     Cellule& GetCellule(int x, int y)const;
 
      
      
@@ -45,8 +45,13 @@ class Terrain
      bool CollectionItem(Item I,Balle B);
 
      bool PositionBallevalide(Balle B);
+
+     bool CollisionObstacle(Obstacle O,Balle B);
+
       
-     bool Collision(Obstacle O,Balle B);
+     bool Collision();
+
+     void ArrangementTrajectoire();
 
 
 

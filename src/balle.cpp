@@ -16,3 +16,21 @@ void Balle :: ActionJoueur(Cellule balle, Vecteur mouv)
 
 
 }
+
+int Balle :: GetX()
+{
+    balle.GetX();
+}
+
+int Balle :: GetY()
+{
+    balle.GetY();
+}
+
+
+void Balle :: ArrangementTrajectoire()
+{
+    
+    B.mouvement.x=///trouver la formule
+    B.mouvement.y=//trouver moyen de le faire 
+}

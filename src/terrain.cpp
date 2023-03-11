@@ -26,4 +26,21 @@ void Terrain :: SetCellule (int x,int y, const Cellule& c)
 
 }
 
-Cellule& Terrain:: GetCellule()
+
+
+
+
+
+
+
+
+bool Terrain :: Collision()
+{
+    if (player.GetX()
+
+}
+
+void Terrain :: ArrangementTrajectoire()
+{
+    if (Collision()) player.ArrangementTrajectoire();
+}

@@ -8,8 +8,6 @@ class Balle
 {
     private:
 
-    
-
     Cellule balle;
 
 
@@ -19,6 +17,11 @@ class Balle
     Vecteur gravite;
 
     Balle();
+
+    int GetX();
+    int GetY();
+
+    void ArrangementTrajectoire();
     
     
 
