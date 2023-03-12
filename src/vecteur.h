@@ -8,12 +8,12 @@ class Vecteur
 
 
     public: 
-    int x;
-    int y;
+    double x;
+    double y;
      /// @brief constructeur par défaut
      Vecteur();
      /// @brief constructeur par copie 
-     Vecteur(int x,int y);
+     Vecteur(double x,double y);
    
    
     /// @brief operateur pour ajouter deeux vecteur
@@ -26,7 +26,7 @@ class Vecteur
     
     Vecteur& operator - (const Vecteur &v1);
 
-    Vecteur& operator / (double scalar);
+    Vecteur operator / (double scalar) const;
 
     ///@brief recupere et retourne les données x et y 
 

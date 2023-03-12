@@ -7,7 +7,7 @@ Vecteur::Vecteur ()
     y=0;
 }
 
-Vecteur::Vecteur(int a, int b)
+Vecteur::Vecteur(double a, double b)
 {
     x=a;
     y=b;
@@ -53,8 +53,8 @@ Vecteur& Vecteur::operator = (const Vecteur& v)
    return *this;
 }
 
-Vecteur& Vecteur ::operator / (double scalar) const {
-        return Vecteur(x / scalar, y / scalar);
+Vecteur Vecteur ::operator / (double scalar) const{
+        return Vecteur (x / scalar, y / scalar);
     }
 
 double Vecteur :: magnitude()const 
