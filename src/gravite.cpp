@@ -4,7 +4,7 @@
 #include<cassert>
 #include"SDL2/SDL.h"
 
-void gravite :: graviteConstante (Balle B)
+void Gravite :: graviteConstante (Balle& B)
 {
 
     B.gravite.x=B.gravite.x*g;
@@ -15,41 +15,56 @@ void gravite :: graviteConstante (Balle B)
 
 }
 
-void gravite::actualiseVecteur(Balle b)
+void Gravite::actualiseVecteur(Balle& b)
 {
     b.mouvement.x+=0.1;
     b.mouvement.y+=0.1;
 }
 
 
-float gravite :: angleChoisis(const char touche)
+float Gravite :: angleChoisis()
 {
     float angle = 45;
-    switch (touche)
+    SDL_Event events;
+    bool choixfini = false;
+    int max=90;
+
+    while (SDL_PollEvent(&events)) 
     {
-    case touche='z'/* constant-expression */:
-
-        while (angle<=90){angle=angle+1.0;};
-
-        break;
-
-    case touche='s':
-
-    while(angle>=0){angle=angle-1.0;}
-
-    default:
-        break;
-    };
-
-    assert(angle=<90);
-    assert(angle>=0);
+			if (events.type == SDL_QUIT) choixfini = true;           // Si l'utilisateur a clique sur la croix de fermeture
+			else if (events.type == SDL_KEYDOWN) 
+            {              // Si une touche est enfoncee
+                
+				switch (events.key.keysym.scancode) 
+                {
+				case SDL_SCANCODE_UP:
+					
+                     while (angle<=90){angle=angle+1.0;};   // car Y inverse
+					
+                    break;
+                
+                case SDL_SCANCODE_DOWN:
+                     
+                     while(angle>=0){angle=angle-1.0;};
+               
+                case SDL_SCANCODE_Q:
+                    
+                    choixfini = true;
+                    
+                    break;
+				
+                default: 
+                    break;
+				}
+            } 
+     }
 
     return angle;
 } 
 
 
 //
-Vecteur gravite :: accelerationBalle()
+void Gravite :: accelerationBalle()
 {
 
     //pas sur a propos de ce qui est écris ci-dessous, ce que je veux traduire une accélération en vecteur avec un angle choisis, et le veceteur qui appartient a la balle 
@@ -61,50 +76,64 @@ Vecteur gravite :: accelerationBalle()
 
 // a optimiser poour pouvoir utiliser SDL
 
-double gravite :: RecupA()
+double Gravite :: RecupA()
 {
     double a;
 
-    a=cos(angleChoisis(touche));
+    a=cos(angleChoisis());
     
      return a;
 
 }
 
-double gravite :: RecupB()
+double Gravite :: RecupB()
 {
     double b;
 
-    b=sin(angleChoisis(touche));
+    b=sin(angleChoisis());
 
     return b;
 }
 
-
-double gravite :: ConversionX()
+// pour otenir langle et le vecteur adéquate en fonction de l'angle que l'on a choisi
+double Gravite :: ConversionX()
 {
     return(x=GetPuis()*RecupA());
 
 }
 
-double gravite :: ConversionY()
+double Gravite :: ConversionY()
 {
     return(y=GetPuis()*RecupB());
 }
 
 
-double gravite :: GetPuis()
+int Gravite :: GetPuis()
 {
-
+    SDL_Event events;
+    bool choixfini = false;
+    double pui;
     int max=90;
 
-    
-    while(pui<max)
+    while (SDL_PollEvent(&events)) 
     {
+			if (events.type == SDL_QUIT) choixfini = true;           // Si l'utilisateur a clique sur la croix de fermeture
+			else if (events.type == SDL_KEYDOWN) 
+            {              // Si une touche est enfoncee
+                
+				switch (events.key.keysym.scancode) 
+                {
+				case SDL_SCANCODE_KP_SPACE:
+					while(max>=pui){pui+=0,5;};    // car Y inverse
+					break;
+                case SDL_SCANCODE_Q:
+                    choixfini = true;
+                    break;
+				default: 
+                    break;
+				}
+            } 
+     }
 
-
-
-    }
-
-
+     return pui;
 }

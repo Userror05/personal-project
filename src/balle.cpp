@@ -13,8 +13,6 @@ void Balle :: ActionJoueur(Cellule balle, Vecteur mouv)
 {
     balle.velocit
 
-
-
 }
 
 int Balle :: GetX()
@@ -31,6 +29,6 @@ int Balle :: GetY()
 void Balle :: ArrangementTrajectoire()
 {
     
-    B.mouvement.x=///trouver la formule
-    B.mouvement.y=//trouver moyen de le faire 
+    mouvement.x=///trouver la formule;
+    mouvement.y=//trouver moyen de le faire ;
 }

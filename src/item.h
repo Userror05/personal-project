@@ -15,12 +15,10 @@ class Item
     TypeItem i_typ;
 
 
-
-
     public:
 
 
-    bool estAtteint(Balle ball); ///booléen 
+    bool estAtteint(); ///booléen 
 
     void EffetParType(TypeItem i_type);
 

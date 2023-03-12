@@ -21,10 +21,19 @@ class Gravite
 
     void graviteConstante (Balle& b);
 
-    void actualiseVecteur(Balle b);
+    void actualiseVecteur(Balle& b);
 
-    float angleChoisis(const char touche);
+    float angleChoisis();
 
+    double RecupA();
+
+    double RecupB();
+
+    double ConversionX();
+
+    double ConversionY();
+
+    int GetPuis();
 
     void accelerationBalle();
 

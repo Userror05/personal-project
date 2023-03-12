@@ -20,7 +20,6 @@ class Balle
 
     int GetX();
     int GetY();
-
     void ArrangementTrajectoire();
     
     

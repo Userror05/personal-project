@@ -5,6 +5,7 @@
 #include"obstacle.h"
 #include"balle.h"
 #include"vecteur.h"
+#include<vector>
 
 //tableau de type cellule pointeur 
 
@@ -16,15 +17,19 @@ class Terrain
       int DimX; 
       int DimY;
 
-      Cellule * tab[20][20] ;
+      Cellule tab[20][20] ;
       //Obstacle obs;
       Balle player;
       
+      //template < class T> class vector;
+
+      //vector <Obstacle> O;
+
+     
       
 
     public:
-    
-    
+
     
      Terrain(); // constructeur par defaut 
      
@@ -32,9 +37,7 @@ class Terrain
     
      void SetCellule(int x, int y,const Cellule& c);
 
-     Cellule& GetCellule(int x, int y)const;
-
-     
+     Cellule GetCellule(int x, int y)const;
      
      void GenererTerrain(int Xmin,int Ymin,int Xmax,int Ymax);
 

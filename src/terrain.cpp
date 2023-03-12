@@ -4,9 +4,9 @@
 
 Terrain :: Terrain()
 {
-    DimX=0;
-    DimY=0;
-    tab[200][200]=nullptr;
+    DimX=20;
+    DimY=20;
+    tab[DimX][DimY];
 }
 // création et destruction du terrain, tableau de cellule
 Terrain :: ~Terrain()
@@ -22,9 +22,17 @@ void Terrain :: SetCellule (int x,int y, const Cellule& c)
 {
     assert(0<=x && x<DimX);
     assert(0<=y && y<DimY);
-    tab[y*200 + x]=c;
+    tab[x][y]=c;
 
 }
+
+Cellule Terrain :: GetCellule(int x, int y)const
+{
+    return tab[x][y];
+
+}
+
+
 
 
 
