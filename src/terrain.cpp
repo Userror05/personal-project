@@ -18,7 +18,7 @@ Terrain :: ~Terrain()
 
 }
 // positionne des cellules
-void Terrain :: SetCellule (int x,int y, const Cellule& c)
+void Terrain :: SetCellule (int x,int y,const Cellule& c)
 {
     assert(0<=x && x<DimX);
     assert(0<=y && y<DimY);

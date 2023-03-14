@@ -7,10 +7,7 @@
 void Gravite :: graviteConstante (Balle& B)
 {
 
-    B.gravite.x=B.gravite.x*g;
-
     B.gravite.y=B.gravite.y*g;
-
      //velocity += g * dt;
 
 }
