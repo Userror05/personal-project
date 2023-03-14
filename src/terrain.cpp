@@ -48,7 +48,9 @@ bool Terrain :: Collision()
 
 }
 
-void Terrain :: ArrangementTrajectoire()
-{
-    if (Collision()) player.ArrangementTrajectoire();
-}
+
+
+
+
+
+

@@ -95,7 +95,7 @@ double Gravite :: RecupB()
 // pour otenir langle et le vecteur adéquate en fonction de l'angle que l'on a choisi
 double Gravite :: ConversionX()
 {
-    return(x=GetPuis()*RecupA());
+    return(ter.player.GetX()=GetPuis()*RecupA());
 
 }
 

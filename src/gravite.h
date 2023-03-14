@@ -37,13 +37,15 @@ class Gravite
 
     void accelerationBalle();
 
+    
 
+  //const Terrain& GetTerrain();
 
 
 };
 
 
-
+// inline const Terrain& Gravite :: GetTerrain() {return ter;}
 
 
 
