@@ -17,6 +17,8 @@ void Gravite::actualiseVecteur(Balle& b)
 
 
     }
+
+    
 }
 
 
