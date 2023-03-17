@@ -3,13 +3,6 @@
 #include<cassert>
 #include"SDL2/SDL.h"
 
-void Gravite :: graviteConstante (Balle& B)
-{
-
-    B.gravite.y=B.gravite.y*g;
-     //velocity += g * dt;
-
-}
 
 void Gravite::actualiseVecteur(Balle& b)
 {
@@ -18,9 +11,9 @@ void Gravite::actualiseVecteur(Balle& b)
 }
 
 
-float Gravite :: angleChoisis()
+void Gravite :: angleChoisis()
 {
-    float angle = 45;
+    float ang = 45;
     SDL_Event events;
     bool choixfini = false;
     int max=90;
@@ -35,13 +28,13 @@ float Gravite :: angleChoisis()
                 {
 				case SDL_SCANCODE_UP:
 					
-                     while (angle<=90){angle=angle+1.0;};   // car Y inverse
+                     while (ang<=90){ang=ang+1.0;};   // car Y inverse
 					
                     break;
                 
                 case SDL_SCANCODE_DOWN:
                      
-                     while(angle>=0){angle=angle-1.0;};
+                     while(ang>=0){ang=ang-1.0;};
                
                 case SDL_SCANCODE_Q:
                     
@@ -54,8 +47,8 @@ float Gravite :: angleChoisis()
 				}
             } 
      }
+     Angle = ang;
 
-    return angle;
 } 
 
 
@@ -76,7 +69,7 @@ double Gravite :: RecupA()
 {
     double a;
 
-    a=cos(angleChoisis());
+    a=cos(Angle);
     
      return a;
 
@@ -86,7 +79,7 @@ double Gravite :: RecupB()
 {
     double b;
 
-    b=sin(angleChoisis());
+    b=sin(Angle);
 
     return b;
 }
@@ -94,17 +87,23 @@ double Gravite :: RecupB()
 // pour otenir langle et le vecteur adéquate en fonction de l'angle que l'on a choisi
 double Gravite :: ConversionX()
 {
-    return(GetPuis()*RecupA());
+    return(Power*RecupA());
 
 }
 
 double Gravite :: ConversionY()
 {
-    return(GetPuis()*RecupB());
+    return(Power*RecupB());
+}
+
+Vecteur Gravite :: Vitesse()
+{
+    Vecteur v (ConversionX(),ConversionY());
+    return(B.vitesse=v);
 }
 
 
-int Gravite :: GetPuis()
+void Gravite :: GetPuis()
 {
     SDL_Event events;
     bool choixfini = false;
@@ -130,6 +129,5 @@ int Gravite :: GetPuis()
 				}
             } 
      }
-
-     return pui;
+    Power=pui;
 }

@@ -19,11 +19,15 @@ class Gravite
     
     float g = -9.81;
 
+    double Power; 
+
+    float Angle;
+
     void graviteConstante (Balle& b);
 
     void actualiseVecteur(Balle& b);
 
-    float angleChoisis();
+    void angleChoisis();
 
     double RecupA();
 
@@ -33,7 +37,7 @@ class Gravite
 
     double ConversionY();
 
-    int GetPuis();
+    void GetPuis();
 
     void accelerationBalle();
 
