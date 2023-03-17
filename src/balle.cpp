@@ -4,9 +4,9 @@ Balle :: Balle ()
 {
     balle.SetX(10);
     balle.SetY(10);
-    Vecteur v(0,0);
-    mouvement(0,0);
-    gravite(-9.81)
+    position (0.0,0.0);
+    gravite (0.0,-9.81);
+    vitesse (0.0,0.0);
 }
 
 

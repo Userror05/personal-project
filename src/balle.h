@@ -15,7 +15,8 @@ class Balle
 
     public:
     
-    Vecteur mouvement;
+    Vecteur position;
+    Vecteur vitesse;
     Vecteur gravite;
 
     Balle();

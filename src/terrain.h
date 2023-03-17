@@ -16,15 +16,22 @@ class Terrain
      
       int DimX; 
       int DimY;
-
-      Cellule  tab[20][20] ;
-      //Obstacle obs;
-      Balle player;
       
+      //enum TypeCellule { Balle='B', Obstacle='O', Cellule='#',SPACE=' ' };
+
+      //Cellule  tab[20][20] ;
+      //Obstacle obs;
+       Balle player;
+      //Obstacle obs;
       //template < class T> class vector;
 
       //vector <Obstacle> O;
 
+      //TypeCellule m_ter[20][20];
+
+      
+      Obstacle ** tab[20][20];
+      
      
       
 
@@ -45,9 +52,9 @@ class Terrain
 
      bool positionValide(Cellule evaluee);//bool
 
-     bool CollectionItem(Item I,Balle B);
+     //bool CollectionItem(Item I,Balle B);
 
-     bool PositionBallevalide(Balle B);
+     //bool PositionBallevalide(Balle B);
 
      bool CollisionObstacle(Obstacle O,Balle B);
 

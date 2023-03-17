@@ -1,6 +1,5 @@
 #include"src/gravite.h"
 #include"math.h"
-#include"vecteur.h"
 #include<cassert>
 #include"SDL2/SDL.h"
 
@@ -14,8 +13,8 @@ void Gravite :: graviteConstante (Balle& B)
 
 void Gravite::actualiseVecteur(Balle& b)
 {
-    b.mouvement.x+=0.1;
-    b.mouvement.y+=0.1;
+    Vecteur actualise (0.1,0.1);
+    b.mouvement+= actualise;
 }
 
 
@@ -95,13 +94,13 @@ double Gravite :: RecupB()
 // pour otenir langle et le vecteur adéquate en fonction de l'angle que l'on a choisi
 double Gravite :: ConversionX()
 {
-    return(ter.player.GetX()=GetPuis()*RecupA());
+    return(GetPuis()*RecupA());
 
 }
 
 double Gravite :: ConversionY()
 {
-    return(y=GetPuis()*RecupB());
+    return(GetPuis()*RecupB());
 }
 
 
