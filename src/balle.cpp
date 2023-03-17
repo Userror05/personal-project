@@ -3,8 +3,7 @@
 Balle :: Balle ()
 {
     balle.SetX(10);
-    balle.SetY(10);
-    position (0.0,0.0);
+    balle.SetY(10); //valeur au pif pour l'instant
     gravite (0.0,-9.81);
     vitesse (0.0,0.0);
 }
