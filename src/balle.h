@@ -3,12 +3,14 @@
 #include"vecteur.h"
 #include"gravite.h"
 #include"cellule.h"
+#include"terrain.h"
 
 class Balle 
 {
     private:
 
     Cellule balle;
+    Terrain ter;
 
 
     public:
@@ -20,19 +22,8 @@ class Balle
 
     int GetX();
     int GetY();
-    void ArrangementTrajectoire();
+    bool ArrangementTrajectoire();
     
-    
-
-
-
-    
-
-    /*  fonction qui fait bouger la balle en fonction de touche appuyée 
-    fonctions qui utilisent gravite pour avancer et changer le vecteur de positions*/
-
-    
-
 
 
 

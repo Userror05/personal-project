@@ -26,7 +26,9 @@ class Vecteur
     
     Vecteur& operator - (const Vecteur &v1);
 
-    Vecteur operator / (double scalar) const;
+    Vecteur operator / (double scalar)const;
+
+    Vecteur operator * (double scalar)const ;
 
     ///@brief recupere et retourne les données x et y 
 

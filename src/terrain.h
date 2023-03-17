@@ -17,7 +17,7 @@ class Terrain
       int DimX; 
       int DimY;
 
-      Cellule tab[20][20] ;
+      Cellule  tab[20][20] ;
       //Obstacle obs;
       Balle player;
       
@@ -57,7 +57,7 @@ class Terrain
      void ArrangementTrajectoire();
 
 
-
+  
 
 
 

@@ -10,11 +10,6 @@ Balle :: Balle ()
 }
 
 
-void Balle :: ActionJoueur(Cellule balle, Vecteur mouv)
-{
-    balle.velocit
-
-}
 
 int Balle :: GetX()
 {
@@ -27,9 +22,7 @@ int Balle :: GetY()
 }
 
 
-void Balle :: ArrangementTrajectoire()
+bool Balle :: ArrangementTrajectoire()
 {
-    
-    mouvement.x=///trouver la formule;
-    mouvement.y=//trouver moyen de le faire ;
+    return ter.Collision();
 }

@@ -7,10 +7,7 @@
 void Gravite :: graviteConstante (Balle& B)
 {
 
-    B.gravite.x=B.gravite.x*g;
-
     B.gravite.y=B.gravite.y*g;
-
      //velocity += g * dt;
 
 }
@@ -98,7 +95,7 @@ double Gravite :: RecupB()
 // pour otenir langle et le vecteur adéquate en fonction de l'angle que l'on a choisi
 double Gravite :: ConversionX()
 {
-    return(x=GetPuis()*RecupA());
+    return(ter.player.GetX()=GetPuis()*RecupA());
 
 }
 

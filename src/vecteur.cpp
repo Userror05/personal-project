@@ -53,8 +53,12 @@ Vecteur& Vecteur::operator = (const Vecteur& v)
    return *this;
 }
 
-Vecteur Vecteur ::operator / (double scalar) const{
+Vecteur Vecteur::operator / (double scalar) const{
         return Vecteur (x / scalar, y / scalar);
+    }
+
+Vecteur Vecteur::operator * (double scalar) const{
+        return Vecteur (x * scalar, y * scalar);
     }
 
 double Vecteur :: magnitude()const 
