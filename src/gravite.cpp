@@ -13,8 +13,17 @@ void Gravite :: graviteConstante (Balle& B)
 
 void Gravite::actualiseVecteur(Balle& b)
 {
-    Vecteur actualise (0.1,0.1);
-    b.mouvement+= actualise;
+    float coef=0.9;
+    b.mouvement=vitesse+gravité
+    while(!ter.Collision())
+    {
+           // b.mouvement= b.mouvement + b.mouvement*coef;
+            b.mouvement= (b.mouvement + gravité)*coef;
+            b.SetX(b.mouvement.GetX());
+            b.SetY(b.mouvement.GetY());
+
+
+    }
 }
 
 
