@@ -41,10 +41,14 @@ bool Balle :: ArrangementTrajectoire()
 
 void Balle :: ActionJoueur()
 {
-    while(!Rejouer(B.mouvement,B))
+    Gravite gr;
+    while(!Rejouer(mouvement,*this))
     {
-        
+        gr.actualiseVecteur(*this);    
     }
+    gr.angleChoisis();
+    gr.GetPuis();
+
 }
 
 bool Balle :: Rejouer(Vecteur v,Balle b)
