@@ -41,15 +41,17 @@ bool Balle :: ArrangementTrajectoire()
 
 void Balle :: ActionJoueur()
 {
-    angleChoisis();
-    GetPuis();
-    Vitesse();
-    InitMouvement(B);
-    while(!Rejouer(B.mouvement,B))
+    Gravite gr;
+    gr.angleChoisis();
+    gr.GetPuis();
+    gr.Vitesse();
+    gr.InitMouvement(B);
+    while(!Rejouer(mouvement,*this))
     {
-        actualiseVecteur(B);
+        gr.actualiseVecteur(*this);
+        
     }
-    
+
 }
 
 bool Balle :: Rejouer(Vecteur v,Balle b)
@@ -63,15 +65,16 @@ bool Balle :: Rejouer(Vecteur v,Balle b)
 
 void Balle :: ActionJoueurVisuel()
 {
-    angleChoisis();
-    AffAng();
-    GetPuis();
-    AffPR();
-    Vitesse();
-    InitMouvement(B);
-    while(!Rejouer(B.mouvement,B))
+    Gravite gr;
+    gr.angleChoisis();
+    gr.AffAng();
+    gr.GetPuis();
+    gr.AffPR();
+    gr.Vitesse();
+    gr.InitMouvement(B);
+    while(!Rejouer(B.mouvement,*this))
     {
-        actualiseVecteur(B);
+        gr.actualiseVecteur(*this);
         AffPosition();
     }
    
