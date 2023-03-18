@@ -14,6 +14,7 @@ class Gravite
     
     Terrain ter;
     
+    
 
     public:
     
@@ -36,6 +37,8 @@ class Gravite
     double ConversionX();
 
     double ConversionY();
+
+    Vecteur Vitesse(Balle& b);
 
     void GetPuis();
 

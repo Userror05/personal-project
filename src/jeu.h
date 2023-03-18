@@ -13,9 +13,10 @@ class Jeu
 
     private:
     Balle B;
-    Item I;
-    Obstacle O;
+    Item item;
+    Obstacle Obs;
     Terrain ter;
+    Gravite gr;
 
 
 
@@ -24,7 +25,11 @@ class Jeu
 
 
 
-    void ActionJoueur();
+    void jeu();
+
+    
+
+    void Affichage_txt();
 
 
 

@@ -9,21 +9,26 @@ class Balle
 {
     private:
 
-    Cellule balle;
+    double pos_x,pos_y;
     Terrain ter;
+   
 
 
     public:
     
-    Vecteur position;
+    Vecteur mouvement;
     Vecteur vitesse;
     Vecteur gravite;
 
     Balle();
 
-    int GetX();
-    int GetY();
+    double GetX();
+    double GetY();
+    void SetX(double x);
+    void SetY(double y);
     bool ArrangementTrajectoire();
+    void ActionJoueur();
+    bool Rejouer(Vecteur v, Balle b);
     
 
 

@@ -7,15 +7,13 @@
 void Gravite::actualiseVecteur(Balle& b)
 {
     float coef=0.9;
-    b.mouvement=vitesse+gravité
+    b.mouvement=b.vitesse+b.gravite;
     while(!ter.Collision())
     {
            // b.mouvement= b.mouvement + b.mouvement*coef;
-            b.mouvement= (b.mouvement + gravité)*coef;
+            b.mouvement= (b.mouvement + b.gravite)*coef;
             b.SetX(b.mouvement.GetX());
             b.SetY(b.mouvement.GetY());
-
-
     }
 
     
@@ -107,10 +105,10 @@ double Gravite :: ConversionY()
     return(Power*RecupB());
 }
 
-Vecteur Gravite :: Vitesse()
+Vecteur Gravite :: Vitesse(Balle& b)
 {
     Vecteur v (ConversionX(),ConversionY());
-    return(B.vitesse=v);
+    return(b.vitesse=v);
 }
 
 
