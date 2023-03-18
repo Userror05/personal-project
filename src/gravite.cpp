@@ -7,7 +7,7 @@
 void Gravite::actualiseVecteur(Balle& b)
 {
     float coef=0.9;
-    b.mouvement=vitesse+gravité
+    b.mouvement=b.vitesse+b.gravite;
     while(!ter.Collision())
     {
            // b.mouvement= b.mouvement + b.mouvement*coef;
