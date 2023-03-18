@@ -2,7 +2,6 @@
 #define _BALLE_H
 #include"vecteur.h"
 #include"gravite.h"
-#include"cellule.h"
 #include"terrain.h"
 
 class Balle 
@@ -29,7 +28,10 @@ class Balle
     bool ArrangementTrajectoire();
     void ActionJoueur();
     bool Rejouer(Vecteur v, Balle b);
+    void AffPosition();
+    void ActionJoueurVisuel();
     
+
 
 
 

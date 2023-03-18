@@ -44,7 +44,11 @@ class Gravite
 
     void accelerationBalle();
 
+    void AffAng();
+
+    void AffPR();
     
+    void InitMouvement(Balle& b);
 
   //const Terrain& GetTerrain();
 

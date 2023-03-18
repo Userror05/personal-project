@@ -7,16 +7,21 @@
 void Gravite::actualiseVecteur(Balle& b)
 {
     float coef=0.9;
-    b.mouvement=b.vitesse+b.gravite;
     while(!ter.Collision())
     {
            // b.mouvement= b.mouvement + b.mouvement*coef;
             b.mouvement= (b.mouvement + b.gravite)*coef;
             b.SetX(b.mouvement.GetX());
             b.SetY(b.mouvement.GetY());
+
     }
 
     
+}
+
+void Gravite :: InitMouvement(Balle& b)
+{
+    b.mouvement=b.vitesse+b.gravite;
 }
 
 
@@ -105,10 +110,10 @@ double Gravite :: ConversionY()
     return(Power*RecupB());
 }
 
-Vecteur Gravite :: Vitesse(Balle& b)
+Vecteur Gravite :: Vitesse()
 {
     Vecteur v (ConversionX(),ConversionY());
-    return(b.vitesse=v);
+    return(B.vitesse=v);
 }
 
 
@@ -139,4 +144,14 @@ void Gravite :: GetPuis()
             } 
      }
     Power=pui;
+}
+
+void Gravite :: AffPR ()
+{
+    cout << "La puissance est de " << Power;
+}
+
+void Gravite :: AffAng()
+{
+    cout << "l'angle est de " << Angle << "°";
 }

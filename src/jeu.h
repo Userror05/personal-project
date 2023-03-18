@@ -18,23 +18,11 @@ class Jeu
     Terrain ter;
     Gravite gr;
 
-
-
     public:
-
-
-
 
     void jeu();
 
-    
-
     void Affichage_txt();
-
-
-
-
-
 
 };
 

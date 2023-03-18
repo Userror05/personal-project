@@ -11,7 +11,7 @@ Balle :: Balle ()
 
 
 
-double Balle :: GetX()
+double Balle :: GetX() 
 {
     return pos_x;
 }
@@ -41,10 +41,15 @@ bool Balle :: ArrangementTrajectoire()
 
 void Balle :: ActionJoueur()
 {
+    angleChoisis();
+    GetPuis();
+    Vitesse();
+    InitMouvement(B);
     while(!Rejouer(B.mouvement,B))
     {
-        
+        actualiseVecteur(B);
     }
+    
 }
 
 bool Balle :: Rejouer(Vecteur v,Balle b)
@@ -54,4 +59,25 @@ bool Balle :: Rejouer(Vecteur v,Balle b)
         return true;
     }
     else return false;
+}
+
+void Balle :: ActionJoueurVisuel()
+{
+    angleChoisis();
+    AffAng();
+    GetPuis();
+    AffPR();
+    Vitesse();
+    InitMouvement(B);
+    while(!Rejouer(B.mouvement,B))
+    {
+        actualiseVecteur(B);
+        AffPosition();
+    }
+   
+}
+
+void Balle :: AffPosition()
+{
+    cout<<"("<<pos_x<<","<<pos_y<<")";
 }
