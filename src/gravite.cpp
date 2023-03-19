@@ -2,6 +2,8 @@
 #include"math.h"
 #include<cassert>
 #include"SDL2/SDL.h"
+using namespace std;
+
 
 
 void Gravite::actualiseVecteur(Balle& b)
@@ -110,10 +112,10 @@ double Gravite :: ConversionY()
     return(Power*RecupB());
 }
 
-Vecteur Gravite :: Vitesse()
+Vecteur Gravite :: Vitesse(Balle& b)
 {
     Vecteur v (ConversionX(),ConversionY());
-    return(B.vitesse=v);
+    return(b.vitesse=v);
 }
 
 

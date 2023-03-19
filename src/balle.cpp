@@ -44,8 +44,8 @@ void Balle :: ActionJoueur()
     Gravite gr;
     gr.angleChoisis();
     gr.GetPuis();
-    gr.Vitesse();
-    gr.InitMouvement(B);
+    gr.Vitesse(*this);
+    gr.InitMouvement(*this);
     while(!Rejouer(mouvement,*this))
     {
         gr.actualiseVecteur(*this);
@@ -70,9 +70,9 @@ void Balle :: ActionJoueurVisuel()
     gr.AffAng();
     gr.GetPuis();
     gr.AffPR();
-    gr.Vitesse();
-    gr.InitMouvement(B);
-    while(!Rejouer(B.mouvement,*this))
+    gr.Vitesse(*this);
+    gr.InitMouvement(*this);
+    while(!Rejouer(mouvement,*this))
     {
         gr.actualiseVecteur(*this);
         AffPosition();
