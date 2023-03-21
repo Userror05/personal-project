@@ -1,32 +1,27 @@
-#include"src/gravite.h"
+#include"gravite.h"
 #include"math.h"
-#include<cassert>
-#include"SDL2/SDL.h"
-using namespace std;
-
+/*#include<cassert>*/
+/*#include"SDL2/SDL.h"*/
+#include<iostream>
 
 
 void Gravite::actualiseVecteur(Balle& b)
 {
     float coef=0.9;
-    while(!ter.Collision())
-    {
-           // b.mouvement= b.mouvement + b.mouvement*coef;
-            b.mouvement= (b.mouvement + b.gravite)*coef;
-            b.SetX(b.mouvement.GetX());
-            b.SetY(b.mouvement.GetY());
+           // b.mouvement= (b.mouvement + b.mouvement)*coef;
+            b.mouvement.SetX((b.mouvement.GetX()+b.gravite.GetX())*coef);
+            b.mouvement.SetY((b.mouvement.GetY()+b.gravite.GetY())*coef);
+            b.SetX(b.GetX()+b.mouvement.GetX());
+            b.SetY(b.GetY()+b.mouvement.GetY());
+            std::cout<<"mouv:"<<"("<<b.mouvement.GetX()<<","<<b.mouvement.GetY()<<")";
+            b.AffPosition();
 
-    }
-
+//avant while(!ter.collision)
     
 }
 
-void Gravite :: InitMouvement(Balle& b)
-{
-    b.mouvement=b.vitesse+b.gravite;
-}
 
-
+/*
 void Gravite :: angleChoisis()
 {
     float ang = 45;
@@ -44,13 +39,13 @@ void Gravite :: angleChoisis()
                 {
 				case SDL_SCANCODE_UP:
 					
-                     while (ang<=90){ang=ang+1.0;};   // car Y inverse
+                     while (ang<=90){ang=ang+1.0; std :: cout<<"angle="<<ang;};   // car Y inverse
 					
                     break;
                 
                 case SDL_SCANCODE_DOWN:
                      
-                     while(ang>=0){ang=ang-1.0;};
+                     while(ang>=0){ang=ang-1.0;std :: cout<<"angle="<<ang;};
                
                 case SDL_SCANCODE_Q:
                     
@@ -64,11 +59,12 @@ void Gravite :: angleChoisis()
             } 
      }
      Angle = ang;
+     std::cout<<"Angle final:"<<Angle;
 
-} 
+} */
 
 
-//
+/*
 void Gravite :: accelerationBalle()
 {
 
@@ -77,16 +73,15 @@ void Gravite :: accelerationBalle()
     //b.mouvement.GetX()*cos(angleChoisis(touche));
     //b.mouvement.GetY()*sin(angleChoisis(touche));
 }
-
+*/
 
 // a optimiser poour pouvoir utiliser SDL
 
 double Gravite :: RecupA()
 {
     double a;
-
     a=cos(Angle);
-    
+    std::cout<<" "<<a<<" ";
      return a;
 
 }
@@ -94,11 +89,19 @@ double Gravite :: RecupA()
 double Gravite :: RecupB()
 {
     double b;
-
-    b=sin(Angle);
-
+    b=sin(ConversionAng());
+    std::cout<<" "<<b<<" ";
     return b;
 }
+
+double Gravite :: ConversionAng()
+{
+    Angle=Angle/180;
+    Angle=Angle*3.141592653;
+    std::cout<<"Angle converti: "<<Angle<<" ";
+    return Angle;
+}
+
 
 // pour otenir langle et le vecteur adéquate en fonction de l'angle que l'on a choisi
 double Gravite :: ConversionX()
@@ -112,13 +115,13 @@ double Gravite :: ConversionY()
     return(Power*RecupB());
 }
 
-Vecteur Gravite :: Vitesse(Balle& b)
+Vecteur& Gravite :: Vitesse(Balle& b)
 {
     Vecteur v (ConversionX(),ConversionY());
     return(b.vitesse=v);
 }
 
-
+/*
 void Gravite :: GetPuis()
 {
     SDL_Event events;
@@ -135,7 +138,7 @@ void Gravite :: GetPuis()
 				switch (events.key.keysym.scancode) 
                 {
 				case SDL_SCANCODE_KP_SPACE:
-					while(max>=pui){pui+=0,5;};    // car Y inverse
+					while(max>=pui){pui+=0,5;std::cout<<"Puissance="<<Power;};    // car Y inverse
 					break;
                 case SDL_SCANCODE_Q:
                     choixfini = true;
@@ -146,14 +149,15 @@ void Gravite :: GetPuis()
             } 
      }
     Power=pui;
-}
+    std::cout<<"Puissance Finale="<<Power;
+}*/
 
 void Gravite :: AffPR ()
 {
-    cout << "La puissance est de " << Power;
+    std :: cout << "La puissance est de " << Power;
 }
 
 void Gravite :: AffAng()
 {
-    cout << "l'angle est de " << Angle << "°";
+    std :: cout << "l'angle est de " << Angle << "°";
 }

@@ -8,12 +8,12 @@ class Vecteur
 
 
     public: 
-    double x;
-    double y;
+    float x;
+    float y;
      /// @brief constructeur par défaut
      Vecteur();
      /// @brief constructeur par copie 
-     Vecteur(double x,double y);
+     Vecteur(float x,float y);
    
    
     /// @brief operateur pour ajouter deeux vecteur
@@ -26,15 +26,20 @@ class Vecteur
     
     Vecteur& operator - (const Vecteur &v1);
 
-    Vecteur operator / (double scalar)const;
+    Vecteur operator / (float scalar)const;
 
-    Vecteur operator * (double scalar)const ;
+    Vecteur operator * (float scalar)const ;
+
+    Vecteur& operator = (const Vecteur& v);
 
     ///@brief recupere et retourne les données x et y 
 
-    int GetX()const;
+    float GetX()const;
 
-    int GetY()const;
+    float GetY()const;
+
+    void SetX(double e);
+    void SetY(double f);
 
     double magnitude()const;
 

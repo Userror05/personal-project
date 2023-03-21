@@ -1,18 +1,12 @@
 #ifndef _GRAVITE
 #define _GRAVITE
 
-#include"vecteur.h"
-#include"terrain.h"
-#include"cellule.h"
 #include"balle.h"
 
 class Gravite
 {
 
     private:
-
-    
-    Terrain ter;
     
     
 
@@ -22,33 +16,33 @@ class Gravite
 
     double Power; 
 
-    float Angle;
+    double Angle;
 
-    void graviteConstante (Balle& b);
+    /*void graviteConstante (Balle& b);*/
 
     void actualiseVecteur(Balle& b);
 
-    void angleChoisis();
+    /*void angleChoisis();*/
 
     double RecupA();
 
     double RecupB();
+    double ConversionAng();
 
     double ConversionX();
 
     double ConversionY();
 
-    Vecteur Vitesse(Balle& b);
+    Vecteur& Vitesse(Balle& b);
 
-    void GetPuis();
+    /*void GetPuis();*/
 
-    void accelerationBalle();
+    /*void accelerationBalle();*/
 
     void AffAng();
 
     void AffPR();
     
-    void InitMouvement(Balle& b);
 
   //const Terrain& GetTerrain();
 

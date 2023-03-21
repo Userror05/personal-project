@@ -1,37 +1,27 @@
-SRC = src/balle.cpp src/terrain.cpp src/jeu.cpp src/cellule.cpp src/gravite.cpp src/obstacle.cpp
+all: bin/txt 
 
-FINAL_TARGET_SDL = golfnic_sdl
+bin/txt: obj/mainTEST1.o obj/vecteur.o obj/cellule.o obj/balle.o obj/jeu.o obj/gravite.o
+	g++ obj/mainTEST1.o obj/vecteur.o obj/cellule.o obj/balle.o obj/jeu.o obj/gravite.o -o bin/txt 
+	
+obj/mainTEST1.o: src/mainTEST1.cpp src/jeu.h src/vecteur.h src/gravite.h src/terrain.h
+	g++ -ggdb -c src/mainTEST1.cpp -o obj/mainTEST1.o
 
+obj/vecteur.o: src/vecteur.cpp src/vecteur.h
+	g++ -g -Wall -c src/vecteur.cpp -o obj/vecteur.o
 
+obj/cellule.o: src/cellule.cpp src/cellule.h
+	g++ -g -Wall -c src/cellule.cpp -o obj/cellule.o
 
+obj/balle.o: src/balle.cpp src/balle.h src/vecteur.h 
+	g++ -g -Wall -c src/balle.cpp -o obj/balle.o
 
-CC					= g++
-LD 					= g++
-LDFLAGS  			=
-CPPFLAGS 			= -Wall -ggdb   #-O2   # pour optimiser
-OBJ_DIR 			= obj
-SRC_DIR 			= src
-BIN_DIR 			= bin
-INCLUDE_DIR			= -I/usr/include/SDL2
-LIBS_SDL = -lSDL2 -lSDL2_ttf -lSDL2_image -lSDL2_mixer -lGL
+obj/gravite.o: src/gravite.cpp src/gravite.h src/vecteur.h src/balle.h
+	g++ -g -Wall -c src/gravite.cpp -o obj/gravite.o
 
-
-default: make_dir $(BIN_DIR)/$(FINAL_TARGET_SDL)
-
-
-
-make_dir:
-$(BIN_DIR)/$(FINAL_TARGET_SDL): $(SRCS_SDL:%.cpp=$(OBJ_DIR)/%.o)
-	$(LD) $+ -o $@ $(LDFLAGS) $(LIBS_SDL)
-
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
-	$(CC) -c $(CPPFLAGS) $(INCLUDE_DIR_SDL) $(INCLUDE_DIR) $< -o $@
+obj/jeu.o: src/jeu.cpp src/jeu.h src/gravite.h src/balle.h src/vecteur.h
+	g++ -g -Wall -c src/jeu.cpp -o obj/jeu.o
 
 
 
-#docu: doc/pacman.doxy
-	cd doc ; doxygen pacman.doxy
-
-clean:
-
-rm -rf $(OBJ_DIR) $(BIN_DIR)/$(FINAL_TARGET_SDL) doc/html
+clean:           
+	-rm obj/*.o  bin/txt

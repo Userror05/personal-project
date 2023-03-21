@@ -1,5 +1,5 @@
 #include "vecteur.h"
-#include"math.h"
+#include <math.h>
 
 Vecteur::Vecteur ()
 {
@@ -7,7 +7,7 @@ Vecteur::Vecteur ()
     y=0;
 }
 
-Vecteur::Vecteur(double a, double b)
+Vecteur::Vecteur(float a, float b)
 {
     x=a;
     y=b;
@@ -35,14 +35,26 @@ Vecteur& Vecteur ::operator - (const Vecteur &v1)
 
 }
 
-int Vecteur:: GetX() const
+float Vecteur:: GetX() const
 {
     return x;
 }
 
-int Vecteur :: GetY() const 
+float Vecteur :: GetY() const 
 {
-    return ;
+    return y;
+}
+
+void Vecteur :: SetX(double e)
+{
+    x=e;
+
+}
+
+
+void Vecteur :: SetY(double f)
+{
+    y=f;
 }
 /// possible problem de mémoire avec  des échanges lourds; penser a le modifier 
 
@@ -53,11 +65,11 @@ Vecteur& Vecteur::operator = (const Vecteur& v)
    return *this;
 }
 
-Vecteur Vecteur::operator / (double scalar) const{
+Vecteur Vecteur::operator / (float scalar) const{
         return Vecteur (x / scalar, y / scalar);
     }
 
-Vecteur Vecteur::operator * (double scalar) const{
+Vecteur Vecteur::operator * (float scalar) const{
         return Vecteur (x * scalar, y * scalar);
     }
 

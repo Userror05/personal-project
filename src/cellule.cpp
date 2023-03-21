@@ -7,8 +7,7 @@ Cellule::Cellule()
    pos_y=0;
 }
 
-Cellule::~Cellule()
-{}
+
 void Cellule::SetX(unsigned int x)
 {  pos_x=x;}
 

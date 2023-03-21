@@ -1,12 +1,15 @@
 #include "balle.h"
+#include <iostream>
 
 Balle :: Balle ()
 {
-    SetX(10);
-    SetY(10); //valeur au pif pour l'instant
-    gravite(0.0,-9.81);
-    vitesse(0.0,0.0);
-    mouvement= Vecteur v(0,0);
+    SetX(0);
+    SetY(0); //valeur au pif pour l'instant
+    Vecteur g(0,-2.81);
+    gravite = g;
+    Vecteur Vec(0.0,0.0);
+    vitesse=Vec;
+    mouvement=vitesse;
 }
 
 
@@ -34,7 +37,7 @@ void Balle :: SetY(double y)
     pos_y=y;
 }
 
-bool Balle :: ArrangementTrajectoire()
+/*bool Balle :: ArrangementTrajectoire()
 {
     return ter.Collision();
 }
@@ -44,43 +47,34 @@ void Balle :: ActionJoueur()
     Gravite gr;
     gr.angleChoisis();
     gr.GetPuis();
-    gr.Vitesse(*this);
-    gr.InitMouvement(*this);
+    gr.Vitesse();
+    gr.InitMouvement(B);
     while(!Rejouer(mouvement,*this))
     {
         gr.actualiseVecteur(*this);
         
     }
 
-}
+}*/
 
-bool Balle :: Rejouer(Vecteur v,Balle b)
-{
-    if(v.GetX()==b.GetX() && v.GetY()==b.GetY())
-    {
-        return true;
-    }
-    else return false;
-}
-
-void Balle :: ActionJoueurVisuel()
-{
-    Gravite gr;
-    gr.angleChoisis();
-    gr.AffAng();
-    gr.GetPuis();
-    gr.AffPR();
-    gr.Vitesse(*this);
-    gr.InitMouvement(*this);
-    while(!Rejouer(mouvement,*this))
-    {
-        gr.actualiseVecteur(*this);
-        AffPosition();
-    }
-   
-}
 
 void Balle :: AffPosition()
 {
-    cout<<"("<<pos_x<<","<<pos_y<<")";
+   std::cout<<"("<<GetX()<<","<<GetY()<<")";
+}
+
+void Balle :: AffVitesse()
+{
+   std::cout<<"vitesse"<<vitesse.GetX()<<";"<<vitesse.GetY();
+}
+
+void Balle :: InitMouvement()
+{
+    mouvement.SetX(vitesse.GetX());
+    mouvement.SetY(vitesse.GetY());
+}
+
+void Balle :: AffInitMouvement()
+{
+   std::cout<<"INITMOUV: "<<mouvement.GetX()<<";"<<mouvement.GetY();
 }
