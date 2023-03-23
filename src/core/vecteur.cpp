@@ -45,14 +45,14 @@ float Vecteur :: GetY() const
     return y;
 }
 
-void Vecteur :: SetX(double e)
+void Vecteur :: SetX(float e)
 {
     x=e;
 
 }
 
 
-void Vecteur :: SetY(double f)
+void Vecteur :: SetY(float f)
 {
     y=f;
 }

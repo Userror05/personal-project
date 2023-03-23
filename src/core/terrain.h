@@ -29,7 +29,7 @@ class Terrain
       //TypeCellule m_ter[20][20];
 
       
-      Cellule ** tab[20][20];
+       Obstacle ** tab;
       
      
       
@@ -42,13 +42,9 @@ class Terrain
      ~Terrain(); // destructeur par défaut 
     
     
-     void SetCellule(int x, int y,const Cellule& c);
+     void SetObstacle(int xmin,int ymin,int xmax, int ymax, const Obstacle& c);
 
-     Cellule GetCellule(int x, int y)const;
-     
-     void GenererTerrain(int Xmin,int Ymin,int Xmax,int Ymax);
-
-     void SetObstacle();
+     //Cellule GetCellule(int x, int y)const;
 
      bool positionValide(Cellule evaluee);//bool
 
@@ -67,8 +63,9 @@ class Terrain
 
      void ArrangementTrajectoire(); 
 
-     
-     const Gravite& getGravite()const;
+     const Gravite& getGravite();
+
+     void TestRegression();
 
 };
 
@@ -78,7 +75,7 @@ inline int Terrain :: getDimx()const{return DimX;}
 
 inline int Terrain :: getDimy()const{return DimY;}
 
-inline const Gravite& Terrain :: getGravite()const{return gr;}
+inline const Gravite& Terrain :: getGravite(){return gr;}
 
 
 #endif

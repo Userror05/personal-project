@@ -38,8 +38,8 @@ class Vecteur
 
     float GetY()const;
 
-    void SetX(double e);
-    void SetY(double f);
+    void SetX(float e);
+    void SetY(float f);
 
     double magnitude()const;
 
