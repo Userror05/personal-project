@@ -1,13 +1,13 @@
 #ifndef _JEU
 #define _JEU
-#include"gravite.h"
+#include"terrain.h"
 
 class Jeu
 {
 
     private:
-    Balle B;
-    Gravite gr;
+    Terrain ter;
+    
 
     public:
 
@@ -17,10 +17,14 @@ class Jeu
 
     bool Rejouer(Vecteur v);
 
-    /*void ActionJoueurVisuel();*/
+    void ActionJoueurVisuel();
     void ActionJoueurVisuelTest45();
 
+    const Terrain& GetTerrain()const;
+
 };
+
+inline const Terrain& Jeu :: GetTerrain()const {return ter;}
 
 
 #endif

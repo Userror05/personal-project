@@ -1,6 +1,6 @@
 #ifndef _OBSTACLE_H
 #define _OBSTACLE_H
-#include"terrain.h"
+#include"cellule.h"
 
 class Obstacle
 {
@@ -8,7 +8,7 @@ class Obstacle
     private:
 
     Cellule Obstacle;
-    Terrain ter;
+    
 
     public:
     
@@ -20,9 +20,9 @@ class Obstacle
 };
 
 inline void Obstacle :: SetObstacle(unsigned int x, unsigned int y)
-{  ter.SetCellule(x,y,Obstacle);}
+{  /*SetCellule(x,y,Obstacle);*/}
 
 inline void Obstacle :: GetObstacle(unsigned int x, unsigned int y)
-{  ter.GetCellule(x,y);}
+{  /*GetCellule(x,y);*/}
 
 #endif

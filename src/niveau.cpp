@@ -1,3 +1,3 @@
-#include"src/niveau.h"
+#include"niveau.h"
 #include"math.h"
 

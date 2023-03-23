@@ -5,11 +5,11 @@ class Vecteur
 {
 
     private :
-
-
-    public: 
     float x;
     float y;
+
+    public: 
+    
      /// @brief constructeur par défaut
      Vecteur();
      /// @brief constructeur par copie 

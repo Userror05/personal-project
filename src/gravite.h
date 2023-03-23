@@ -7,7 +7,7 @@ class Gravite
 {
 
     private:
-    
+    Balle jp;
     
 
     public:
@@ -44,13 +44,12 @@ class Gravite
     void AffPR();
     
 
-  //const Terrain& GetTerrain();
+    const Balle& GetBalle()const;
 
 
 };
+inline const Balle& Gravite :: GetBalle()const{ return jp;}
 
-
-// inline const Terrain& Gravite :: GetTerrain() {return ter;}
 
 
 

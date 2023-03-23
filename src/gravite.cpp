@@ -3,6 +3,7 @@
 /*#include<cassert>*/
 /*#include"SDL2/SDL.h"*/
 #include<iostream>
+#include<unistd.h>
 
 
 void Gravite::actualiseVecteur(Balle& b)
@@ -13,7 +14,9 @@ void Gravite::actualiseVecteur(Balle& b)
             b.mouvement.SetY((b.mouvement.GetY()+b.gravite.GetY())*coef);
             b.SetX(b.GetX()+b.mouvement.GetX());
             b.SetY(b.GetY()+b.mouvement.GetY());
+            usleep(1000000);
             std::cout<<"mouv:"<<"("<<b.mouvement.GetX()<<","<<b.mouvement.GetY()<<")";
+            
             b.AffPosition();
 
 //avant while(!ter.collision)
@@ -94,13 +97,7 @@ double Gravite :: RecupB()
     return b;
 }
 
-double Gravite :: ConversionAng()
-{
-    Angle=Angle/180;
-    Angle=Angle*3.141592653;
-    std::cout<<"Angle converti: "<<Angle<<" ";
-    return Angle;
-}
+ 
 
 
 // pour otenir langle et le vecteur adéquate en fonction de l'angle que l'on a choisi

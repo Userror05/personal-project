@@ -19,8 +19,8 @@ class Balle
 
     Balle();
 
-    double GetX();
-    double GetY();
+    double GetX()const;
+    double GetY()const;
     void SetX(double x);
     void SetY(double y);
    /* bool ArrangementTrajectoire();*/

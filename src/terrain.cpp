@@ -4,8 +4,6 @@
 
 Terrain :: Terrain()
 {
-    DimX=20;
-    DimY=20;
     tab[DimX][DimY];
 }
 // création et destruction du terrain, tableau de cellule
@@ -22,13 +20,13 @@ void Terrain :: SetCellule (int x,int y,const Cellule& c)
 {
     assert(0<=x && x<DimX);
     assert(0<=y && y<DimY);
-    tab[x][y]=c;
+    //tab[x][y]=c;
 
 }
 
 Cellule Terrain :: GetCellule(int x, int y)const
 {
-    return tab[x][y];
+   // return tab[x][y];
 
 }
 
@@ -44,7 +42,7 @@ Cellule Terrain :: GetCellule(int x, int y)const
 
 bool Terrain :: Collision()
 {
-    if (player.GetX()
+    return false;
 
 }
 

@@ -14,12 +14,12 @@ Balle :: Balle ()
 
 
 
-double Balle :: GetX() 
+double Balle :: GetX()const 
 {
     return pos_x;
 }
 
-double Balle :: GetY()
+double Balle :: GetY()const
 {
     return pos_y;
 }

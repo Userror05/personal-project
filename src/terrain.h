@@ -1,11 +1,10 @@
 #ifndef _TERRAIN_H
 #define _TERRAIN_H
 
-#include"cellule.h"
+
 #include"obstacle.h"
-#include"balle.h"
-#include"vecteur.h"
-#include<vector>
+#include"gravite.h"
+
 
 //tableau de type cellule pointeur 
 
@@ -14,15 +13,15 @@ class Terrain
     private:
       
      
-      int DimX; 
-      int DimY;
+      int DimX=20; 
+      int DimY=20;
       
       //enum TypeCellule { Balle='B', Obstacle='O', Cellule='#',SPACE=' ' };
 
       //Cellule  tab[20][20] ;
       //Obstacle obs;
-       Balle player;
-      //Obstacle obs;
+       Gravite gr;
+       //Obstacle obs;
       //template < class T> class vector;
 
       //vector <Obstacle> O;
@@ -30,7 +29,7 @@ class Terrain
       //TypeCellule m_ter[20][20];
 
       
-      Obstacle ** tab[20][20];
+      Cellule ** tab[20][20];
       
      
       
@@ -42,6 +41,7 @@ class Terrain
      
      ~Terrain(); // destructeur par défaut 
     
+    
      void SetCellule(int x, int y,const Cellule& c);
 
      Cellule GetCellule(int x, int y)const;
@@ -52,36 +52,33 @@ class Terrain
 
      bool positionValide(Cellule evaluee);//bool
 
+     int getDimx()const;
+
+     int getDimy() const;
+
      //bool CollectionItem(Item I,Balle B);
 
      //bool PositionBallevalide(Balle B);
 
-     bool CollisionObstacle(Obstacle O,Balle B);
+     //bool CollisionObstacle(Obstacle O,Balle B);
 
       
      bool Collision();
 
-     void ArrangementTrajectoire();
+     void ArrangementTrajectoire(); 
 
-
-  
-
-
-
-
-
-
+     
+     const Gravite& getGravite()const;
 
 };
 
 
 
+inline int Terrain :: getDimx()const{return DimX;}
 
+inline int Terrain :: getDimy()const{return DimY;}
 
-
-
-
-
+inline const Gravite& Terrain :: getGravite()const{return gr;}
 
 
 #endif
