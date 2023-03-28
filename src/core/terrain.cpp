@@ -4,7 +4,7 @@
 
 Terrain :: Terrain()
 {
-    tab=nullptr;
+    tab[20][20]=nullptr;
 }
 // création et destruction du terrain, tableau de cellule
 Terrain :: ~Terrain()
@@ -24,7 +24,7 @@ void Terrain :: SetObstacle (int xmin,int ymin,int xmax, int ymax,const Obstacle
   {
     for(unsigned int j=ymin;j<=ymax;j++)
     {
-        tab[i*xmax+j] ;//tab[i][j]; ///u= new Obstacle[ymax]; //improvisation
+        tab[i][j]= new Obstacle[ymax]; //improvisation
     }
   }
 
@@ -32,13 +32,16 @@ void Terrain :: SetObstacle (int xmin,int ymin,int xmax, int ymax,const Obstacle
 
 void Terrain :: ArrangementTrajectoire()
 {
+    Balle b = gr.GetBalle();
     if (Collision())
     {
-        gr.GetBalle().mouvement.SetX(gr.GetBalle().mouvement.GetX());
+        
+        b.mouvement.SetX(gr.GetBalle().mouvement.GetX());
     }
     if (Collision()&& gr.GetBalle().mouvement.GetY()<0)
     {
-         gr.GetBalle().mouvement.SetY(-gr.GetBalle().mouvement.GetY());
+        float y=gr.GetBalle().mouvement.GetY();
+         b.mouvement.SetY(-y);
     }
 
 
@@ -48,7 +51,7 @@ bool Terrain :: Collision()
 {
     int x = (int)gr.GetBalle().GetX();
     int y = (int)gr.GetBalle().GetY();
-    if (tab[y*DimX+x]!= nullptr)return true;
+    if (tab[x][y]!= nullptr)return true;
     else return false;
 }
 

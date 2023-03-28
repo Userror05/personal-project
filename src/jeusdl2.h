@@ -12,6 +12,7 @@ class JeuSDL2
 {
     private :
     Jeu Jeu;
+    
     SDL_Window * window;
     SDL_Renderer * renderer;
 
@@ -25,6 +26,8 @@ class JeuSDL2
 
     public:
 
+    
+
     void BoucleChoixPUI();
 
 
@@ -32,8 +35,6 @@ class JeuSDL2
 
     void SDLinit();
     
-     
-
 
 
 

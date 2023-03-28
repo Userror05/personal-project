@@ -44,11 +44,12 @@ class Gravite
     void AffPR();
     
 
-    const Balle& GetBalle()const;
+     Balle& GetBalle();
 
 
 };
-inline const Balle& Gravite :: GetBalle()const{ return jp;}
+
+inline  Balle& Gravite :: GetBalle(){ return jp;}
 
 
 

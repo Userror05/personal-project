@@ -16,7 +16,7 @@ void JeuSDL2 :: BoucleChoixPUI()
 				switch (events.key.keysym.scancode) 
                 {
 				case SDL_SCANCODE_F:
-					while(10>=jeu.GetTerrain().getGravite().Power){jeu.GetTerrain().getGravite().Power++;};    // car Y inverse
+					Jeu.GetPuis(SDL_SCANCODE_F);    // car Y inverse
 					break;
                 case SDL_SCANCODE_Q:
                     quit = true;
@@ -45,10 +45,10 @@ void JeuSDL2 :: BoucleChoixANG()
 				switch (events.key.keysym.scancode) 
                 {
 				case SDL_SCANCODE_UP:
-					while(jeu.GetTerrain().getGravite().Angle<=90){jeu.GetTerrain().getGravite().Angle++;};    // car Y inverse
+					Jeu.angleChoisis(SDL_SCANCODE_UP);    // car Y inverse
 					break;
                 case SDL_SCANCODE_DOWN:
-					while(jeu.GetTerrain().getGravite().Angle>=0){jeu.GetTerrain().getGravite().Angle--;};    // car Y inverse
+					Jeu.angleChoisis(SDL_SCANCODE_DOWN);    // car Y inverse
 					break;
                 case SDL_SCANCODE_Q:
                     quit = true;
@@ -94,8 +94,8 @@ void JeuSDL2 ::SDLinit()
     else withSound = true;
 
 	int dimx, dimy;
-	dimx = jeu.getConstTerrain().getDimX();
-	dimy = jeu.getConstTerrain().getDimY();
+	dimx = Jeu.GetTerrain().getDimx();
+	dimy = Jeu.GetTerrain().getDimx();
 	dimx = dimx * TAILLE_SPRITE;
 	dimy = dimy * TAILLE_SPRITE;
 

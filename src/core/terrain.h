@@ -29,7 +29,7 @@ class Terrain
       //TypeCellule m_ter[20][20];
 
       
-       Obstacle ** tab;
+       Obstacle * tab[20][20];
       
      
       
@@ -63,7 +63,7 @@ class Terrain
 
      void ArrangementTrajectoire(); 
 
-     const Gravite& getGravite();
+     Gravite& getGravite();
 
      void TestRegression();
 
@@ -75,7 +75,7 @@ inline int Terrain :: getDimx()const{return DimX;}
 
 inline int Terrain :: getDimy()const{return DimY;}
 
-inline const Gravite& Terrain :: getGravite(){return gr;}
+inline Gravite& Terrain :: getGravite(){return gr;}
 
 
 #endif

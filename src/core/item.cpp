@@ -1,4 +1,4 @@
-#include"src/item.h"
+#include"item.h"
 #include<cassert>
 
 bool Item::estAtteint(Balle b)
