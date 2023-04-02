@@ -1,5 +1,7 @@
 #include"jeusdl2.h"
 
+const int TAILLE_SPRITE = 32;
+
 void JeuSDL2 :: BoucleChoixPUI()
    
     {
@@ -109,11 +111,12 @@ void JeuSDL2 ::SDLinit()
 
     renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
 
-    // IMAGES
-    im_pacman.loadFromFile("data/pacman.png",renderer);
+    /*im_pacman.loadFromFile("data/pacman.png",renderer);
     im_mur.loadFromFile("data/mur.png",renderer);
     im_pastille.loadFromFile("data/pastille.png",renderer);
-    im_fantome.loadFromFile("data/fantome.png",renderer);
+    im_fantome.loadFromFile("data/fantome.png",renderer);*/
+    // IMAGES
+    
 
     // FONTS
     font = TTF_OpenFont("data/DejaVuSansCondensed.ttf",50);

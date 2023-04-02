@@ -97,7 +97,10 @@ double Gravite :: RecupB()
     return b;
 }
 
- 
+double Gravite :: ConversionAng()
+{
+
+}
 
 
 // pour otenir langle et le vecteur adéquate en fonction de l'angle que l'on a choisi

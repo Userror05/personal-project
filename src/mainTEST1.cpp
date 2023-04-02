@@ -1,11 +1,11 @@
-#include "jeu.h"
+#include "core/terrain.h"
 
 
 
 int main()
 {
-   Jeu jeu;
-   jeu.ActionJoueurVisuelTest45();
+   Terrain jeu;
+   jeu.TestRegression();
    
 return 0;
 }

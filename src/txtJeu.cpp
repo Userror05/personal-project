@@ -5,11 +5,11 @@
 #include <unistd.h>
 #endif // WIN32
 #include "winTxt.h"
-#include "jeu.h"
+#include "core/jeu.h"
 
 void txtAff(WinTXT & win, const Jeu & jeu) {
 	//const Terrain& ter = jeu.getTerrain();
-	const Balle& b = jeu.getTerrain().GetBalle();
+	const Balle& b = jeu.GetTerrain().getGravite().GetBalle();
 
 	win.clear();
 
@@ -28,7 +28,7 @@ void txtAff(WinTXT & win, const Jeu & jeu) {
 void txtBoucle (Jeu & jeu) {
 	// Creation d'une nouvelle fenetre en mode texte
 	// => fenetre de dimension et position (WIDTH,HEIGHT,STARTX,STARTY)
-    WinTXT win (jeu.getTerrain().getDimx(),jeu.getTerrain().getDimy());
+    WinTXT win (jeu.GetTerrain().getDimx(),jeu.GetTerrain().getDimy());
 	//jeu.Get;
 
 	bool ok = true;
