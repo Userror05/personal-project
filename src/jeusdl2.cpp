@@ -94,7 +94,7 @@ void JeuSDL2 ::SDLinit()
         withSound = false;
     }
     else withSound = true;
-
+//////////////////
 	int dimx, dimy;
 	dimx = Jeu.GetTerrain().getDimx();
 	dimy = Jeu.GetTerrain().getDimx();
@@ -144,3 +144,8 @@ void JeuSDL2 ::SDLinit()
         }
     }
 }
+
+
+
+
+

@@ -34,6 +34,8 @@ class JeuSDL2
     void BoucleChoixANG();
 
     void SDLinit();
+
+    void Bouclejeu();
     
 
 
