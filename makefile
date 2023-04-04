@@ -1,7 +1,7 @@
 all: bin/test 
 
-bin/test: obj/mainTEST1.o obj/vecteur.o obj/cellule.o obj/balle.o obj/jeu.o obj/gravite.o obj/terrain.o obj/obstacle.o
-	g++ obj/mainTEST1.o obj/vecteur.o obj/cellule.o obj/balle.o obj/jeu.o obj/gravite.o obj/terrain.o obj/obstacle.o -o bin/test 
+bin/test: obj/mainTEST1.o obj/vecteur.o obj/cellule.o obj/balle.o obj/jeu.o obj/gravite.o obj/terrain.o obj/obstacle.o obj/niveau.o
+	g++ obj/mainTEST1.o obj/vecteur.o obj/cellule.o obj/balle.o obj/jeu.o obj/gravite.o obj/terrain.o obj/obstacle.o obj/niveau.o -o bin/test 
 	
 obj/mainTEST1.o: src/mainTEST1.cpp src/core/jeu.h src/core/vecteur.h src/core/gravite.h src/core/terrain.h
 	g++ -ggdb -c src/mainTEST1.cpp -o obj/mainTEST1.o
@@ -27,6 +27,8 @@ obj/terrain.o: src/core/gravite.h src/core/balle.h src/core/vecteur.h src/core/o
 obj/jeu.o: src/core/jeu.cpp src/core/jeu.h src/core/gravite.h src/core/balle.h src/core/vecteur.h
 	g++ -ggdb -Wall -c src/core/jeu.cpp -o obj/jeu.o
 
+obj/niveau.o: src/niveau.cpp src/niveau.h
+	g++ -ggdb -Wall -c src/niveau.cpp -o obj/niveau.o
 
 clean:           
 	-rm obj/*.o  bin/test

@@ -13,26 +13,15 @@ class Terrain
     private:
       
      
-      int DimX; 
-      int DimY;
-      
+      unsigned int DimX; 
+      unsigned int DimY;
       //enum TypeCellule { Balle='B', Obstacle='O', Cellule='#',SPACE=' ' };
 
-      //Cellule  tab[20][20] ;
-      //Obstacle obs;
        Gravite gr;
-       //Obstacle obs;
-      //template < class T> class vector;
-
-      //vector <Obstacle> O;
-
-      //TypeCellule m_ter[20][20];
-
+       
       
        Obstacle * tab[20][20];
-      
-     
-      
+       
 
     public:
 
@@ -42,19 +31,8 @@ class Terrain
      ~Terrain(); // destructeur par défaut 
     
     
-     void SetObstacle(int xmin,int ymin,int xmax, int ymax, const Obstacle& c);
+     void SetObstacle(unsigned int xmin,unsigned int ymin,unsigned int xmax,unsigned int ymax,const Obstacle& c);
 
-     //Obstacle GetObs(int x, int y)const;
-
-     bool positionValide(Cellule evaluee);//bool
-
-     //bool CollectionItem(Item I,Balle B);
-
-     //bool PositionBallevalide(Balle B);
-
-     //bool CollisionObstacle(Obstacle O,Balle B);
-
-      
      bool Collision();
 
      void ArrangementTrajectoire(); 
@@ -69,10 +47,19 @@ class Terrain
 
      Obstacle* getXY (const int x, const int y) const;
 
+     //Obstacle GetObs(int x, int y)const;
+
+     bool positionValide(Cellule evaluee);//bool
+
+     //bool CollectionItem(Item I,Balle B);
+
+     //bool PositionBallevalide(Balle B);
+
+     //bool CollisionObstacle(Obstacle O,Balle B);
 
 };
 
-inline Obstacle* Terrain::getXY (const int x, const int y) const {
+inline Obstacle * Terrain::getXY (const int x, const int y) const {
 	assert(x>=0);
 	assert(y>=0);
 	assert(x<DimX);

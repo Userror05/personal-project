@@ -36,7 +36,7 @@ Terrain :: ~Terrain()
 
 }
 // positionne des obstacles
-void Terrain :: SetObstacle (int xmin,int ymin,int xmax, int ymax,const Obstacle& c)
+void Terrain :: SetObstacle (unsigned int xmin,unsigned int ymin,unsigned int xmax,unsigned int ymax,const Obstacle& c)
 {
     assert(0<=xmin && xmax<DimX);
     assert(0<=ymin && ymax<DimY);
@@ -71,7 +71,7 @@ bool Terrain :: Collision()
 {
     int x = (int)gr.GetBalle().GetX();
     int y = (int)gr.GetBalle().GetY();
-    if (tab[x][y]!= nullptr)return true;
+    if (getXY(x,y)!= nullptr)return true;
     else return false;
 }
 

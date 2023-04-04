@@ -1,11 +1,15 @@
-#include "core/terrain.h"
+#include "niveau.h"
+#include<string>
 
 
 
 int main()
 {
-   Terrain jeu;
-   jeu.TestRegression();
+   Niveau niv;
+  std :: string mot = "./data/niveau1";
+   niv.ouvrir(mot);
+
    
+   ;
 return 0;
 }
