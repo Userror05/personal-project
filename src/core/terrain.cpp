@@ -81,7 +81,14 @@ void Terrain :: TestRegression()
     Terrain ter;
     const Obstacle c;
     assert(ter.getDimx()==ter.getDimy());
-    assert(tab[19][19]==nullptr);
+    for(unsigned int i=0;i<ter.getDimx();i++)
+    {
+        for(unsigned int j=0;j<ter.getDimy();j++)
+        {
+            assert(tab[i][j]==nullptr);
+        }
+    }
+    
     ter.SetObstacle(1,1,3,3,c);
     assert(ter.getXY(2,2)!=nullptr);
     
