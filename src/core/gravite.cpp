@@ -99,7 +99,9 @@ double Gravite :: RecupB()
 
 double Gravite :: ConversionAng()
 {
-
+    double c;
+    c=(Angle*3.141592653589)/180;
+    return c;
 }
 
 
