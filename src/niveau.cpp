@@ -59,8 +59,12 @@ void Niveau::ouvrir(const std :: string & filename) {
     
     fichier >> xmin >> ymin>> xmax >> ymax ;
     assert(xmin > 0 && xmin<xmax && xmax < ter.getDimx()-1);
+
 	assert(ymin > 0 && ymin<ymax && ymax < ter.getDimy()-1);
-	ter.SetObstacle(xmin,ymin,xmax,ymax,c);
+
+	ter.SetObstacle(xmin,ymin,xmax,ymax,c); //fichier.eof();
+	
     fichier.close();
-    std :: cout << "Lecture de l'image  " << filename << " ... OK\n";
+
+    std :: cout << "Lecture de niveau  " << filename << " ... OK\n";
 }

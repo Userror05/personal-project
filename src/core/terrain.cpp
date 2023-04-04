@@ -6,22 +6,31 @@ Terrain :: Terrain()
 {
     DimX=20;
     DimY=20;
-    tab[DimX][DimY]=nullptr;
+    for(int i=0;i<DimX;i++)
+    {
+        for(int j=0;j<DimY;j++)
+        {
+           tab[i][j]=nullptr;
+        }
+    }
 }
 // création et destruction du terrain, tableau de cellule
 Terrain :: ~Terrain()
 {
     
-    for(int i=0;i<=DimX;i++)
+    for(int i=0;i<DimX;i++)
     {
-        for(int j=0;j<=DimY;j++)
+        for(int j=0;j<DimY;j++)
         {
-            delete tab[i][j];
-        }
-        
+            if(tab[i][j]!=nullptr)
+            {
+              delete tab[i][j];
+            }
+            
+        }      
 
     }
-    tab[DimX][DimY] = nullptr;
+
     DimX=0;
     DimY=0;
 
@@ -72,7 +81,7 @@ void Terrain :: TestRegression()
     Terrain ter;
     const Obstacle c;
     assert(ter.getDimx()==ter.getDimy());
-    assert(tab[20][20]==nullptr);
+    assert(tab[19][19]==nullptr);
     ter.SetObstacle(1,1,3,3,c);
     assert(ter.getXY(2,2)!=nullptr);
     

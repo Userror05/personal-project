@@ -21,7 +21,7 @@ obj/balle.o: src/core/balle.cpp src/core/balle.h src/core/vecteur.h
 obj/gravite.o: src/core/gravite.cpp src/core/gravite.h src/core/vecteur.h src/core/balle.h
 	g++ -ggdb -Wall -c src/core/gravite.cpp -o obj/gravite.o
 
-obj/terrain.o: src/core/gravite.h src/core/balle.h src/core/vecteur.h src/core/obstacle.h
+obj/terrain.o: src/core/gravite.h src/core/balle.h src/core/vecteur.h src/core/obstacle.h src/core/terrain.h src/core/terrain.cpp
 	g++ -ggdb -Wall -c src/core/terrain.cpp -o obj/terrain.o
 
 obj/jeu.o: src/core/jeu.cpp src/core/jeu.h src/core/gravite.h src/core/balle.h src/core/vecteur.h
