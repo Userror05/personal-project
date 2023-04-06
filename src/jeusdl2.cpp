@@ -146,6 +146,20 @@ void JeuSDL2 ::SDLinit()
 }
 
 
+JeuSDL2::~JeuSDL2 () {
+    if (withSound) Mix_Quit();
+    TTF_CloseFont(font);
+    TTF_Quit();
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    SDL_Quit();
+}
 
+
+
+void JeuSDL2 :: Bouclejeu()
+{
+    
+}
 
 
