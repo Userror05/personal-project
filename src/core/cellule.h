@@ -1,57 +1,64 @@
+/**
+
+    @file Cellule.h
+    @brief Fichier d'en-tête pour la classe Cellule
+    */
+
 #ifndef _CELLULE
 #define _CELLULE
+
+/**
+
+    @class Cellule
+    @brief Représente une cellule unique dans une grille de terrain
+    */
 
 class Cellule
 {
 
-    private:
-    unsigned int pos_x;
-    unsigned int pos_y; // en haut a gauche 
-   
-    //TypeCell c_type;
 
-    
+private:
+unsigned int pos_x; /**< La coordonnée x de la cellule */
+unsigned int pos_y; /**< La coordonnée y de la cellule */
 
+public:
 
-    public:
-    
-    Cellule();
-    
+/**
+ * @brief Constructeur par défaut pour Cellule
+ */
+Cellule();
 
-    void SetX (unsigned int x);
-    
-    void SetY(unsigned int y);
+/**
+ * @brief Définit la coordonnée x de la cellule
+ * @param x La nouvelle coordonnée x
+ */
+void SetX (unsigned int x);
 
-    unsigned int GetX() const;
+/**
+ * @brief Définit la coordonnée y de la cellule
+ * @param y La nouvelle coordonnée y
+ */
+void SetY(unsigned int y);
 
-    unsigned int GetY() const;
+/**
+ * @brief Retourne la coordonnée x de la cellule
+ * @return La coordonnée x
+ */
+unsigned int GetX() const;
 
-    // operateur pour siplifier lutilisation dans le tableau de cellule dans terrain
+/**
+ * @brief Retourne la coordonnée y de la cellule
+ * @return La coordonnée y
+ */
+unsigned int GetY() const;
 
-    Cellule& operator = (const Cellule& c);
-
-
-
-
-
-
-
-    
-
-
-
-
-    // dans terrains Cellule& GetCellule()const;
-    // void set Cellule ()
-
+/**
+ * @brief Opérateur d'affectation pour Cellule
+ * @param c La Cellule à affecter à cette Cellule
+ * @return Une référence à cette Cellule
+ */
+Cellule& operator = (const Cellule& c);
 
 };
-
-//enum TypeCell
-//{  BALLE=1, OBSTACLE=2,ITEM1=3,ITEM2=4,ITEM3=5,ITEM4=6};
-
-
-
-
 
 #endif
