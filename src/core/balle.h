@@ -72,6 +72,9 @@ public:
      * @brief Affiche le vecteur de mouvement initial de la balle
      */
     void AffInitMouvement();
+
+
+    void TestRegression();
 };
 
 #endif

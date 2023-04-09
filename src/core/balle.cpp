@@ -1,5 +1,6 @@
 #include "balle.h"
 #include <iostream>
+#include<cassert>
 
 Balle :: Balle ()
 {
@@ -37,25 +38,6 @@ void Balle :: SetY(double y)
     pos_y=y;
 }
 
-/*bool Balle :: ArrangementTrajectoire()
-{
-    return ter.Collision();
-}
-
-void Balle :: ActionJoueur()
-{
-    Gravite gr;
-    gr.angleChoisis();
-    gr.GetPuis();
-    gr.Vitesse();
-    gr.InitMouvement(B);
-    while(!Rejouer(mouvement,*this))
-    {
-        gr.actualiseVecteur(*this);
-        
-    }
-
-}*/
 
 
 void Balle :: AffPosition()
@@ -77,4 +59,15 @@ void Balle :: InitMouvement()
 void Balle :: AffInitMouvement()
 {
    std::cout<<"INITMOUV: "<<mouvement.GetX()<<";"<<mouvement.GetY();
+}
+
+
+
+void Balle :: TestRegression()
+{
+    Balle b;
+    assert(b.GetX()==0 && b.GetY()==0);
+    Vecteur v (0,0);
+    //assert(b.mouvement == v && b.vitesse == v );
+    
 }

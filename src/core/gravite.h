@@ -46,6 +46,8 @@ class Gravite
 
      Balle& GetBalle();
 
+    void TestRegression();
+
 
 };
 
