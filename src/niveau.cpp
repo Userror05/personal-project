@@ -69,6 +69,8 @@ void Niveau::ouvrir(const std :: string & filename)
 		assert(ymin > 0 && ymin<ymax && ymax < ter.getDimy()-1);
 
 		ter.SetObstacle(xmin,ymin,xmax,ymax,c);
+
+		std :: cout << "obstacle posé à   "<<(xmax-xmin)<<" x "<<(ymax-ymin)<< std :: endl;
 	}
 
     fichier.close();
