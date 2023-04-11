@@ -6,9 +6,9 @@ Terrain :: Terrain()
 {
     DimX=20;
     DimY=20;
-    for(int i=0;i<DimX;i++)
+    for(unsigned int i=0;i<DimX;i++)
     {
-        for(int j=0;j<DimY;j++)
+        for(unsigned int j=0;j<DimY;j++)
         {
            tab[i][j]=nullptr;
         }
@@ -18,9 +18,9 @@ Terrain :: Terrain()
 Terrain :: ~Terrain()
 {
     
-    for(int i=0;i<DimX;i++)
+    for(unsigned int i=0;i<DimX;i++)
     {
-        for(int j=0;j<DimY;j++)
+        for(unsigned int j=0;j<DimY;j++)
         {
             if(tab[i][j]!=nullptr)
             {
@@ -36,7 +36,7 @@ Terrain :: ~Terrain()
 
 }
 // positionne des obstacles
-void Terrain :: SetObstacle (unsigned int xmin,unsigned int ymin,unsigned int xmax,unsigned int ymax,const Obstacle& c)
+void Terrain :: SetObstacle (unsigned int xmin,unsigned int ymin,unsigned int xmax,unsigned int ymax)
 {
     assert(0<=xmin && xmax<DimX);
     assert(0<=ymin && ymax<DimY);
@@ -79,7 +79,7 @@ bool Terrain :: Collision()
 void Terrain :: TestRegression()
 {
     Terrain ter;
-    const Obstacle c;
+    
     assert(ter.getDimx()==ter.getDimy());
     for(unsigned int i=0;i<ter.getDimx();i++)
     {
@@ -89,7 +89,7 @@ void Terrain :: TestRegression()
         }
     }
     
-    ter.SetObstacle(1,1,3,3,c);
+    ter.SetObstacle(1,1,3,3);
     assert(ter.getXY(2,2)!=nullptr);
     
 }

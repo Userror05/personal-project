@@ -32,27 +32,23 @@ bool Jeu :: Rejouer(Vecteur v)
     else return false;
 }
 
-/*void Jeu :: ActionJoueurVisuel()
+void Jeu :: ActionJoueur()
 {
-    Gravite gr;
-    gr.angleChoisis();
-    gr.AffAng();
-    gr.GetPuis();
-    gr.AffPR();
-    gr.Vitesse();
-    gr.InitMouvement(B);
-    while(!Rejouer(B.mouvement,*this))
-    {
-        gr.actualiseVecteur(*this);
-        AffPosition();
-    }
-    if(ter.Collision())
-    {
-        ter.ArrangementTrajectoire();
-    }
     
+    ter.getGravite().Vitesse(ter.getGravite().GetBalle());
+    ter.getGravite().GetBalle().InitMouvement();
+    for(int t=0;t<=5;t++)
+    while(Rejouer(ter.getGravite().GetBalle().mouvement))
+    {
+         if(ter.Collision())
+        {
+            ter.ArrangementTrajectoire();
+        }
+        ter.getGravite().actualiseVecteur(ter.getGravite().GetBalle());
+        
+    }
    
-}*/
+}
 
 void Jeu :: ActionJoueurVisuelTest45()
 {

@@ -1,19 +1,19 @@
 all: bin/test 
 
-bin/test: obj/mainTEST1.o obj/vecteur.o obj/cellule.o obj/balle.o obj/jeu.o obj/gravite.o obj/terrain.o obj/obstacle.o obj/niveau.o
-	g++ obj/mainTEST1.o obj/vecteur.o obj/cellule.o obj/balle.o obj/jeu.o obj/gravite.o obj/terrain.o obj/obstacle.o obj/niveau.o -o bin/test 
+bin/test: obj/mainsdl.o obj/vecteur.o obj/cellule.o obj/balle.o obj/jeu.o obj/gravite.o obj/terrain.o obj/obstacle.o obj/jeu.o obj/jeusdl2.o
+	g++ obj/mainsdl.o obj/vecteur.o obj/cellule.o obj/balle.o obj/jeu.o obj/gravite.o obj/terrain.o obj/obstacle.o obj/jeu.o obj/jeusdl2.o -o bin/test -lSDL2 -lSDL2_ttf -lSDL2_image -lSDL2_mixer -lGL
 	
-obj/mainTEST1.o: src/mainTEST1.cpp src/core/jeu.h src/core/vecteur.h src/core/gravite.h src/core/terrain.h
-	g++ -ggdb -c src/mainTEST1.cpp -o obj/mainTEST1.o
+obj/mainsdl.o: src/sdl2/mainsdl.cpp src/core/jeu.h src/core/vecteur.h src/core/gravite.h src/core/terrain.h
+	g++ -ggdb -c src/sdl2/mainsdl.cpp -o obj/mainsdl.o -lSDL2 -lSDL2_ttf -lSDL2_image -lSDL2_mixer -lGL
 
 obj/vecteur.o: src/core/vecteur.cpp src/core/vecteur.h
-	g++ -ggdb -Wall -c src/core/vecteur.cpp -o obj/vecteur.o
+	g++ -ggdb -Wall -c src/core/vecteur.cpp -o obj/vecteur.o 
 
 obj/cellule.o: src/core/cellule.cpp src/core/cellule.h
-	g++ -ggdb -Wall -c src/core/cellule.cpp -o obj/cellule.o
+	g++ -ggdb -Wall -c src/core/cellule.cpp -o obj/cellule.o 
 
 obj/obstacle.o: src/core/obstacle.cpp src/core/obstacle.h src/core/cellule.h
-	g++ -ggdb -Wall -c src/core/obstacle.cpp -o obj/obstacle.o
+	g++ -ggdb -Wall -c src/core/obstacle.cpp -o obj/obstacle.o 
 
 obj/balle.o: src/core/balle.cpp src/core/balle.h src/core/vecteur.h 
 	g++ -ggdb -Wall -c src/core/balle.cpp -o obj/balle.o
@@ -27,8 +27,5 @@ obj/terrain.o: src/core/gravite.h src/core/balle.h src/core/vecteur.h src/core/o
 obj/jeu.o: src/core/jeu.cpp src/core/jeu.h src/core/gravite.h src/core/balle.h src/core/vecteur.h
 	g++ -ggdb -Wall -c src/core/jeu.cpp -o obj/jeu.o
 
-obj/niveau.o: src/niveau.cpp src/niveau.h
-	g++ -ggdb -Wall -c src/niveau.cpp -o obj/niveau.o
-
-clean:           
-	-rm obj/*.o  bin/test
+obj/jeusdl2.o: src/sdl2/jeusdl2.cpp src/sdl2/jeusdl2.h
+	g++ -ggdb -Wall -c src/sdl2/jeusdl2.cpp -o obj/jeusdl2.o -lSDL2 -lSDL2_ttf -lSDL2_image -lSDL2_mixer -lGL

@@ -47,7 +47,7 @@ public:
      * @param ymax La position maximale en Y de l'obstacle.
      * @param c L'obstacle à ajouter.
      */
-    void SetObstacle(unsigned int xmin, unsigned int ymin, unsigned int xmax, unsigned int ymax, const Obstacle& c);
+    void SetObstacle(unsigned int xmin, unsigned int ymin, unsigned int xmax, unsigned int ymax);
 
     /**
      * @brief Vérifie si la balle entre en collision avec un obstacle.
@@ -71,14 +71,14 @@ public:
      * 
      * @return La dimension en X du terrain.
      */
-    int getDimx() const;
+    unsigned int getDimx() const;
 
     /**
      * @brief Renvoie la dimension en Y du terrain.
      *
      * @return La dimension en Y du terrain.
      */
-    int getDimy() const;
+    unsigned int getDimy() const;
 
     /**
      * @brief Renvoie l'objet gravité utilisé pour simuler la gravité sur le terrain.
@@ -118,9 +118,9 @@ inline Obstacle * Terrain::getXY (const int x, const int y) const {
 	return tab[x][y];
 }
 
-inline int Terrain :: getDimx()const{return DimX;}
+inline unsigned int Terrain :: getDimx()const{return DimX;}
 
-inline int Terrain :: getDimy()const{return DimY;}
+inline unsigned int Terrain :: getDimy()const{return DimY;}
 
 inline Gravite& Terrain :: getGravite(){return gr;}
 

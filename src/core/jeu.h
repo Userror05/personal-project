@@ -17,7 +17,7 @@ class Jeu
 
     bool Rejouer(Vecteur v);
 
-    void ActionJoueurVisuel();
+    void ActionJoueur();
     void ActionJoueurVisuelTest45();
 
      Terrain& GetTerrain();
