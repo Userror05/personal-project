@@ -5,18 +5,19 @@
 #include <unistd.h>
 #endif // WIN32
 #include "winTxt.h"
-#include "core/jeu.h"
+#include "../core/jeu.h"
 
-void txtAff(WinTXT & win, const Jeu & jeu) {
-	//const Terrain& ter = jeu.getTerrain();
-	const Balle& b = jeu.GetTerrain().getGravite().GetBalle();
+void txtAff(WinTXT & win,Jeu & jeu) {
+	const Terrain& ter = jeu.GetTerrain();
+	const Balle& b = jeu.GetTerrain().GetBalle();
 
 	win.clear();
 
-    /*/ Affichage des murs et des pastilles
-	for(int x=0;x<ter.getDimX();++x)
-		for(int y=0;y<ter.getDimY();++y)
-			win.print( x, y, ter.getXYasChar(x,y));*/
+    // Affichage des murs
+	for(int x=0;x<ter.getDimx();++x)
+		for(int y=0;y<ter.getDimy();++y)
+			if(ter.getXY(x,y)!=nullptr)
+				win.print( x, y,'1');
 
     // Affichage de la balle
 	win.print(b.GetX(),b.GetY(),'O');
@@ -43,21 +44,32 @@ void txtBoucle (Jeu & jeu) {
 		usleep(100000);
         #endif // WIN32
 
-		jeu.Affichage_txt();
+		jeu.ActionJoueur();
 
 		c = win.getCh();
-		switch (c) {
+		
+		
+			switch (c) {
 			case 'z':
-				jeu.ActionJoueur(jeu.getTerrain().GetBalle(),'z');
+				jeu.angleChoisis('z');
 				break;
 			case 's':
-				jeu.ActionJoueur(jeu.getTerrain().GetBalle(),'s');
+				jeu.angleChoisis('s');
 				break;
+				
+				case 't':
+				jeu.GetPuis('t');
+				break;
+			case 'g':
+				jeu.GetPuis('g');
 				break;
 			case 'q':
 				ok = false;
 				break;
+
+		
 		}
+		
 
 	} while (ok);
 

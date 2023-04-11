@@ -7,8 +7,7 @@ class Gravite
 {
 
     private:
-    Balle jp;
-    
+   
 
     public:
     
@@ -44,14 +43,14 @@ class Gravite
     void AffPR();
     
 
-    Balle& GetBalle();
+    
 
     void TestRegression();
 
 
 };
 
-inline  Balle& Gravite :: GetBalle(){ return jp;}
+
 
 
 

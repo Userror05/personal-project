@@ -1,6 +1,7 @@
 #include"jeusdl2.h"
 #include<iostream>
 #include<string>
+using namespace std;
 
 const int TAILLE_SPRITE = 32;
 
@@ -8,28 +9,28 @@ JeuSDL2 ::JeuSDL2()
 {
     // Initialisation de la SDL
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-        std :: cout << "Erreur lors de l'initialisation de la SDL : " << SDL_GetError() <<  std :: endl;
+        cout << "Erreur lors de l'initialisation de la SDL : " << SDL_GetError() << endl;
         SDL_Quit();
         exit(1);
     }
 
     if (TTF_Init() != 0) {
-        std :: cout << "Erreur lors de l'initialisation de la SDL_ttf : " << TTF_GetError() <<  std :: endl;
+        cout << "Erreur lors de l'initialisation de la SDL_ttf : " << TTF_GetError() <<   endl;
         SDL_Quit();
         exit(1);
     }
 
     int imgFlags = IMG_INIT_PNG | IMG_INIT_JPG;
     if( !(IMG_Init(imgFlags) & imgFlags)) {
-        std :: cout << "SDL_image could not initialize! SDL_image Error: " << IMG_GetError() << std ::  endl;
+         cout << "SDL_image could not initialize! SDL_image Error: " << IMG_GetError() << endl;
         SDL_Quit();
         exit(1);
     }
 
     if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
     {
-        std :: cout << "SDL_mixer could not initialize! SDL_mixer Error: " << Mix_GetError() << std :: endl;
-        std ::  cout << "No sound !!!" <<  std :: endl;
+         cout << "SDL_mixer could not initialize! SDL_mixer Error: " << Mix_GetError() <<  endl;
+        cout << "No sound !!!" <<   endl;
         //SDL_Quit();exit(1);
         withSound = false;
     }
@@ -44,26 +45,24 @@ JeuSDL2 ::JeuSDL2()
     // Creation de la fenetre
     window = SDL_CreateWindow("Pacman", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, dimx, dimy, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
     if (window == nullptr) {
-        std ::  cout << "Erreur lors de la creation de la fenetre : " << SDL_GetError() << std ::  endl; 
+         cout << "Erreur lors de la creation de la fenetre : " << SDL_GetError() << endl; 
         SDL_Quit(); 
         exit(1);
     }
 
     renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
 
-    im_balle.loadFromFile("data/balle.png",renderer);
+    im_balle.loadFromFile("data/balle.jpg",renderer);
     im_mur.loadFromFile("data/mur.jpg",renderer);
-    //im_pastille.loadFromFile("data/pastille.png",renderer);
-    //im_fantome.loadFromFile("data/fantome.png",renderer);
     // IMAGES
     
 
-    // FONTS
+    /*// FONTS
     font = TTF_OpenFont("data/DejaVuSansCondensed.ttf",50);
     if (font == nullptr)
         font = TTF_OpenFont("../data/DejaVuSansCondensed.ttf",50);
     if (font == nullptr) {
-           std ::   cout << "Failed to load DejaVuSansCondensed.ttf! SDL_TTF Error: " << TTF_GetError() << std ::  endl; 
+            cout << "Failed to load DejaVuSansCondensed.ttf! SDL_TTF Error: " << TTF_GetError() << endl; 
             SDL_Quit(); 
             exit(1);
 	}
@@ -71,7 +70,7 @@ JeuSDL2 ::JeuSDL2()
 	font_im.setSurface(TTF_RenderText_Solid(font,"Pacman",font_color));
 	font_im.loadFromCurrentSurface(renderer);
 
-   /*if (withSound)
+   if (withSound)
     {
         sound = Mix_LoadWAV("data/son.wav");
         if (sound == nullptr) 
@@ -88,8 +87,8 @@ JeuSDL2 ::JeuSDL2()
 
 JeuSDL2::~JeuSDL2 () {
     //if (withSound) Mix_Quit();
-    TTF_CloseFont(font);
-    TTF_Quit();
+    //TTF_CloseFont(font);
+    //TTF_Quit();
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
@@ -166,10 +165,10 @@ void JeuSDL2 :: sdlaff()
     Terrain& ter = gami.GetTerrain();
     SDL_RenderClear(renderer);
 
-im_balle.draw(renderer,ter.getGravite().GetBalle().GetX()*TAILLE_SPRITE,ter.getGravite().GetBalle().GetY()*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
-for(int i=0;i<ter.getDimx();i++)
+im_balle.draw(renderer,ter.GetBalle().GetX()*TAILLE_SPRITE,ter.GetBalle().GetY()*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+for(unsigned int i=0;i<ter.getDimx();i++)
 {
-    for(int j=0;j<ter.getDimy();j++)
+    for(unsigned int j=0;j<ter.getDimy();j++)
     {
         if(ter.getXY(i,j)!=nullptr)
         im_mur.draw(renderer,i*TAILLE_SPRITE,j*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
@@ -182,7 +181,7 @@ void JeuSDL2 :: Bouclejeu()
     BoucleChoixANG();
     BoucleChoixPUI();
 
-    while(!gami.Rejouer(gami.GetTerrain().getGravite().GetBalle().mouvement))
+    while(!gami.Rejouer(gami.GetTerrain().GetBalle().mouvement))
     {
         gami.ActionJoueur();
         
@@ -252,16 +251,16 @@ Image::~Image()
 void Image::loadFromFile (const char* filename, SDL_Renderer * renderer) {
     m_surface = IMG_Load(filename);
     if (m_surface == nullptr) {
-        std:: string nfn = std :: string("../") + filename;
-       std :: cout << "Error: cannot load "<< filename <<". Trying "<<nfn<<std :: endl;
+     string nfn =  string("../") + filename;
+        cout << "Error: cannot load "<< filename <<". Trying "<<nfn<< endl;
         m_surface = IMG_Load(nfn.c_str());
         if (m_surface == nullptr) {
-            nfn = std:: string("../") + nfn;
+            nfn = string("../") + nfn;
             m_surface = IMG_Load(nfn.c_str());
         }
     }
     if (m_surface == nullptr) {
-        std :: cout<<"Error: cannot load "<< filename <<std :: endl;
+        cout<<"Error: cannot load "<< filename << endl;
         SDL_Quit();
         exit(1);
     }
@@ -272,7 +271,7 @@ void Image::loadFromFile (const char* filename, SDL_Renderer * renderer) {
 
     m_texture = SDL_CreateTextureFromSurface(renderer,surfaceCorrectPixelFormat);
     if (m_texture == NULL) {
-        std :: cout << "Error: problem to create the texture of "<< filename<< std :: endl;
+         cout << "Error: problem to create the texture of "<< filename << endl;
         SDL_Quit();
         exit(1);
     }
@@ -281,7 +280,7 @@ void Image::loadFromFile (const char* filename, SDL_Renderer * renderer) {
 void Image::loadFromCurrentSurface (SDL_Renderer * renderer) {
     m_texture = SDL_CreateTextureFromSurface(renderer,m_surface);
     if (m_texture == nullptr) {
-        std :: cout << "Error: problem to create the texture from surface " << std :: endl;
+         cout << "Error: problem to create the texture from surface " << endl;
         SDL_Quit();
         exit(1);
     }

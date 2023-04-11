@@ -24,7 +24,7 @@ private:
     unsigned int DimY; /**< La dimension en Y du terrain. */
     Gravite gr; /**< L'objet gravité utilisé pour simuler la gravité sur le terrain. */
     Obstacle * tab[20][20]; /**< Le tableau de pointeurs d'obstacles représentant les obstacles présents sur le terrain. */
-
+    Balle jp;
 public:
     /**
      * @brief Constructeur par défaut.
@@ -85,6 +85,13 @@ public:
      * @return L'objet gravité utilisé pour simuler la gravité sur le terrain.
      */
     Gravite& getGravite();
+    /**
+     * @brief Renvoie l'objet Balle utilisé par le joueur.
+     *
+     * @return L'objet Balle utilisé sur le terrain.
+     */
+
+    Balle& GetBalle();
 
     /**
      * @brief Renvoie le pointeur d'obstacle à la position (x, y) du tableau d'obstacles.
@@ -95,7 +102,7 @@ public:
      */
     
 
-     Obstacle* getXY (const int x, const int y) const;
+     Obstacle* getXY (unsigned int x, unsigned int y) const;
 
      //Obstacle GetObs(int x, int y)const;
 
@@ -103,13 +110,14 @@ public:
 
      //bool CollectionItem(Item I,Balle B);
 
-     
+      
+    
 
      
 
 };
 
-inline Obstacle * Terrain::getXY (const int x, const int y) const {
+inline Obstacle * Terrain::getXY (unsigned int x, unsigned int y) const {
 	assert(x>=0);
 	assert(y>=0);
 	assert(x<DimX);
@@ -123,5 +131,6 @@ inline unsigned int Terrain :: getDimy()const{return DimY;}
 
 inline Gravite& Terrain :: getGravite(){return gr;}
 
+inline  Balle& Terrain :: GetBalle(){ return jp;}
 
 #endif

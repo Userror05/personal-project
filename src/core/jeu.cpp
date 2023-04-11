@@ -13,16 +13,16 @@ bool Jeu :: Rejouer(Vecteur v)
 void Jeu :: ActionJoueur()
 {
     
-    ter.getGravite().Vitesse(ter.getGravite().GetBalle());
-    ter.getGravite().GetBalle().InitMouvement();
+    ter.getGravite().Vitesse(ter.GetBalle());
+    ter.GetBalle().InitMouvement();
     for(int t=0;t<=5;t++)
-    while(!Rejouer(ter.getGravite().GetBalle().mouvement))
+    while(!Rejouer(ter.GetBalle().mouvement))
     {
          if(ter.Collision())
         {
             ter.ArrangementTrajectoire();
         }
-        ter.getGravite().actualiseVecteur(ter.getGravite().GetBalle());
+        ter.getGravite().actualiseVecteur(ter.GetBalle());
         
     }
    

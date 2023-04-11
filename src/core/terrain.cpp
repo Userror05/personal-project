@@ -52,15 +52,15 @@ void Terrain :: SetObstacle (unsigned int xmin,unsigned int ymin,unsigned int xm
 
 void Terrain :: ArrangementTrajectoire()
 {
-    Balle b = gr.GetBalle();
+    Balle b = jp;
     if (Collision())
     {
         
-        b.mouvement.SetX(gr.GetBalle().mouvement.GetX());
+        b.mouvement.SetX(jp.mouvement.GetX());
     }
-    if (Collision()&& gr.GetBalle().mouvement.GetY()<0)
+    if (Collision()&& jp.mouvement.GetY()<0)
     {
-        float y=gr.GetBalle().mouvement.GetY();
+        float y=jp.mouvement.GetY();
          b.mouvement.SetY(-y);
     }
 
@@ -69,8 +69,8 @@ void Terrain :: ArrangementTrajectoire()
 
 bool Terrain :: Collision()
 {
-    int x = (int)gr.GetBalle().GetX();
-    int y = (int)gr.GetBalle().GetY();
+    int x = (int)jp.GetX();
+    int y = (int)jp.GetY();
     if (getXY(x,y)!= nullptr)return true;
     else return false;
 }

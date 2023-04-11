@@ -103,6 +103,7 @@ void Gravite :: TestRegression()
     AffPR();
     float x =b.mouvement.GetX();
     actualiseVecteur(b);
+    b.AffPosition();
     assert(b.mouvement.GetX()!=x);assert(b.mouvement.GetY()!=x);
     AffAng();
     AffPR();
