@@ -5,22 +5,37 @@
 #include<unistd.h>
 
 
+
+Gravite :: Gravite ()
+{
+    Angle = 45;
+    Power = 5;
+}
+
 void Gravite::actualiseVecteur(Balle& b)
 {
     float coef=0.9;
             b.Sauvegarde.SetX(b.mouvement.GetX());
+
             b.Sauvegarde.SetY(b.mouvement.GetY());
+
            // b.mouvement= (b.mouvement + b.mouvement)*coef;
+
             b.mouvement.SetX((b.mouvement.GetX()+b.gravite.GetX())*coef);
+
             b.mouvement.SetY((b.mouvement.GetY()+b.gravite.GetY())*coef);
+
             b.SetX(b.GetX()+b.mouvement.GetX());
+
             b.SetY(b.GetY()+b.mouvement.GetY());
+
             usleep(1000000);
+
             std::cout<<"mouv:"<<"("<<b.mouvement.GetX()<<","<<b.mouvement.GetY()<<")";
             
             b.AffPosition();
 
-//avant while(!ter.collision)
+
     
 }
 
@@ -88,12 +103,12 @@ Vecteur& Gravite :: Vitesse(Balle& b)
 
 void Gravite :: AffPR ()
 {
-    std :: cout << "La puissance est de " << Power;
+    std :: cout << "La puissance est de " << Power<< std :: endl;
 }
 
 void Gravite :: AffAng()
 {
-    std :: cout << "l'angle est de " << Angle << "°";
+    std :: cout << "l'angle est de " << Angle << "°"<<std :: endl;
 }
 
 void Gravite :: TestRegression()
@@ -101,11 +116,26 @@ void Gravite :: TestRegression()
     Balle b;
     AffAng();
     AffPR();
-    float x =b.mouvement.GetX();
-    actualiseVecteur(b);
+    float x = b.mouvement.GetX();
+    std :: cout << x;
+    float y = b.mouvement.GetY();
+    float ang =ConversionAng();
+    assert(ang!= Angle);
+    
     b.AffPosition();
-    assert(b.mouvement.GetX()!=x);assert(b.mouvement.GetY()!=x);
+
     AffAng();
     AffPR();
+    
+    
+    Vitesse(b);
+    std :: cout << b.vitesse.GetX() << std :: endl;
+    b.InitMouvement();std :: cout << b.mouvement.GetX() << std :: endl;
+    actualiseVecteur(b);
+
+    std :: cout << b.mouvement.GetX();
+
+    assert(x!=b.mouvement.GetX());assert(b.mouvement.GetY()!=y);
+    
     
 }

@@ -45,7 +45,7 @@ Niveau::Niveau () { Terrain();
 
 
 
-void Niveau::ouvrir(const std :: string & filename)
+void Niveau::ouvrir(const std :: string & filename, Terrain& ter)
  {
 
     std :: ifstream fichier (filename.c_str());
@@ -76,4 +76,13 @@ void Niveau::ouvrir(const std :: string & filename)
     fichier.close();
 
     std :: cout << "Lecture de niveau  " << filename << " ... OK\n";
+}
+
+
+void Niveau ::  TestRegression()
+{
+	Niveau niv;
+	Terrain teraria;
+	niv.ouvrir("../data/niveau1",teraria);
+	assert(teraria.getXY(2,2)==nullptr);
 }

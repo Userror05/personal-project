@@ -42,13 +42,14 @@ void Balle :: SetY(double y)
 
 void Balle :: AffPosition()
 {
-   std::cout<<"("<<GetX()<<","<<GetY()<<")";
+   std::cout<<"("<<GetX()<<","<<GetY()<<")" << std ::endl;
 }
 
 void Balle :: AffVitesse()
 {
-   std::cout<<"vitesse"<<vitesse.GetX()<<";"<<vitesse.GetY();
+   std::cout<<"vitesse  :  "<<vitesse.GetX()<<"  ;  "<<vitesse.GetY()<<std ::endl;
 }
+
 
 void Balle :: InitMouvement()
 {
@@ -67,7 +68,9 @@ void Balle :: TestRegression()
 {
     Balle b;
     assert(b.GetX()==0 && b.GetY()==0);
-    Vecteur v (0,0);
+    assert(b.vitesse.GetX()==0);
+    b.InitMouvement();
+    assert(b.mouvement.GetX()==b.vitesse.GetX());
     //assert(b.mouvement == v && b.vitesse == v );
     
 }
