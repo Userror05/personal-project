@@ -1,10 +1,10 @@
 all: bin/test 
 
-bin/test: obj/mainsdl.o obj/vecteur.o obj/cellule.o obj/balle.o obj/jeu.o obj/gravite.o obj/terrain.o obj/obstacle.o obj/jeu.o obj/jeusdl2.o
-	g++ obj/mainsdl.o obj/vecteur.o obj/cellule.o obj/balle.o obj/jeu.o obj/gravite.o obj/terrain.o obj/obstacle.o obj/jeu.o obj/jeusdl2.o -o bin/test -lSDL2 -lSDL2_ttf -lSDL2_image -lSDL2_mixer -lGL
+bin/test: obj/mainsdl.o obj/vecteur.o obj/cellule.o obj/balle.o obj/jeu.o obj/gravite.o obj/terrain.o obj/obstacle.o obj/jeusdl2.o
+	g++ obj/mainsdl.o obj/vecteur.o obj/cellule.o obj/balle.o obj/gravite.o obj/terrain.o obj/obstacle.o obj/jeu.o obj/jeusdl2.o -o bin/test -lSDL2 -lSDL2_ttf -lSDL2_image -lSDL2_mixer 
 	
 obj/mainsdl.o: src/sdl2/mainsdl.cpp src/core/jeu.h src/core/vecteur.h src/core/gravite.h src/core/terrain.h
-	g++ -ggdb -c src/sdl2/mainsdl.cpp -o obj/mainsdl.o -lSDL2 -lSDL2_ttf -lSDL2_image -lSDL2_mixer -lGL
+	g++ -ggdb -c src/sdl2/mainsdl.cpp -o obj/mainsdl.o -lSDL2 -lSDL2_ttf -lSDL2_image -lSDL2_mixer 
 
 obj/vecteur.o: src/core/vecteur.cpp src/core/vecteur.h
 	g++ -ggdb -Wall -c src/core/vecteur.cpp -o obj/vecteur.o 
@@ -24,8 +24,11 @@ obj/gravite.o: src/core/gravite.cpp src/core/gravite.h src/core/vecteur.h src/co
 obj/terrain.o: src/core/gravite.h src/core/balle.h src/core/vecteur.h src/core/obstacle.h src/core/terrain.h src/core/terrain.cpp
 	g++ -ggdb -Wall -c src/core/terrain.cpp -o obj/terrain.o
 
-obj/jeu.o: src/core/jeu.cpp src/core/jeu.h src/core/gravite.h src/core/balle.h src/core/vecteur.h
+obj/jeu.o: src/core/jeu.cpp src/core/jeu.h 
 	g++ -ggdb -Wall -c src/core/jeu.cpp -o obj/jeu.o
 
 obj/jeusdl2.o: src/sdl2/jeusdl2.cpp src/sdl2/jeusdl2.h
-	g++ -ggdb -Wall -c src/sdl2/jeusdl2.cpp -o obj/jeusdl2.o -lSDL2 -lSDL2_ttf -lSDL2_image -lSDL2_mixer -lGL
+	g++ -ggdb -Wall -c src/sdl2/jeusdl2.cpp -o obj/jeusdl2.o -lSDL2 -lSDL2_ttf -lSDL2_image -lSDL2_mixer 
+
+clean:
+	rm obj/*.o

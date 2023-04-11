@@ -8,6 +8,8 @@
 void Gravite::actualiseVecteur(Balle& b)
 {
     float coef=0.9;
+            b.Sauvegarde.SetX(b.mouvement.GetX());
+            b.Sauvegarde.SetY(b.mouvement.GetY());
            // b.mouvement= (b.mouvement + b.mouvement)*coef;
             b.mouvement.SetX((b.mouvement.GetX()+b.gravite.GetX())*coef);
             b.mouvement.SetY((b.mouvement.GetY()+b.gravite.GetY())*coef);

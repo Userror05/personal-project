@@ -18,11 +18,11 @@ class Gravite
 
     double Angle;
 
-    /*void graviteConstante (Balle& b);*/
+    
 
     void actualiseVecteur(Balle& b);
 
-    /*void angleChoisis();*/
+    
 
     double RecupA();
 
@@ -35,7 +35,7 @@ class Gravite
 
     Vecteur& Vitesse(Balle& b);
 
-    /*void GetPuis();*/
+    
 
     /*void accelerationBalle();*/
 
@@ -44,7 +44,7 @@ class Gravite
     void AffPR();
     
 
-     Balle& GetBalle();
+    Balle& GetBalle();
 
     void TestRegression();
 

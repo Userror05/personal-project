@@ -45,7 +45,6 @@ public:
      * @param ymin La position minimale en Y de l'obstacle.
      * @param xmax La position maximale en X de l'obstacle.
      * @param ymax La position maximale en Y de l'obstacle.
-     * @param c L'obstacle à ajouter.
      */
     void SetObstacle(unsigned int xmin, unsigned int ymin, unsigned int xmax, unsigned int ymax);
 

@@ -1,28 +1,6 @@
 #include"jeu.h"
 #include<iostream>
 
-/*
-
-
-  //tant que F pas presser, on fait ActionJoueur()
-    
-
-    
-
-
-/*Void Jeu :: Affichage_txt()
-{
-    int t=0;
-    while (t=0)
-    {
-        Action
-    }
-    
-}*/
-
-
-//Tant que F pas presser, on fait ActionJoueurVisuel()
-
 bool Jeu :: Rejouer(Vecteur v)
 {
     if(v.magnitude()>=0.1)
@@ -38,7 +16,7 @@ void Jeu :: ActionJoueur()
     ter.getGravite().Vitesse(ter.getGravite().GetBalle());
     ter.getGravite().GetBalle().InitMouvement();
     for(int t=0;t<=5;t++)
-    while(Rejouer(ter.getGravite().GetBalle().mouvement))
+    while(!Rejouer(ter.getGravite().GetBalle().mouvement))
     {
          if(ter.Collision())
         {
@@ -50,7 +28,7 @@ void Jeu :: ActionJoueur()
    
 }
 
-void Jeu :: ActionJoueurVisuelTest45()
+/*void Jeu :: ActionJoueurVisuelTest45()
 {
     
     ter.getGravite().Power=20;
@@ -72,7 +50,7 @@ void Jeu :: ActionJoueurVisuelTest45()
         
     }
 }
-
+*/
 
 
 
@@ -126,13 +104,13 @@ void Jeu :: GetPuis (const char touche)
                 {
 				case 'z':
 
-					while(max>=pui){pui+=0,5; std :: cout<<pui;} 
+					while(max>=pui){pui=pui+0.5; std :: cout<<pui;} 
                       // car Y inverse
 					break;
 
                 case 's':
 
-                    while(pui>=0){pui-=0,5;std :: cout<<pui;}
+                    while(pui>=0){pui=pui-0.5;std :: cout<<pui;}
 
                     break;
 
