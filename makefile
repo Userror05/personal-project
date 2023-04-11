@@ -55,8 +55,8 @@ $(BIN_DIR)/$(FINAL_TARGET_SDL): $(SRCS_SDL:%.cpp=$(OBJ_DIR)/%.o)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	$(CC) -c $(CPPFLAGS) $(INCLUDE_DIR_SDL) $(INCLUDE_DIR) $< -o $@
 
-docu: doc/pacman.doxy
-	cd doc ; doxygen pacman.doxy
+docu: doc/golfnic.doxy
+	cd doc ; doxygen golfnic.doxy
 
 clean:
 ifeq ($(OS),Windows_NT)
