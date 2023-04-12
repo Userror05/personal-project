@@ -45,6 +45,7 @@ void Image::loadFromFile (const char* filename, SDL_Renderer * renderer) {
         SDL_Quit();
         exit(1);
     }
+    
 }
 
 void Image::loadFromCurrentSurface (SDL_Renderer * renderer) {
@@ -79,7 +80,7 @@ SDL_Texture * Image::getTexture() const {return m_texture;}
 void Image::setSurface(SDL_Surface * surf) {m_surface = surf;}
 
 
-JeuSDL2 ::JeuSDL2()
+JeuSDL2 ::JeuSDL2() : gami()
 {
     // Initialisation de la SDL
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -237,7 +238,7 @@ void JeuSDL2 :: BoucleChoixANG()
 void JeuSDL2 :: sdlaff()
 { 
 
-    Terrain& ter = gami.GetTerrain();
+     Terrain& ter = gami.GetTerrain();
     SDL_RenderClear(renderer);
 
 im_balle.draw(renderer,ter.GetBalle().GetX()*TAILLE_SPRITE,ter.GetBalle().GetY()*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
@@ -305,5 +306,6 @@ void JeuSDL2 :: Bouclejeu()
         }
 
 }
+
 
 

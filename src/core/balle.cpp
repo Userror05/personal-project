@@ -50,7 +50,6 @@ void Balle :: AffVitesse()
    std::cout<<"vitesse  :  "<<vitesse.GetX()<<"  ;  "<<vitesse.GetY()<<std ::endl;
 }
 
-
 void Balle :: InitMouvement()
 {
     mouvement.SetX(vitesse.GetX());

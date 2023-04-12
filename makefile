@@ -64,4 +64,3 @@ ifeq ($(OS),Windows_NT)
 else
 	rm -rf $(OBJ_DIR) $(BIN_DIR)/$(FINAL_TARGET_TXT) $(BIN_DIR)/$(FINAL_TARGET_SDL) doc/html
 endif
-

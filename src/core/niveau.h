@@ -24,7 +24,7 @@ public :
 
     void ouvrir(const std::string & filename,Terrain& ter);
 
-    void TestRegression(); //marche pas encore
+    void TestRegression();
 
 };
 

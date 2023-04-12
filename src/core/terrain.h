@@ -91,7 +91,7 @@ public:
      * @return L'objet Balle utilisé sur le terrain.
      */
 
-    Balle& GetBalle();
+    const Balle& GetBalle() const ;
 
     /**
      * @brief Renvoie le pointeur d'obstacle à la position (x, y) du tableau d'obstacles.
@@ -120,8 +120,8 @@ public:
 inline Obstacle * Terrain::getXY (unsigned int x, unsigned int y) const {
 	assert(x>=0);
 	assert(y>=0);
-	assert(x<=DimX-1);
-	assert(y<=DimY-1);
+	assert(x<DimX);
+	assert(y<DimY);
 	return tab[x][y];
 }
 
@@ -131,6 +131,6 @@ inline unsigned int Terrain :: getDimy()const{return DimY;}
 
 inline Gravite& Terrain :: getGravite(){return gr;}
 
-inline  Balle& Terrain :: GetBalle(){ return jp;}
+inline const Balle& Terrain :: GetBalle() const { return jp;}
 
 #endif

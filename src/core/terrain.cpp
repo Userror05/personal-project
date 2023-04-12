@@ -1,5 +1,6 @@
 #include "terrain.h"
 #include<cassert>
+#include<iostream>
 
 
 Terrain :: Terrain()
@@ -116,11 +117,16 @@ void Terrain :: TestRegression()
     
     ter.SetObstacle(2,2,3,3);
     assert(ter.getXY(2,2)!=nullptr);
+    
+    const Balle& b = ter.GetBalle();
+
+
+    
+    std :: cout<<b.GetX(); std :: cout << b.GetY();
 
     
     
 }
-
 
 
 

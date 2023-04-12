@@ -11,13 +11,13 @@ class Gravite
 
     public:
     
-    float g = -9.81;
+    //float g = -9.81;
 
-    double Power = 5; 
+    double Power; 
 
-    double Angle = 45;
+    double Angle;
 
-    
+    Gravite();
 
     void actualiseVecteur(Balle& b);
 

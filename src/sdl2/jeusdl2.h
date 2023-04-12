@@ -17,6 +17,8 @@ private:
     SDL_Surface * m_surface;
     SDL_Texture * m_texture;
     bool m_hasChanged;
+    TTF_Font * police;
+    SDL_Color couleur;
 
 public:
     Image () ;
@@ -26,8 +28,13 @@ public:
     void draw (SDL_Renderer * renderer, int x, int y, int w=-1, int h=-1);
     SDL_Texture * getTexture() const;
     void setSurface(SDL_Surface * surf);
+    void afficherMenu(SDL_Renderer * renderer);
+    void SetPolice(TTF_Font * police);
+    void SetColeurPolice(SDL_Color couleur);
 };
 
+inline void Image :: SetPolice(TTF_Font * pol){police =pol;}
+inline void Image :: SetColeurPolice(SDL_Color coul){couleur = coul;}
 class JeuSDL2
 {
     private :

@@ -20,15 +20,14 @@ class Jeu
     void ActionJoueur();
     //void ActionJoueurVisuelTest45();
 
-     Terrain& GetTerrain();
+    Terrain& GetTerrain() ;
 
      void angleChoisis(const char touche);
      void GetPuis(const char touche);
-     
 
 };
 
-inline  Terrain& Jeu :: GetTerrain(){return ter;}
+inline  Terrain& Jeu :: GetTerrain() {return ter;}
 
 
 #endif

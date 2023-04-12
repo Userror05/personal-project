@@ -7,15 +7,12 @@ int main()
     Balle b;
    
     b.TestRegression();
-
-    ter.TestRegression();
     
     gr.TestRegression();
 
+    ter.TestRegression();
+
     
-   
-
-
 
 
 }

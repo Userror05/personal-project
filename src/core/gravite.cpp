@@ -6,7 +6,11 @@
 
 
 
-
+Gravite :: Gravite ()
+{
+    Angle = 45;
+    Power = 5;
+}
 
 void Gravite::actualiseVecteur(Balle& b)
 {
