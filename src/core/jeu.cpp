@@ -91,10 +91,8 @@ void Jeu :: angleChoisis (const char touche)
 void Jeu :: GetPuis (const char touche)
 {
    
-    double pui;
+    double pui = 5;
     int max=10;
-
-    
 				switch (touche) 
                 {
 				case 't':
