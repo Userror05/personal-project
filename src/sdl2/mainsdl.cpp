@@ -2,6 +2,6 @@
 int main(int argc, char** argv)
 {
     JeuSDL2 jeu;
-    jeu.sdlaff();
+    jeu.Bouclejeu();
 
 }

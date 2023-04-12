@@ -24,6 +24,7 @@ class Jeu
 
      void angleChoisis(const char touche);
      void GetPuis(const char touche);
+     
 
 };
 

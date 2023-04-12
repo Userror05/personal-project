@@ -120,8 +120,8 @@ public:
 inline Obstacle * Terrain::getXY (unsigned int x, unsigned int y) const {
 	assert(x>=0);
 	assert(y>=0);
-	assert(x<DimX);
-	assert(y<DimY);
+	assert(x<=DimX-1);
+	assert(y<=DimY-1);
 	return tab[x][y];
 }
 

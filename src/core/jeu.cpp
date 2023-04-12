@@ -3,7 +3,7 @@
 
 bool Jeu :: Rejouer(Vecteur v)
 {
-    if(v.magnitude()>=0.1)
+    if(0.9>=v.magnitude())
     {
         return true;
     }
@@ -15,7 +15,6 @@ void Jeu :: ActionJoueur()
     
     ter.getGravite().Vitesse(ter.GetBalle());
     ter.GetBalle().InitMouvement();
-    for(int t=0;t<=5;t++)
     while(!Rejouer(ter.GetBalle().mouvement))
     {
          if(ter.Collision())

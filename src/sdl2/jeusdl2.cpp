@@ -117,7 +117,7 @@ JeuSDL2 ::JeuSDL2()
 	dimy = dimy * TAILLE_SPRITE;
 
     // Creation de la fenetre
-    window = SDL_CreateWindow("Pacman", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, dimx, dimy, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+    window = SDL_CreateWindow("Golfnic", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, dimx, dimy, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
     if (window == nullptr) {
          cout << "Erreur lors de la creation de la fenetre : " << SDL_GetError() << endl; 
         SDL_Quit(); 
@@ -132,16 +132,16 @@ JeuSDL2 ::JeuSDL2()
     
 
     /*// FONTS
-    font = TTF_OpenFont("data/DejaVuSansCondensed.ttf",50);
+    font = TTF_OpenFont("data/SIXTY.ttf",50);
     if (font == nullptr)
-        font = TTF_OpenFont("../data/DejaVuSansCondensed.ttf",50);
+        font = TTF_OpenFont("../data/SIXTY.ttf",50);
     if (font == nullptr) {
-            cout << "Failed to load DejaVuSansCondensed.ttf! SDL_TTF Error: " << TTF_GetError() << endl; 
+            cout << "Failed to load SIXTY.ttf! SDL_TTF Error: " << TTF_GetError() << endl; 
             SDL_Quit(); 
             exit(1);
 	}
 	font_color.r = 50;font_color.g = 50;font_color.b = 255;
-	font_im.setSurface(TTF_RenderText_Solid(font,"Pacman",font_color));
+	font_im.setSurface(TTF_RenderText_Solid(font,"golfnic",font_color));
 	font_im.loadFromCurrentSurface(renderer);
 
    if (withSound)
@@ -251,8 +251,9 @@ for(unsigned int i=0;i<ter.getDimx();i++)
 }
 }
 void JeuSDL2 :: Bouclejeu()
-{
-
+{     
+    SDL_Event events;
+      bool jouer = false;
     //BoucleChoixANG();
     //BoucleChoixPUI();
 
@@ -265,12 +266,14 @@ void JeuSDL2 :: Bouclejeu()
     //gami.Rejouer(gami.GetTerrain().GetBalle().mouvement)==0
 
      bool quit = false;
-        while(quit){
-        SDL_Event events;
+        while(!quit){
+       
         while (SDL_PollEvent(&events)) 
         {
 			if (events.type == SDL_QUIT) quit = true;           // Si l'utilisateur a clique sur la croix de fermeture
-			else if (events.type == SDL_KEYDOWN) 
+			if(jouer)
+            {
+                 if (events.type == SDL_KEYDOWN) 
             {              // Si une touche est enfoncee
                 
 				switch (events.key.keysym.scancode) 
@@ -290,7 +293,9 @@ void JeuSDL2 :: Bouclejeu()
 				default: 
                     break;
 				}
-            } 
+            } jouer=true;
+            
+            } else gami.ActionJoueur();
 
             sdlaff();
 		        // on permute les deux buffers (cette fonction ne doit se faire qu'une seule fois dans la boucle)
