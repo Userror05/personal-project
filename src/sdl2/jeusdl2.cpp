@@ -5,6 +5,80 @@ using namespace std;
 
 const int TAILLE_SPRITE = 32;
 
+Image::Image () : m_surface(nullptr), m_texture(nullptr), m_hasChanged(false) {
+}
+
+Image::~Image()
+{
+    SDL_FreeSurface(m_surface);
+    SDL_DestroyTexture(m_texture);
+
+    m_surface = nullptr;
+    m_texture = nullptr;
+    m_hasChanged = false;
+}
+
+void Image::loadFromFile (const char* filename, SDL_Renderer * renderer) {
+    m_surface = IMG_Load(filename);
+    if (m_surface == nullptr) {
+     string nfn =  string("../") + filename;
+        cout << "Error: cannot load "<< filename <<". Trying "<<nfn<< endl;
+        m_surface = IMG_Load(nfn.c_str());
+        if (m_surface == nullptr) {
+            nfn = string("../") + nfn;
+            m_surface = IMG_Load(nfn.c_str());
+        }
+    }
+    if (m_surface == nullptr) {
+        cout<<"Error: cannot load "<< filename << endl;
+        SDL_Quit();
+        exit(1);
+    }
+
+    SDL_Surface * surfaceCorrectPixelFormat = SDL_ConvertSurfaceFormat(m_surface,SDL_PIXELFORMAT_ARGB8888,0);
+    SDL_FreeSurface(m_surface);
+    m_surface = surfaceCorrectPixelFormat;
+
+    m_texture = SDL_CreateTextureFromSurface(renderer,surfaceCorrectPixelFormat);
+    if (m_texture == NULL) {
+         cout << "Error: problem to create the texture of "<< filename << endl;
+        SDL_Quit();
+        exit(1);
+    }
+}
+
+void Image::loadFromCurrentSurface (SDL_Renderer * renderer) {
+    m_texture = SDL_CreateTextureFromSurface(renderer,m_surface);
+    if (m_texture == nullptr) {
+         cout << "Error: problem to create the texture from surface " << endl;
+        SDL_Quit();
+        exit(1);
+    }
+}
+
+void Image::draw (SDL_Renderer * renderer, int x, int y, int w, int h) {
+    int ok;
+    SDL_Rect r;
+    r.x = x;
+    r.y = y;
+    r.w = (w<0)?m_surface->w:w;
+    r.h = (h<0)?m_surface->h:h;
+
+    if (m_hasChanged) {
+        ok = SDL_UpdateTexture(m_texture,nullptr,m_surface->pixels,m_surface->pitch);
+        assert(ok == 0);
+        m_hasChanged = false;
+    }
+
+    ok = SDL_RenderCopy(renderer,m_texture,nullptr,&r);
+    assert(ok == 0);
+}
+
+SDL_Texture * Image::getTexture() const {return m_texture;}
+
+void Image::setSurface(SDL_Surface * surf) {m_surface = surf;}
+
+
 JeuSDL2 ::JeuSDL2()
 {
     // Initialisation de la SDL
@@ -148,6 +222,7 @@ void JeuSDL2 :: BoucleChoixANG()
                 case SDL_SCANCODE_Q:
                     quit = true;
                     break;
+                    
 				default: 
                     break;
 				}
@@ -178,19 +253,18 @@ for(unsigned int i=0;i<ter.getDimx();i++)
 void JeuSDL2 :: Bouclejeu()
 {
 
-    BoucleChoixANG();
-    BoucleChoixPUI();
+    //BoucleChoixANG();
+    //BoucleChoixPUI();
 
-    while(!gami.Rejouer(gami.GetTerrain().GetBalle().mouvement))
+   /*while(!gami.Rejouer(gami.GetTerrain().GetBalle().mouvement))
     {
         gami.ActionJoueur();
         
-        sdlaff();
-		// on permute les deux buffers (cette fonction ne doit se faire qu'une seule fois dans la boucle)
-        SDL_RenderPresent(renderer);
-    }
+        
+    }*/ 
+    //gami.Rejouer(gami.GetTerrain().GetBalle().mouvement)==0
 
-     /*bool quit = false;
+     bool quit = false;
         while(quit){
         SDL_Event events;
         while (SDL_PollEvent(&events)) 
@@ -201,111 +275,30 @@ void JeuSDL2 :: Bouclejeu()
                 
 				switch (events.key.keysym.scancode) 
                 {
-				case Jeu.Rejouer()==1:
-					Jeu.angleChoisis(SDL_SCANCODE_UP);    // car Y inverse
+				case SDL_SCANCODE_UP:
+					gami.angleChoisis(SDL_SCANCODE_UP);    // car Y inverse
 					break;
                 case SDL_SCANCODE_DOWN:
-					Jeu.angleChoisis(SDL_SCANCODE_DOWN);    // car Y inverse
+					gami.angleChoisis(SDL_SCANCODE_DOWN);    // car Y inverse
+					break;
+				case SDL_SCANCODE_F:
+					gami.GetPuis(SDL_SCANCODE_F);    // car Y inverse
 					break;
                 case SDL_SCANCODE_Q:
                     quit = true;
                     break;
 				default: 
-
                     break;
 				}
             } 
-        }*/
+
+            sdlaff();
+		        // on permute les deux buffers (cette fonction ne doit se faire qu'une seule fois dans la boucle)
+            SDL_RenderPresent(renderer);
+
+        }
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Image::Image () : m_surface(nullptr), m_texture(nullptr), m_hasChanged(false) {
 }
-
-Image::~Image()
-{
-    SDL_FreeSurface(m_surface);
-    SDL_DestroyTexture(m_texture);
-
-    m_surface = nullptr;
-    m_texture = nullptr;
-    m_hasChanged = false;
-}
-
-void Image::loadFromFile (const char* filename, SDL_Renderer * renderer) {
-    m_surface = IMG_Load(filename);
-    if (m_surface == nullptr) {
-     string nfn =  string("../") + filename;
-        cout << "Error: cannot load "<< filename <<". Trying "<<nfn<< endl;
-        m_surface = IMG_Load(nfn.c_str());
-        if (m_surface == nullptr) {
-            nfn = string("../") + nfn;
-            m_surface = IMG_Load(nfn.c_str());
-        }
-    }
-    if (m_surface == nullptr) {
-        cout<<"Error: cannot load "<< filename << endl;
-        SDL_Quit();
-        exit(1);
-    }
-
-    SDL_Surface * surfaceCorrectPixelFormat = SDL_ConvertSurfaceFormat(m_surface,SDL_PIXELFORMAT_ARGB8888,0);
-    SDL_FreeSurface(m_surface);
-    m_surface = surfaceCorrectPixelFormat;
-
-    m_texture = SDL_CreateTextureFromSurface(renderer,surfaceCorrectPixelFormat);
-    if (m_texture == NULL) {
-         cout << "Error: problem to create the texture of "<< filename << endl;
-        SDL_Quit();
-        exit(1);
-    }
-}
-
-void Image::loadFromCurrentSurface (SDL_Renderer * renderer) {
-    m_texture = SDL_CreateTextureFromSurface(renderer,m_surface);
-    if (m_texture == nullptr) {
-         cout << "Error: problem to create the texture from surface " << endl;
-        SDL_Quit();
-        exit(1);
-    }
-}
-
-void Image::draw (SDL_Renderer * renderer, int x, int y, int w, int h) {
-    int ok;
-    SDL_Rect r;
-    r.x = x;
-    r.y = y;
-    r.w = (w<0)?m_surface->w:w;
-    r.h = (h<0)?m_surface->h:h;
-
-    if (m_hasChanged) {
-        ok = SDL_UpdateTexture(m_texture,nullptr,m_surface->pixels,m_surface->pitch);
-        assert(ok == 0);
-        m_hasChanged = false;
-    }
-
-    ok = SDL_RenderCopy(renderer,m_texture,nullptr,&r);
-    assert(ok == 0);
-}
-
-SDL_Texture * Image::getTexture() const {return m_texture;}
-
-void Image::setSurface(SDL_Surface * surf) {m_surface = surf;}
 
 

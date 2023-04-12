@@ -13,9 +13,9 @@ class Gravite
     
     float g = -9.81;
 
-    double Power; 
+    double Power = 5; 
 
-    double Angle;
+    double Angle = 45;
 
     
 
