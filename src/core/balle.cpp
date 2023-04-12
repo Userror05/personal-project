@@ -4,8 +4,8 @@
 
 Balle :: Balle ()
 {
-    SetX(0);
-    SetY(0); //valeur au pif pour l'instant
+    SetX(2);
+    SetY(2); //valeur au pif pour l'instant
     Vecteur g(0,-2.81);
     gravite = g;
     Vecteur Vec(0.0,0.0);
@@ -67,7 +67,7 @@ void Balle :: AffInitMouvement()
 void Balle :: TestRegression()
 {
     Balle b;
-    assert(b.GetX()==0 && b.GetY()==0);
+    assert(b.GetX()==2 && b.GetY()==2);
     assert(b.vitesse.GetX()==0);
     b.InitMouvement();
     assert(b.mouvement.GetX()==b.vitesse.GetX());
