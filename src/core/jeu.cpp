@@ -15,7 +15,7 @@ void Jeu :: ActionJoueur()
     
     ter.getGravite().Vitesse(ter.GetBalle());
     ter.GetBalle().InitMouvement();
-    for(int t=0;t<=5;t++)
+  
     while(!Rejouer(ter.GetBalle().mouvement))
     {
          if(ter.Collision())
@@ -59,34 +59,30 @@ void Jeu :: ActionJoueur()
 void Jeu :: angleChoisis (const char touche)
 {
     float ang = 45;
-    bool choixfini = false;
+    
     int max=90;
 
-    while (choixfini) 
-    {
+    
 				switch (touche) 
                 {
 				case 'z':
 					
-                     while (ang<=90){ang=ang+1.0; std :: cout<<"angle="<<ang;};   // car Y inverse
+                     while (ang<=90){ang=ang+1.0; std :: cout<<"angle = "<< ang;};   // car Y inverse
 					
                     break;
                 
                 case 's':
                      
-                     while(ang>=0){ang=ang-1.0;std :: cout<<"angle="<<ang;};
-               
-                case 'q':
-                    
-                    choixfini = true;
+                     while(ang>=0){ang=ang-1.0;std :: cout<<"angle = "<< ang;}
                     
                     break;
 				
                 default: 
                     break;
 				}
-            } 
-     ter.getGravite().Angle = ang;
+                std :: cout<< "  angle choisie  "<< ang << std::endl;
+            
+     ter.getGravite().SetAng(ang);
 
 } 
 
@@ -94,30 +90,25 @@ void Jeu :: angleChoisis (const char touche)
 
 void Jeu :: GetPuis (const char touche)
 {
-    bool choixfini = false;
+   
     double pui;
-    int max=90;
+    int max=10;
 
-    while (choixfini) 
-    {
+    
 				switch (touche) 
                 {
-				case 'z':
+				case 't':
 
-					while(max>=pui){pui=pui+0.5; std :: cout<<pui;} 
+					while(max>=pui){pui=pui+0.5;} 
                       // car Y inverse
 					break;
 
-                case 's':
+                case 'g':
 
-                    while(pui>=0){pui=pui-0.5;std :: cout<<pui;}
+                    while(pui>=0){pui=pui-0.5;}
 
                     break;
-
-                case 'q':
-
-                    choixfini = true;
 				}
-            } 
-    ter.getGravite().Power=pui;
+            std :: cout<< "  puissance choisie  "<< pui << std::endl;
+    ter.getGravite().SetPow(pui);
 }

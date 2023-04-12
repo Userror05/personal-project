@@ -91,7 +91,7 @@ public:
      * @return L'objet Balle utilisé sur le terrain.
      */
 
-    const Balle& GetBalle() const ;
+     Balle& GetBalle() ;
 
     /**
      * @brief Renvoie le pointeur d'obstacle à la position (x, y) du tableau d'obstacles.
@@ -110,7 +110,7 @@ public:
 
      //bool CollectionItem(Item I,Balle B);
 
-      
+     const Balle& getConstBalle()const ;
     
 
      
@@ -131,6 +131,8 @@ inline unsigned int Terrain :: getDimy()const{return DimY;}
 
 inline Gravite& Terrain :: getGravite(){return gr;}
 
-inline const Balle& Terrain :: GetBalle() const { return jp;}
+inline Balle& Terrain :: GetBalle() { return jp;}
+
+inline const Balle& Terrain :: getConstBalle() const { return jp;}
 
 #endif

@@ -112,8 +112,8 @@ JeuSDL2 ::JeuSDL2() : gami()
     else withSound = true;
 //////////////////
 	int dimx, dimy;
-	dimx = gami.GetTerrain().getDimx();
-	dimy = gami.GetTerrain().getDimx();
+	dimx = gami.getConstTerrain().getDimx();
+	dimy = gami.getConstTerrain().getDimx();
 	dimx = dimx * TAILLE_SPRITE;
 	dimy = dimy * TAILLE_SPRITE;
 
@@ -215,10 +215,10 @@ void JeuSDL2 :: BoucleChoixANG()
 				switch (events.key.keysym.scancode) 
                 {
 				case SDL_SCANCODE_UP:
-					gami.angleChoisis(SDL_SCANCODE_UP);    // car Y inverse
+					gami.angleChoisis(SDL_SCANCODE_UP);    // pour augmenter
 					break;
                 case SDL_SCANCODE_DOWN:
-					gami.angleChoisis(SDL_SCANCODE_DOWN);    // car Y inverse
+					gami.angleChoisis(SDL_SCANCODE_DOWN);    // pour baisser
 					break;
                 case SDL_SCANCODE_Q:
                     quit = true;
@@ -238,10 +238,11 @@ void JeuSDL2 :: BoucleChoixANG()
 void JeuSDL2 :: sdlaff()
 { 
 
-     Terrain& ter = gami.GetTerrain();
+     const Terrain& ter = gami.getConstTerrain();
+     const Balle& b = gami.getConstTerrain().getConstBalle();
     SDL_RenderClear(renderer);
 
-im_balle.draw(renderer,ter.GetBalle().GetX()*TAILLE_SPRITE,ter.GetBalle().GetY()*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+im_balle.draw(renderer,b.GetX()*TAILLE_SPRITE,b.GetY()*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
 for(unsigned int i=0;i<ter.getDimx();i++)
 {
     for(unsigned int j=0;j<ter.getDimy();j++)
@@ -250,11 +251,16 @@ for(unsigned int i=0;i<ter.getDimx();i++)
         im_mur.draw(renderer,i*TAILLE_SPRITE,j*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
     }
 }
+
+
+
 }
+
+
 void JeuSDL2 :: Bouclejeu()
 {     
     SDL_Event events;
-      bool jouer = false;
+     bool jouer = false;
     //BoucleChoixANG();
     //BoucleChoixPUI();
 
@@ -272,40 +278,51 @@ void JeuSDL2 :: Bouclejeu()
         while (SDL_PollEvent(&events)) 
         {
 			if (events.type == SDL_QUIT) quit = true;           // Si l'utilisateur a clique sur la croix de fermeture
-			if(jouer)
-            {
-                 if (events.type == SDL_KEYDOWN) 
+			
+            
+               else  if (events.type == SDL_KEYDOWN) 
             {              // Si une touche est enfoncee
                 
-				switch (events.key.keysym.scancode) 
+				switch (events.key.keysym.sym) 
                 {
-				case SDL_SCANCODE_UP:
-					gami.angleChoisis(SDL_SCANCODE_UP);    // car Y inverse
+				case SDLK_z:
+					gami.angleChoisis('z');    // car Y inverse
 					break;
-                case SDL_SCANCODE_DOWN:
-					gami.angleChoisis(SDL_SCANCODE_DOWN);    // car Y inverse
+                case SDLK_s:
+					gami.angleChoisis('s');    // car Y inverse
 					break;
-				case SDL_SCANCODE_F:
-					gami.GetPuis(SDL_SCANCODE_F);    // car Y inverse
+				case SDLK_t:
+					gami.GetPuis('t');    // car Y inverse
 					break;
-                case SDL_SCANCODE_Q:
+                case SDLK_g:
+					gami.GetPuis('g');    // car Y inverse
+					break;
+                case SDLK_j:
+                    jouer = true;
+                    break;
+                case SDLK_q:
                     quit = true;
                     break;
 				default: 
                     break;
-				}
-            } jouer=true;
+				} 
+            } if(jouer){gami.ActionJoueur();}
             
-            } else gami.ActionJoueur();
+            }  
+            
+            
+                sdlaff();
+            
+                SDL_RenderPresent(renderer);
 
-            sdlaff();
+           
 		        // on permute les deux buffers (cette fonction ne doit se faire qu'une seule fois dans la boucle)
-            SDL_RenderPresent(renderer);
+           
 
         }
         }
 
-}
+
 
 
 

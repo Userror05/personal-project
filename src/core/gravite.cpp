@@ -12,7 +12,7 @@ Gravite :: Gravite ()
     Power = 5;
 }
 
-void Gravite::actualiseVecteur(Balle& b)
+void Gravite::actualiseVecteur(Balle& b)const
 {
     float coef=0.9;
             b.Sauvegarde.SetX(b.mouvement.GetX());
@@ -119,7 +119,7 @@ void Gravite :: TestRegression()
     float x = b.mouvement.GetX();
     std :: cout << x;
     float y = b.mouvement.GetY();
-    float ang =ConversionAng();
+    float ang = ConversionAng();
     assert(ang!= Angle);
     
     b.AffPosition();

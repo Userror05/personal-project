@@ -8,18 +8,22 @@ class Gravite
 
     private:
    
+    double Power; 
+
+    double Angle;
 
     public:
     
     //float g = -9.81;
 
-    double Power; 
-
-    double Angle;
 
     Gravite();
 
-    void actualiseVecteur(Balle& b);
+    void actualiseVecteur(Balle& b) const;
+
+    void SetPow(float pow);
+
+    void SetAng(float ang);
 
     
 
@@ -49,7 +53,10 @@ class Gravite
 
 
 };
-
+inline void Gravite :: SetPow(float pow)
+{   Power = pow;}
+inline void Gravite :: SetAng(float ang)
+{   Angle = ang;}
 
 
 

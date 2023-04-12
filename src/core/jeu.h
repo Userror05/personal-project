@@ -22,12 +22,18 @@ class Jeu
 
     Terrain& GetTerrain() ;
 
-     void angleChoisis(const char touche);
-     void GetPuis(const char touche);
+    const Terrain& getConstTerrain() const; 
+
+    void angleChoisis(const char touche);
+
+    void GetPuis(const char touche);
+
 
 };
 
 inline  Terrain& Jeu :: GetTerrain() {return ter;}
+
+inline  const Terrain& Jeu :: getConstTerrain() const {return ter;}
 
 
 #endif
