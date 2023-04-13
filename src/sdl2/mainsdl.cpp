@@ -3,5 +3,6 @@ int main(int argc, char** argv)
 {
     JeuSDL2 jeu;
     jeu.Bouclejeu();
+    return 0;
 
 }

@@ -212,10 +212,9 @@ void JeuSDL2 :: BoucleChoixANG()
    
     {
           SDL_Event events;
-          bool jouer = false;
 
      //bool quit = false;
-        while(!jouer){
+       
        
         while (SDL_PollEvent(&events)) 
         {
@@ -233,7 +232,7 @@ void JeuSDL2 :: BoucleChoixANG()
 					gami.angleChoisis('s');    // car Y inverse
 					break;
                 case SDLK_j:
-                    jouer = true;
+                   
                     break;
                     
 				default: 
@@ -243,7 +242,7 @@ void JeuSDL2 :: BoucleChoixANG()
         }
         }
 
-}
+
 
 
 
@@ -296,10 +295,10 @@ void JeuSDL2 :: Bouclejeu()
                         case SDLK_g:
                             gami.GetPuis('g');
                             break;
-                        case SDLK_j:
-                            if(gami.jouer('j')) {
-                                gami.ActionJoueur(gami.GetTerrain().GetBalle());
-                                
+                        case SDLK_j: gami.jouer('j');
+                            if(gami.jouer('j')) 
+                            {
+                               gami.ActionJoueur(gami.GetTerrain().GetBalle());
                             }
                             break;
                         case SDLK_q:
@@ -309,12 +308,13 @@ void JeuSDL2 :: Bouclejeu()
                     }
                 }
             }
+            sdlaff();
+        SDL_RenderPresent(renderer);
         }
 
-        sdlaff();
-        SDL_RenderPresent(renderer);
         
-        }
+        
+ }
         
         
 
