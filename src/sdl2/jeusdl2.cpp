@@ -174,23 +174,31 @@ void JeuSDL2 :: BoucleChoixPUI()
    
     {
         
-         bool quit = false;
-        while(quit){
         SDL_Event events;
+          bool jouer = false;
+
+     //bool quit = false;
+        while(!jouer){
+       
         while (SDL_PollEvent(&events)) 
         {
-			if (events.type == SDL_QUIT) quit = true;           // Si l'utilisateur a clique sur la croix de fermeture
-			else if (events.type == SDL_KEYDOWN) 
+			
+            
+             if (events.type == SDL_KEYDOWN) 
             {              // Si une touche est enfoncee
                 
-				switch (events.key.keysym.scancode) 
+				switch (events.key.keysym.sym) 
                 {
-				case SDL_SCANCODE_F:
-					gami.GetPuis(SDL_SCANCODE_F);    // car Y inverse
+				case SDLK_z:
+					gami.angleChoisis('z');    // car Y inverse
 					break;
-                case SDL_SCANCODE_Q:
-                    quit = true;
+                case SDLK_s:
+					gami.angleChoisis('s');    // car Y inverse
+					break;
+                case SDLK_j:
+                    jouer = true;
                     break;
+                    
 				default: 
                     break;
 				}
@@ -203,25 +211,29 @@ void JeuSDL2 :: BoucleChoixPUI()
 void JeuSDL2 :: BoucleChoixANG()
    
     {
-         bool quit = false;
-        while(quit){
-        SDL_Event events;
+          SDL_Event events;
+          bool jouer = false;
+
+     //bool quit = false;
+        while(!jouer){
+       
         while (SDL_PollEvent(&events)) 
         {
-			if (events.type == SDL_QUIT) quit = true;           // Si l'utilisateur a clique sur la croix de fermeture
-			else if (events.type == SDL_KEYDOWN) 
+			
+            
+             if (events.type == SDL_KEYDOWN) 
             {              // Si une touche est enfoncee
                 
-				switch (events.key.keysym.scancode) 
+				switch (events.key.keysym.sym) 
                 {
-				case SDL_SCANCODE_UP:
-					gami.angleChoisis(SDL_SCANCODE_UP);    // pour augmenter
+				case SDLK_z:
+					gami.angleChoisis('z');    // car Y inverse
 					break;
-                case SDL_SCANCODE_DOWN:
-					gami.angleChoisis(SDL_SCANCODE_DOWN);    // pour baisser
+                case SDLK_s:
+					gami.angleChoisis('s');    // car Y inverse
 					break;
-                case SDL_SCANCODE_Q:
-                    quit = true;
+                case SDLK_j:
+                    jouer = true;
                     break;
                     
 				default: 
@@ -261,15 +273,9 @@ void JeuSDL2 :: Bouclejeu()
 {     
     SDL_Event events;
      bool jouer = false;
-    //BoucleChoixANG();
-    //BoucleChoixPUI();
+    
 
-   /*while(!gami.Rejouer(gami.GetTerrain().GetBalle().mouvement))
-    {
-        gami.ActionJoueur();
-        
-        
-    }*/ 
+   
     //gami.Rejouer(gami.GetTerrain().GetBalle().mouvement)==0
 
      bool quit = false;
@@ -279,37 +285,13 @@ void JeuSDL2 :: Bouclejeu()
         {
 			if (events.type == SDL_QUIT) quit = true;           // Si l'utilisateur a clique sur la croix de fermeture
 			
-            
-               else  if (events.type == SDL_KEYDOWN) 
-            {              // Si une touche est enfoncee
-                
-				switch (events.key.keysym.sym) 
-                {
-				case SDLK_z:
-					gami.angleChoisis('z');    // car Y inverse
-					break;
-                case SDLK_s:
-					gami.angleChoisis('s');    // car Y inverse
-					break;
-				case SDLK_t:
-					gami.GetPuis('t');    // car Y inverse
-					break;
-                case SDLK_g:
-					gami.GetPuis('g');    // car Y inverse
-					break;
-                case SDLK_j:
-                    jouer = true;
-                    break;
-                case SDLK_q:
-                    quit = true;
-                    break;
-				default: 
-                    break;
-				} 
-            } if(jouer){gami.ActionJoueur();}
-            
-            }  
-            
+            else if(gami.Rejouer(gami.GetTerrain().GetBalle().mouvement))
+            {
+                BoucleChoixANG();
+                BoucleChoixPUI();    
+            } 
+               else  gami.ActionJoueur(gami.GetTerrain().GetBalle());
+            } 
             
                 sdlaff();
             
@@ -318,9 +300,12 @@ void JeuSDL2 :: Bouclejeu()
            
 		        // on permute les deux buffers (cette fonction ne doit se faire qu'une seule fois dans la boucle)
            
+            }  
+            
+            
 
         }
-        }
+        
 
 
 

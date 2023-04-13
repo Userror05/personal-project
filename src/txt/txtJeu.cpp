@@ -44,7 +44,7 @@ void txtBoucle (Jeu & jeu) {
 		usleep(100000);
         #endif // WIN32
 
-		jeu.ActionJoueur();
+		jeu.ActionJoueur(jeu.GetTerrain().GetBalle());
 
 		c = win.getCh();
 		

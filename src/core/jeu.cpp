@@ -10,19 +10,19 @@ bool Jeu :: Rejouer(Vecteur v)
     else return false;
 }
 
-void Jeu :: ActionJoueur()
+void Jeu :: ActionJoueur(Balle& b)
 {
     
-    ter.getGravite().Vitesse(ter.GetBalle());
-    ter.GetBalle().InitMouvement();
+    ter.getGravite().Vitesse(b);
+    b.InitMouvement();
   
-    while(!Rejouer(ter.GetBalle().mouvement))
+    while(!Rejouer(b.mouvement))
     {
          if(ter.Collision())
         {
             ter.ArrangementTrajectoire();
         }
-        ter.getGravite().actualiseVecteur(ter.GetBalle());
+        ter.getGravite().actualiseVecteur(b);
         
     }
    
@@ -58,7 +58,7 @@ void Jeu :: ActionJoueur()
 
 void Jeu :: angleChoisis (const char touche)
 {
-    float ang = 45;
+    int ang = ter.getGravite().Getangle();
     
     int max=90;
 
@@ -67,13 +67,13 @@ void Jeu :: angleChoisis (const char touche)
                 {
 				case 'z':
 					
-                     while (ang<=90){ang=ang+1.0; std :: cout<<"angle = "<< ang;};   // car Y inverse
+                     while (ang<=max){ang++; std :: cout<<"angle = "<< ang;};   // car Y inverse
 					
                     break;
                 
                 case 's':
                      
-                     while(ang>=0){ang=ang-1.0;std :: cout<<"angle = "<< ang;}
+                     while(ang>=0){ang--;std :: cout<<"angle = "<< ang;}
                     
                     break;
 				
@@ -91,19 +91,19 @@ void Jeu :: angleChoisis (const char touche)
 void Jeu :: GetPuis (const char touche)
 {
    
-    double pui = 5;
-    int max=10;
+    int pui = ter.getGravite().Getpow();
+    int max=11;
 				switch (touche) 
                 {
 				case 't':
 
-					while(max>=pui){pui=pui+0.5;} 
+					while(max>pui){pui++;} 
                       // car Y inverse
 					break;
 
                 case 'g':
 
-                    while(pui>=0){pui=pui-0.5;}
+                    while(pui>=0){pui--;}
 
                     break;
 				}
