@@ -1,5 +1,6 @@
 #include"jeu.h"
 #include<iostream>
+#include<cassert>
 
 bool Jeu :: Rejouer(Vecteur v)
 {
@@ -65,15 +66,15 @@ void Jeu :: angleChoisis (const char touche)
     
 				switch (touche) 
                 {
-				case 'z':
+				case  'z':
 					
-                     while (ang<=max){ang++; std :: cout<<"angle = "<< ang;};   // car Y inverse
+                      if(ang<=max){ang++; std :: cout<<"angle = "<< ang;};   // car Y inverse
 					
                     break;
                 
                 case 's':
                      
-                     while(ang>=0){ang--;std :: cout<<"angle = "<< ang;}
+                     if(ang>=0){ang--;std :: cout<<"angle = "<< ang;}
                     
                     break;
 				
@@ -92,21 +93,42 @@ void Jeu :: GetPuis (const char touche)
 {
    
     int pui = ter.getGravite().Getpow();
-    int max=11;
+    int max=10;
 				switch (touche) 
                 {
 				case 't':
 
-					while(max>pui){pui++;} 
+					if(max>pui){pui++;}else std :: cout<<"max de puissace atteint"<< std ::endl;
                       // car Y inverse
 					break;
 
                 case 'g':
 
-                    while(pui>=0){pui--;}
+                    if(pui>=0){pui--;} else std ::  cout << "min de puissance atteint " << std :: endl;
 
                     break;
 				}
+
+                assert(pui>=0 && pui <=10);
             std :: cout<< "  puissance choisie  "<< pui << std::endl;
     ter.getGravite().SetPow(pui);
+}
+
+bool Jeu :: jouer(const char jouer)
+{
+    if(jouer=='j') return true; else return false;
+}
+
+void Jeu :: testRegression()
+{
+    Jeu gami;
+    int ang = gami.GetTerrain().getGravite().Getangle();
+    assert(ang<=90 && ang>=0);
+    gami.angleChoisis('z');
+
+    assert(gami.GetTerrain().getGravite().Getangle() && gami.GetTerrain().getGravite().Getangle()!=ang);
+
+    gami.GetPuis('t');
+
+    
 }

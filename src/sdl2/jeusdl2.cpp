@@ -272,39 +272,50 @@ for(unsigned int i=0;i<ter.getDimx();i++)
 void JeuSDL2 :: Bouclejeu()
 {     
     SDL_Event events;
-     bool jouer = false;
+
+    bool quit = false;
     
-
-   
     //gami.Rejouer(gami.GetTerrain().GetBalle().mouvement)==0
-
-     bool quit = false;
-        while(!quit){
-       
-        while (SDL_PollEvent(&events)) 
-        {
-			if (events.type == SDL_QUIT) quit = true;           // Si l'utilisateur a clique sur la croix de fermeture
-			
-            else if(gami.Rejouer(gami.GetTerrain().GetBalle().mouvement))
-            {
-                BoucleChoixANG();
-                BoucleChoixPUI();    
-            } 
-               else  gami.ActionJoueur(gami.GetTerrain().GetBalle());
-            } 
+    while(!quit){
+        while (SDL_PollEvent(&events)) {
             
-                sdlaff();
-            
-                SDL_RenderPresent(renderer);
-
-           
-		        // on permute les deux buffers (cette fonction ne doit se faire qu'une seule fois dans la boucle)
-           
-            }  
-            
-            
-
+                if (events.type == SDL_QUIT) quit = true;
+                else if (events.type == SDL_KEYDOWN) {
+                    bool jouer = false;
+                    switch (events.key.keysym.sym) {
+                        // Commandes du 1er joueur
+                        case SDLK_z:
+                            gami.angleChoisis('z');
+                            break;
+                        case SDLK_s:
+                            gami.angleChoisis('s');
+                            break;
+                        case SDLK_t:
+                            gami.GetPuis('t');
+                            break;
+                        case SDLK_g:
+                            gami.GetPuis('g');
+                            break;
+                        case SDLK_j:
+                            if(gami.jouer('j')) {
+                                gami.ActionJoueur(gami.GetTerrain().GetBalle());
+                                
+                            }
+                            break;
+                        case SDLK_q:
+                            quit = true;
+                            break;
+                        default: break;
+                    }
+                }
+            }
         }
+
+        sdlaff();
+        SDL_RenderPresent(renderer);
+        
+        }
+        
         
 
 

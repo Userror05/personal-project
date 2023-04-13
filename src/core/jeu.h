@@ -28,6 +28,10 @@ class Jeu
 
     void GetPuis(const char touche);
 
+    bool jouer(const char jouer);
+    
+    void testRegression();
+
 
 };
 

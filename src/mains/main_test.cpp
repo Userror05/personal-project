@@ -1,7 +1,9 @@
-#include"../core/terrain.h"
+#include"../core/jeu.h"
 
 int main()
 {
+    Jeu jeu;
+    jeu.testRegression();
     Terrain ter;
     Gravite gr;
     Balle b;
@@ -12,7 +14,7 @@ int main()
 
     ter.TestRegression();
 
-    
 
+return 0;
 
 }
