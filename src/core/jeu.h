@@ -18,7 +18,7 @@ class Jeu
     bool Rejouer(Vecteur v);
 
     void ActionJoueur(Balle& b);
-    //void ActionJoueurVisuelTest45();
+    void ActionJoueurVisuelTest45(Balle& b);
 
     Terrain& GetTerrain() ;
 
@@ -36,7 +36,6 @@ class Jeu
 };
 
 inline  Terrain& Jeu :: GetTerrain() {return ter;}
-
 inline  const Terrain& Jeu :: getConstTerrain() const {return ter;}
 
 

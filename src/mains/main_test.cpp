@@ -3,6 +3,11 @@
 int main()
 {
     Jeu jeu;
+    jeu.GetPuis('t');
+}
+
+/*
+    Jeu jeu;
     jeu.testRegression();
     Terrain ter;
     Gravite gr;
@@ -16,5 +21,4 @@ int main()
 
 
 return 0;
-
-}
+*/

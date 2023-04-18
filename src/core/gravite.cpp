@@ -26,10 +26,10 @@ void Gravite::actualiseVecteur(Balle& b)const
             b.mouvement.SetY((b.mouvement.GetY()+b.gravite.GetY())*coef);
 
             b.SetX(b.GetX()+b.mouvement.GetX());
-
             b.SetY(b.GetY()+b.mouvement.GetY());
-
-            usleep(1000000);
+           
+           
+            //usleep(1000000);
 
             std::cout<<"mouv:"<<"("<<b.mouvement.GetX()<<","<<b.mouvement.GetY()<<")";
             
@@ -59,8 +59,8 @@ void Gravite :: accelerationBalle()
 double Gravite :: RecupA()
 {
     double a;
-    a=cos(Angle);
-    std::cout<<" "<<a<<" ";
+    a=cos(ConversionAng());
+    /*std::cout<<" "<<a<<" "<<"le_return:_";*/
      return a;
 
 }
@@ -69,7 +69,7 @@ double Gravite :: RecupB()
 {
     double b;
     b=sin(ConversionAng());
-    std::cout<<" "<<b<<" ";
+    /*std::cout<<" "<<b<<" "<<"le_return:_";*/
     return b;
 }
 

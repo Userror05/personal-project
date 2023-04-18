@@ -84,7 +84,7 @@ public:
      *
      * @return L'objet gravité utilisé pour simuler la gravité sur le terrain.
      */
-    Gravite& getGravite();
+    Gravite& GetGravite();
     /**
      * @brief Renvoie l'objet Balle utilisé par le joueur.
      *
@@ -129,7 +129,7 @@ inline unsigned int Terrain :: getDimx()const{return DimX;}
 
 inline unsigned int Terrain :: getDimy()const{return DimY;}
 
-inline Gravite& Terrain :: getGravite(){return gr;}
+inline Gravite& Terrain :: GetGravite(){return gr;}
 
 inline Balle& Terrain :: GetBalle() { return jp;}
 

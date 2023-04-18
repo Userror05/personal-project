@@ -14,44 +14,46 @@ bool Jeu :: Rejouer(Vecteur v)
 void Jeu :: ActionJoueur(Balle& b)
 {
     
-    ter.getGravite().Vitesse(b);
+    ter.GetGravite().Vitesse(b);
     b.InitMouvement();
   
     while(!Rejouer(b.mouvement))
     {
-         if(ter.Collision())
-        {
-            ter.ArrangementTrajectoire();
-        }
-        ter.getGravite().actualiseVecteur(b);
+       //  if(ter.Collision())
+       // {
+       //     ter.ArrangementTrajectoire();
+        //}
+        ter.GetGravite().actualiseVecteur(b);
         
     }
    
 }
 
-/*void Jeu :: ActionJoueurVisuelTest45()
+void Jeu :: ActionJoueurVisuelTest45(Balle& b)
 {
     
-    ter.getGravite().Power=20;
-    ter.getGravite().AffPR();
-    ter.getGravite().Angle=45;
-    ter.getGravite().AffAng();
-    ter.getGravite().Vitesse(ter.getGravite().GetBalle());
-    ter.getGravite().GetBalle().AffVitesse();
-    ter.getGravite().GetBalle().InitMouvement();
-    ter.getGravite().GetBalle().AffInitMouvement();
-    for(int t=0;t<=5;t++)
-   // while(Rejouer(B.mouvement))
-    {
-         if(ter.Collision())
+    ter.GetGravite().SetPow(5);
+    ter.GetGravite().AffPR();
+    ter.GetGravite().SetAng(45);
+    ter.GetGravite().AffAng();
+    ter.GetGravite().Vitesse(b);
+    b.AffVitesse();
+    b.InitMouvement();
+    b.AffInitMouvement();
+    //for(int t=0;t<=5;t++)
+    // while(Rejouer(b.mouvement))
+    //{
+        for(int i=0;i<=5;i++)
         {
-            ter.ArrangementTrajectoire();
-        }
-        ter.getGravite().actualiseVecteur(ter.getGravite().GetBalle());
+        // if(ter.Collision())
+       // {
+       //     ter.ArrangementTrajectoire();
+        //}
+        ter.GetGravite().actualiseVecteur(b);
         
     }
 }
-*/
+
 
 
 
@@ -59,7 +61,7 @@ void Jeu :: ActionJoueur(Balle& b)
 
 void Jeu :: angleChoisis (const char touche)
 {
-    int ang = ter.getGravite().Getangle();
+    int ang = ter.GetGravite().Getangle();
     
     int max=90;
 
@@ -83,7 +85,7 @@ void Jeu :: angleChoisis (const char touche)
 				}
                 std :: cout<< "  angle choisie  "<< ang << std::endl;
             
-     ter.getGravite().SetAng(ang);
+     ter.GetGravite().SetAng(ang);
 
 } 
 
@@ -92,7 +94,7 @@ void Jeu :: angleChoisis (const char touche)
 void Jeu :: GetPuis (const char touche)
 {
    
-    int pui = ter.getGravite().Getpow();
+    int pui = ter.GetGravite().Getpow();
     int max=10;
 				switch (touche) 
                 {
@@ -111,7 +113,7 @@ void Jeu :: GetPuis (const char touche)
 
                 assert(pui>=0 && pui <=10);
             std :: cout<< "  puissance choisie  "<< pui << std::endl;
-    ter.getGravite().SetPow(pui);
+    ter.GetGravite().SetPow(pui);
 }
 
 bool Jeu :: jouer(const char jouer)
@@ -122,13 +124,38 @@ bool Jeu :: jouer(const char jouer)
 void Jeu :: testRegression()
 {
     Jeu gami;
-    int ang = gami.GetTerrain().getGravite().Getangle();
+    int ang = gami.GetTerrain().GetGravite().Getangle();
     assert(ang<=90 && ang>=0);
     gami.angleChoisis('z');
 
-    assert(gami.GetTerrain().getGravite().Getangle() && gami.GetTerrain().getGravite().Getangle()!=ang);
+    assert(gami.GetTerrain().GetGravite().Getangle() && gami.GetTerrain().GetGravite().Getangle()!=ang);
 
     gami.GetPuis('t');
 
     
 }
+
+/*
+void Jeu :: ActionJoueurVisuelTest45()
+{
+    
+    ter.getGravite().Power=5;
+    ter.getGravite().AffPR();
+    ter.getGravite().Angle=45;
+    ter.getGravite().AffAng();
+    ter.getGravite().Vitesse(ter.getGravite().GetBalle());
+    ter.getGravite().GetBalle().AffVitesse();
+    ter.getGravite().GetBalle().InitMouvement();
+    ter.getGravite().GetBalle().AffInitMouvement();
+    for(int t=0;t<=5;t++)
+   // while(Rejouer(B.mouvement))
+    {
+         if(ter.Collision())
+        {
+            ter.ArrangementTrajectoire();
+        }
+        ter.getGravite().actualiseVecteur(ter.getGravite().GetBalle());
+        
+    }
+}
+*/

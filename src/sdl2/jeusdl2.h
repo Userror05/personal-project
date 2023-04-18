@@ -64,8 +64,13 @@ class JeuSDL2
     void BoucleChoixANG();
 
     void Bouclejeu();
+    void BouclejeuV2();
+    void TestAffichageBalleContinue(Balle& b);
 
     void sdlaff();
+    Jeu& GetJeu();
+    void TestAll();
+
     
 
 
@@ -74,7 +79,6 @@ class JeuSDL2
 
 };
 
-
-
+inline Jeu& JeuSDL2 :: GetJeu(){return gami;}
 
 #endif

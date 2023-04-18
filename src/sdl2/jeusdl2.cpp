@@ -1,6 +1,7 @@
 #include"jeusdl2.h"
 #include<iostream>
 #include<string>
+#include<unistd.h>
 using namespace std;
 
 const int TAILLE_SPRITE = 32;
@@ -300,6 +301,7 @@ void JeuSDL2 :: Bouclejeu()
                             {
                                gami.ActionJoueur(gami.GetTerrain().GetBalle());
                             }
+                            cout<< "c'est joué";
                             break;
                         case SDLK_q:
                             quit = true;
@@ -315,6 +317,122 @@ void JeuSDL2 :: Bouclejeu()
         
         
  }
+
+void JeuSDL2 :: BouclejeuV2()
+{     
+    SDL_Event events;
+
+    bool quit = false;
+    
+    //gami.Rejouer(gami.GetTerrain().GetBalle().mouvement)==0
+    while(!quit){
+        while (SDL_PollEvent(&events)) {
+            
+                if (events.type == SDL_QUIT) quit = true;
+                else if (events.type == SDL_KEYDOWN) {
+                    bool jouer = false;
+                    switch (events.key.keysym.sym) {
+                        // Commandes du 1er joueur
+                        case SDLK_z:
+                            gami.angleChoisis('z');
+                            break;
+                        case SDLK_s:
+                            gami.angleChoisis('s');
+                            break;
+                        case SDLK_t:
+                            gami.GetPuis('t');
+                            break;
+                        case SDLK_g:
+                            gami.GetPuis('g');
+                            break;
+                        case SDLK_j: gami.jouer('j');
+                            if(gami.jouer('j')) 
+                            {
+                               TestAffichageBalleContinue(gami.GetTerrain().GetBalle());
+                            }
+                            cout<< "c'est joué";
+                            break;
+                        case SDLK_q:
+                            quit = true;
+                            break;
+                        default: break;
+                    }
+                }
+            }
+            sdlaff();
+        SDL_RenderPresent(renderer);
+        }
+
+        
+        
+ }
+
+void JeuSDL2 :: TestAffichageBalleContinue(Balle& b)
+{
+     const Terrain& ter = gami.getConstTerrain();
+    // const Balle& b = gami.getConstTerrain().getConstBalle();
+    SDL_RenderClear(renderer);
+
+    //Pour le faire avec une puissance définie de 5: gami.GetTerrain().GetGravite().SetPow(5);
+    gami.GetTerrain().GetGravite().Getpow();
+    gami.GetTerrain().GetGravite().AffPR();
+    //Pour le faire avec un angle définie de 45:     gami.GetTerrain().GetGravite().SetAng(45);
+    gami.GetTerrain().GetGravite().Getangle();
+    gami.GetTerrain().GetGravite().AffAng();
+    gami.GetTerrain().GetGravite().Vitesse(b);
+    b.AffVitesse();
+    b.InitMouvement();
+    b.AffInitMouvement();
+    //for(int t=0;t<=5;t++)
+    // while(Rejouer(b.mouvement))
+    //{
+        for(int i=0;i<=5;i++)
+        { SDL_RenderClear(renderer);
+        // if(ter.Collision())
+       // {
+       //     ter.ArrangementTrajectoire();
+        //}
+        gami.GetTerrain().GetGravite().actualiseVecteur(b);
+        im_balle.draw(renderer,b.GetX()*TAILLE_SPRITE,b.GetY()*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+        for(unsigned int i=0;i<ter.getDimx();i++)
+            {
+            for(unsigned int j=0;j<ter.getDimy();j++)
+                {
+                 if(ter.getXY(i,j)!=nullptr)
+                im_mur.draw(renderer,i*TAILLE_SPRITE,j*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+                }
+            }
+        SDL_RenderPresent(renderer);
+    
+        usleep(100000);
+        
+    }
+
+
+}
+
+
+
+void JeuSDL2 :: TestAll()
+{
+    Balle b;
+    /*cout<<gami.GetTerrain().GetGravite().Getangle()<<" ";
+    cout<<gami.GetTerrain().GetGravite().ConversionAng()<<" ";
+    cout<<gami.GetTerrain().GetGravite().RecupA()<<" ";
+    cout<<gami.GetTerrain().GetGravite().RecupB()<<" ";
+    cout<<gami.GetTerrain().GetGravite().ConversionX()<<" ";
+    cout<<gami.GetTerrain().GetGravite().ConversionY()<<" ";*/
+   /* gami.GetTerrain().GetGravite().Vitesse(b);
+    cout<<"("<<b.vitesse.GetX()<<",";
+    cout<<b.vitesse.GetY()<<") ; ";
+    b.InitMouvement();
+    cout<<b.mouvement.GetX()<<",";
+    cout<<b.mouvement.GetY()<<"; ";
+    gami.GetTerrain().GetGravite().actualiseVecteur(b);*/
+    gami.ActionJoueurVisuelTest45(b);  
+    
+    
+}
         
         
 
