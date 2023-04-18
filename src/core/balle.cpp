@@ -29,6 +29,7 @@ double Balle :: GetY()const
 void Balle :: SetX(double x)
 {
     pos_x=x;
+    decalage_x=x;
 
 }
 
