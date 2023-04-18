@@ -11,6 +11,7 @@ Balle :: Balle ()
     Vecteur Vec(0.0,0.0);
     vitesse=Vec;
     mouvement=vitesse;
+    divise=vitesse;
 }
 
 
@@ -59,6 +60,12 @@ void Balle :: InitMouvement()
 void Balle :: AffInitMouvement()
 {
    std::cout<<"INITMOUV: "<<mouvement.GetX()<<";"<<mouvement.GetY();
+}
+
+void Balle :: MoinsHuitMille()
+{
+    divise.SetX((mouvement.GetX())/50);
+    divise.SetY((mouvement.GetY())/50);
 }
 
 

@@ -58,10 +58,10 @@ class JeuSDL2
     JeuSDL2();
     ~JeuSDL2();
 
-    void BoucleChoixPUI();
+    //void BoucleChoixPUI();
 
 
-    void BoucleChoixANG();
+    //void BoucleChoixANG();
 
     void Bouclejeu();
     void BouclejeuV2();

@@ -76,27 +76,27 @@ void Terrain :: SetObstacle (unsigned int xmin,unsigned int ymin,unsigned int xm
 
 }
 
-void Terrain :: ArrangementTrajectoire()
+void Terrain :: ArrangementTrajectoire(Balle& b)
 {
-    Balle b = jp;
-    if (Collision())
+    if (Collision(b))
     {
         
-        b.mouvement.SetX(jp.mouvement.GetX());
+        b.divise.SetX(b.divise.GetX());
     }
-    if (Collision()&& jp.mouvement.GetY()<0)
+    if (Collision(b)&& b.divise.GetY()<0)
     {
-        float y=jp.mouvement.GetY();
-         b.mouvement.SetY(-y);
+        float y=b.divise.GetY();
+         b.divise.SetY(-y);
     }
 
 
 }
 
-bool Terrain :: Collision()
+bool Terrain :: Collision(Balle& b)
 {
-    int x = (int)jp.GetX();
-    int y = (int)jp.GetY();
+    float x = b.GetX();
+    float y = b.GetY();
+    std::cout<<"collision!"<<std::endl;
     if (getXY(x,y)!= nullptr)return true;
     else return false;
 }

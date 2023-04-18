@@ -53,12 +53,12 @@ public:
      *
      * @return True si la balle entre en collision avec un obstacle, False sinon.
      */
-    bool Collision();
+    bool Collision(Balle& B);
 
     /**
      * @brief Modifie la trajectoire de la balle en prenant en compte les obstacles présents sur le terrain.
      */
-    void ArrangementTrajectoire();
+    void ArrangementTrajectoire(Balle& b);
 
     /**
      * @brief Effectue un test de régression pour la classe Terrain.

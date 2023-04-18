@@ -23,6 +23,7 @@ public:
     Vecteur mouvement; /**< Le vecteur de mouvement de la balle */
     Vecteur vitesse; /**< Le vecteur de vitesse de la balle */
     Vecteur gravite; /**< Le vecteur de gravité de la balle */
+    Vecteur divise;  /**< Le vecteur divisé par mille de mouvement */
 
     /**
      * @brief Constructeur par défaut de la classe Balle
@@ -73,6 +74,7 @@ public:
      */
     void AffInitMouvement();
 
+    void MoinsHuitMille();
 
     void TestRegression();
 };
