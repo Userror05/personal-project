@@ -1,12 +1,15 @@
 #include"../core/jeu.h"
 
 int main()
-{ 
+{
+    Jeu jeu;
+    jeu.GetPuis('t');
+}
+
+/*
+    Jeu jeu;
+    jeu.testRegression();
     Terrain ter;
-    
-    ter.TestRegression();
-    std :: string mot = "./data/niveau1";
-    ter.ouvrir(mot);
     Gravite gr;
     Balle b;
    
@@ -14,15 +17,7 @@ int main()
     
     gr.TestRegression();
 
-    return 0;
-}
-
-/*
-    Jeu jeu;
-    jeu.testRegression();
-    
-   
-   
+    ter.TestRegression();
 
 
 return 0;

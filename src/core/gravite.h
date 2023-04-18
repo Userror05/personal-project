@@ -20,6 +20,7 @@ class Gravite
     Gravite();
 
     void actualiseVecteur(Balle& b) const;
+    void actualiseVecteurV2(Balle& b) const;
 
     void SetPow(int pow);
 
@@ -49,6 +50,8 @@ class Gravite
     void AffAng();
 
     void AffPR();
+
+   
     
 
     

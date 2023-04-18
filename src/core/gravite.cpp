@@ -25,8 +25,8 @@ void Gravite::actualiseVecteur(Balle& b)const
 
             b.mouvement.SetY((b.mouvement.GetY()+b.gravite.GetY())*coef);
 
-            b.SetX(b.GetX()+b.mouvement.GetX());
-            b.SetY(b.GetY()+b.mouvement.GetY());
+            //b.SetX(b.GetX()+b.mouvement.GetX());
+            //b.SetY(b.GetY()+b.mouvement.GetY());
            
            
             //usleep(1000000);
@@ -38,6 +38,29 @@ void Gravite::actualiseVecteur(Balle& b)const
 
     
 }
+void Gravite::actualiseVecteurV2(Balle& b)const
+{
+            // b.mouvement= (b.mouvement + b.mouvement)*coef;
+
+           // b.divise.SetX((b.divise.GetX()+b.divise.GetX()));
+
+           // b.divise.SetY((b.divise.GetY()+b.divise.GetY()));
+
+            b.SetX(b.GetX()+b.divise.GetX());
+            b.SetY(b.GetY()+b.divise.GetY());
+           
+           
+            //usleep(1000000);
+
+            std::cout<<"mouv:"<<"("<<b.divise.GetX()<<","<<b.divise.GetY()<<")";
+            
+            b.AffPosition();
+
+
+    
+}
+
+
 
 
 

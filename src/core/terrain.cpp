@@ -1,13 +1,12 @@
 #include "terrain.h"
 #include<cassert>
 #include<iostream>
-#include<fstream>
 
 
 Terrain :: Terrain()
 {
-    DimX=50;
-    DimY=50;
+    DimX=20;
+    DimY=20;
      //rempli le contour du terrain, d'obstacle
     for(unsigned int k = 0;k<DimX;k++)
     {
@@ -77,27 +76,27 @@ void Terrain :: SetObstacle (unsigned int xmin,unsigned int ymin,unsigned int xm
 
 }
 
-void Terrain :: ArrangementTrajectoire(Balle& jp)
+void Terrain :: ArrangementTrajectoire(Balle& b)
 {
-    
-    if (Collision())
+    if (Collision(b))
     {
         
-        jp.mouvement.SetX(jp.mouvement.GetX());
+        b.divise.SetX(b.divise.GetX());
     }
-    if (Collision()&& jp.mouvement.GetY()<0)
+    if (Collision(b)&& b.divise.GetY()<0)
     {
-        float y=jp.mouvement.GetY();
-         jp.mouvement.SetY(-y);
+        float y=b.divise.GetY();
+         b.divise.SetY(-y);
     }
 
 
 }
 
-bool Terrain :: Collision()
+bool Terrain :: Collision(Balle& b)
 {
-    int x = (int)jp.GetX();
-    int y = (int)jp.GetY();
+    float x = b.GetX();
+    float y = b.GetY();
+    std::cout<<"collision!"<<std::endl;
     if (getXY(x,y)!= nullptr)return true;
     else return false;
 }
@@ -121,49 +120,14 @@ void Terrain :: TestRegression()
     
     const Balle& b = ter.GetBalle();
 
+
+    
     std :: cout<<b.GetX(); std :: cout << b.GetY();
 
-    ouvrir("./data/niveau1");
-
-	assert(ter.getXY(2,2)!=nullptr);
-
-
     
     
 }
 
 
 
-void Terrain :: ouvrir(const std :: string & filename)
- {
-
-    std :: ifstream fichier (filename.c_str());
-
-    assert(fichier.is_open());
-
-	unsigned int xmin,ymin,xmax,ymax;
-	//std :: string mot;
-	//dimX = dimY = 0;
-	//fichier >> mot >> dimX >> dimY >> mot;
-	
-	//if (tab != NULL) delete [] tab;
-	//tab = new Pixel [dimX*dimY];
-	
-    while(!fichier.eof())
-	{
-		fichier >> xmin >> ymin >> xmax >> ymax ;
-
-    	assert(xmin > 0 && xmin<xmax && xmax < getDimx()-1);
-
-		assert(ymin > 0 && ymin<ymax && ymax < getDimy()-1);
-
-		SetObstacle(xmin,ymin,xmax,ymax);
-
-		std :: cout << "obstacle posé à   "<<(xmax-xmin)<<" x "<<(ymax-ymin)<< std :: endl;
-	}
-
-    fichier.close();
-
-    std :: cout << "Lecture de niveau  " << filename << " ... OK\n";
-}
 

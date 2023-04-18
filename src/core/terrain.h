@@ -10,7 +10,6 @@
 #include"obstacle.h"
 #include"gravite.h"
 #include<cassert>
-#include<string>
 
 /**
  * @class Terrain
@@ -24,7 +23,7 @@ private:
     unsigned int DimX; /**< La dimension en X du terrain. */
     unsigned int DimY; /**< La dimension en Y du terrain. */
     Gravite gr; /**< L'objet gravité utilisé pour simuler la gravité sur le terrain. */
-    Obstacle * tab[50][50]; /**< Le tableau de pointeurs d'obstacles représentant les obstacles présents sur le terrain. */
+    Obstacle * tab[20][20]; /**< Le tableau de pointeurs d'obstacles représentant les obstacles présents sur le terrain. */
     Balle jp;
 public:
     /**
@@ -54,12 +53,12 @@ public:
      *
      * @return True si la balle entre en collision avec un obstacle, False sinon.
      */
-    bool Collision();
+    bool Collision(Balle& B);
 
     /**
      * @brief Modifie la trajectoire de la balle en prenant en compte les obstacles présents sur le terrain.
      */
-    void ArrangementTrajectoire(Balle& jp);
+    void ArrangementTrajectoire(Balle& b);
 
     /**
      * @brief Effectue un test de régression pour la classe Terrain.
@@ -112,8 +111,6 @@ public:
      //bool CollectionItem(Item I,Balle B);
 
      const Balle& getConstBalle()const ;
-
-     void ouvrir (const std :: string & filename);
     
 
      

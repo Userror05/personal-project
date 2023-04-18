@@ -18,7 +18,7 @@ class Item
     public:
 
 
-    bool estAtteint(); ///booléen 
+    bool estAtteint(Balle b); ///booléen 
 
     void EffetParType(TypeItem i_type);
 

@@ -131,8 +131,7 @@ JeuSDL2 ::JeuSDL2() : gami()
     im_balle.loadFromFile("data/balle.jpg",renderer);
     im_mur.loadFromFile("data/mur.jpg",renderer);
     // IMAGES
-
-    gami.GetTerrain().ouvrir("./data/niveau1");
+    
 
     /*// FONTS
     font = TTF_OpenFont("data/SIXTY.ttf",50);
@@ -171,7 +170,7 @@ JeuSDL2::~JeuSDL2 () {
     SDL_Quit();
 }
 
-
+/*
 void JeuSDL2 :: BoucleChoixPUI()
    
     {
@@ -208,9 +207,9 @@ void JeuSDL2 :: BoucleChoixPUI()
         }
         }
 
-}
+}*/
 
-void JeuSDL2 :: BoucleChoixANG()
+/*void JeuSDL2 :: BoucleChoixANG()
    
     {
           SDL_Event events;
@@ -245,24 +244,23 @@ void JeuSDL2 :: BoucleChoixANG()
         }
 
 
-
+*/
 
 
 void JeuSDL2 :: sdlaff()
 { 
-    
 
      const Terrain& ter = gami.getConstTerrain();
      const Balle& b = gami.getConstTerrain().getConstBalle();
     SDL_RenderClear(renderer);
 
-im_balle.draw(renderer,(ter.getDimx()/2)*TAILLE_SPRITE,(ter.getDimx()/2)*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+im_balle.draw(renderer,b.GetX()*TAILLE_SPRITE,b.GetY()*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
 for(unsigned int i=0;i<ter.getDimx();i++)
 {
     for(unsigned int j=0;j<ter.getDimy();j++)
     {
         if(ter.getXY(i,j)!=nullptr)
-        im_mur.draw(renderer,((i-b.GetX())*TAILLE_SPRITE),((j-b.GetY())*TAILLE_SPRITE),TAILLE_SPRITE,TAILLE_SPRITE);
+        im_mur.draw(renderer,i*TAILLE_SPRITE,j*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
     }
 }
 
@@ -389,17 +387,23 @@ void JeuSDL2 :: TestAffichageBalleContinue(Balle& b)
     // while(Rejouer(b.mouvement))
     //{
         for(int i=0;i<=5;i++)
-        { SDL_RenderClear(renderer);
+        { 
+            SDL_RenderClear(renderer);
         // if(ter.Collision())
        // {
        //     ter.ArrangementTrajectoire();
         //}
-        gami.GetTerrain().GetGravite().actualiseVecteur(b);
-        sdlaff();        
-        SDL_RenderPresent(renderer);
-    
-        usleep(100000);
-        
+            
+            b.MoinsHuitMille();
+            for (int i = 0; i <= 50; i++)
+            {
+                gami.GetTerrain().GetGravite().actualiseVecteurV2(b);         
+                gami.GetTerrain().ArrangementTrajectoire(b);
+                sdlaff();
+                SDL_RenderPresent(renderer);
+                usleep(1);
+            }
+            gami.GetTerrain().GetGravite().actualiseVecteur(b);
     }
 
 

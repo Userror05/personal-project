@@ -17,13 +17,13 @@ class Balle
 private:
     double pos_x; /**< La position en x de la balle */
     double pos_y; /**< La position en y de la balle */
-    double decalage_x;
-    double decalage_y;
+
 public:
     Vecteur Sauvegarde; /**< Le vecteur de sauvegarde de la position de la balle */
     Vecteur mouvement; /**< Le vecteur de mouvement de la balle */
     Vecteur vitesse; /**< Le vecteur de vitesse de la balle */
     Vecteur gravite; /**< Le vecteur de gravité de la balle */
+    Vecteur divise;  /**< Le vecteur divisé par mille de mouvement */
 
     /**
      * @brief Constructeur par défaut de la classe Balle
@@ -74,6 +74,7 @@ public:
      */
     void AffInitMouvement();
 
+    void MoinsHuitMille();
 
     void TestRegression();
 };

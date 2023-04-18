@@ -11,9 +11,9 @@ class Jeu
 
     public:
 
-    Jeu();
+    /*void jeu();
 
-    //void Affichage_txt();
+    void Affichage_txt();*/
 
     bool Rejouer(Vecteur v);
 
