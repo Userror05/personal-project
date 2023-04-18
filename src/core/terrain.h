@@ -111,6 +111,8 @@ public:
      //bool CollectionItem(Item I,Balle B);
 
      const Balle& getConstBalle()const ;
+
+     void ouvrir (const string& filename);
     
 
      
