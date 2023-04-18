@@ -2,6 +2,9 @@
 #include<iostream>
 #include<cassert>
 
+
+Jeu :: Jeu() {Terrain();}
+
 bool Jeu :: Rejouer(Vecteur v)
 {
     if(v.magnitude()>=0.1)
@@ -19,10 +22,10 @@ void Jeu :: ActionJoueur(Balle& b)
   
     while(!Rejouer(b.mouvement))
     {
-       //  if(ter.Collision())
-       // {
-       //     ter.ArrangementTrajectoire();
-        //}
+        if(ter.Collision())
+       {
+           ter.ArrangementTrajectoire(b);
+        }
         ter.GetGravite().actualiseVecteur(b);
         
     }

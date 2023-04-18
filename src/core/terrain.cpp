@@ -1,12 +1,13 @@
 #include "terrain.h"
 #include<cassert>
 #include<iostream>
+#include<fstream>
 
 
 Terrain :: Terrain()
 {
-    DimX=20;
-    DimY=20;
+    DimX=50;
+    DimY=50;
      //rempli le contour du terrain, d'obstacle
     for(unsigned int k = 0;k<DimX;k++)
     {
@@ -76,18 +77,18 @@ void Terrain :: SetObstacle (unsigned int xmin,unsigned int ymin,unsigned int xm
 
 }
 
-void Terrain :: ArrangementTrajectoire()
+void Terrain :: ArrangementTrajectoire(Balle& jp)
 {
-    Balle b = jp;
+    
     if (Collision())
     {
         
-        b.mouvement.SetX(jp.mouvement.GetX());
+        jp.mouvement.SetX(jp.mouvement.GetX());
     }
     if (Collision()&& jp.mouvement.GetY()<0)
     {
         float y=jp.mouvement.GetY();
-         b.mouvement.SetY(-y);
+         jp.mouvement.SetY(-y);
     }
 
 
@@ -120,9 +121,12 @@ void Terrain :: TestRegression()
     
     const Balle& b = ter.GetBalle();
 
-
-    
     std :: cout<<b.GetX(); std :: cout << b.GetY();
+
+    ouvrir("./data/niveau1");
+
+	assert(ter.getXY(2,2)!=nullptr);
+
 
     
     
@@ -130,4 +134,36 @@ void Terrain :: TestRegression()
 
 
 
+void Terrain :: ouvrir(const std :: string & filename)
+ {
+
+    std :: ifstream fichier (filename.c_str());
+
+    assert(fichier.is_open());
+
+	unsigned int xmin,ymin,xmax,ymax;
+	//std :: string mot;
+	//dimX = dimY = 0;
+	//fichier >> mot >> dimX >> dimY >> mot;
+	
+	//if (tab != NULL) delete [] tab;
+	//tab = new Pixel [dimX*dimY];
+	
+    while(!fichier.eof())
+	{
+		fichier >> xmin >> ymin >> xmax >> ymax ;
+
+    	assert(xmin > 0 && xmin<xmax && xmax < getDimx()-1);
+
+		assert(ymin > 0 && ymin<ymax && ymax < getDimy()-1);
+
+		SetObstacle(xmin,ymin,xmax,ymax);
+
+		std :: cout << "obstacle posé à   "<<(xmax-xmin)<<" x "<<(ymax-ymin)<< std :: endl;
+	}
+
+    fichier.close();
+
+    std :: cout << "Lecture de niveau  " << filename << " ... OK\n";
+}
 

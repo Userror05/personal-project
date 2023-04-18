@@ -4,7 +4,7 @@
 
 Balle :: Balle ()
 {
-    SetX(2);
+    SetX(2); decalage_y=decalage_x=0;
     SetY(2); //valeur au pif pour l'instant
     Vecteur g(0,-1);
     gravite = g;

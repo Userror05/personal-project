@@ -17,7 +17,8 @@ class Balle
 private:
     double pos_x; /**< La position en x de la balle */
     double pos_y; /**< La position en y de la balle */
-
+    double decalage_x;
+    double decalage_y;
 public:
     Vecteur Sauvegarde; /**< Le vecteur de sauvegarde de la position de la balle */
     Vecteur mouvement; /**< Le vecteur de mouvement de la balle */
