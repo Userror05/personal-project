@@ -2,6 +2,7 @@
 #include<cassert>
 #include<iostream>
 #include<string>
+#include<fstream>
 
 
 Terrain :: Terrain()
@@ -148,11 +149,11 @@ void Terrain ::ouvrir(const std :: string & filename)
 	{
 		fichier >> xmin >> ymin >> xmax >> ymax ;
 
-    	assert(xmin > 0 && xmin<xmax && xmax < ter.getDimx());
+    	assert(xmin > 0 && xmin<xmax && xmax < getDimx());
 
-		assert(ymin > 0 && ymin<ymax && ymax < ter.getDimy());
+		assert(ymin > 0 && ymin<ymax && ymax < getDimy());
 
-		ter.SetObstacle(xmin,ymin,xmax,ymax);
+		SetObstacle(xmin,ymin,xmax,ymax);
 
 		std :: cout << "obstacle posé à   "<<(xmax-xmin)<<" x "<<(ymax-ymin)<< std :: endl;
 	}

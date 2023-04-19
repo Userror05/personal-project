@@ -10,6 +10,7 @@
 #include"obstacle.h"
 #include"gravite.h"
 #include<cassert>
+#include<string>
 
 /**
  * @class Terrain
@@ -112,7 +113,7 @@ public:
 
      const Balle& getConstBalle()const ;
 
-     void ouvrir (const string& filename);
+     void ouvrir (const std :: string& filename);
     
 
      
