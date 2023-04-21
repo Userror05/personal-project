@@ -370,7 +370,7 @@ void JeuSDL2 :: BouclejeuV2()
 void JeuSDL2 :: TestAffichageBalleContinue(Balle& b)
 {
      const Terrain& ter = gami.getConstTerrain();
-    // const Balle& b = gami.getConstTerrain().getConstBalle();
+     const Balle& b = gami.getConstBalle();
     SDL_RenderClear(renderer);
 
     //Pour le faire avec une puissance définie de 5: gami.GetTerrain().GetGravite().SetPow(5);
@@ -413,7 +413,8 @@ void JeuSDL2 :: TestAffichageBalleContinue(Balle& b)
 
 void JeuSDL2 :: TestAll()
 {
-    Balle b;
+    const Balle& b =gami.getConstBalle();
+
     /*cout<<gami.GetTerrain().GetGravite().Getangle()<<" ";
     cout<<gami.GetTerrain().GetGravite().ConversionAng()<<" ";
     cout<<gami.GetTerrain().GetGravite().RecupA()<<" ";
@@ -427,11 +428,10 @@ void JeuSDL2 :: TestAll()
     cout<<b.mouvement.GetX()<<",";
     cout<<b.mouvement.GetY()<<"; ";
     gami.GetTerrain().GetGravite().actualiseVecteur(b);*/
-    gami.ActionJoueurVisuelTest45(b);  
+   // gami.ActionJoueurVisuelTest45(b);  
     
     
 }
-        
         
 
 

@@ -159,3 +159,19 @@ void Jeu :: ActionJoueurVisuelTest45()
     }
 }
 */
+
+void Jeu :: repartirPosition(Balle& b)
+{
+    float x=b.GetX();
+    float y = b.GetY();
+
+
+    tabPosX.push_back(x);
+    tabPosY.push_back(y);
+}       
+
+void Jeu :: clearRepartition()
+{
+    tabPosX.clear();
+    tabPosY.clear();
+}

@@ -6,6 +6,7 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_mixer.h>
 #include<iostream>
+#include<vector>
 
 
 
@@ -51,7 +52,7 @@ class JeuSDL2
     bool withSound; 
     Image im_balle;
     Image im_mur;
-
+   
 
     public:
 
@@ -70,6 +71,8 @@ class JeuSDL2
     void sdlaff();
     Jeu& GetJeu();
     void TestAll();
+
+    void repartirPosition(Balle& b);
 
     
 

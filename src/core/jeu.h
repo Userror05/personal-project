@@ -1,6 +1,7 @@
 #ifndef _JEU
 #define _JEU
 #include"terrain.h"
+#include<vector>
 
 class Jeu
 {
@@ -8,6 +9,8 @@ class Jeu
     private:
     Terrain ter;
     Balle jp;
+    vector<float> tabPosX;
+    vector<float> tabPosY;
     
 
     public:
@@ -35,6 +38,9 @@ class Jeu
 
     const Balle& getConstBalle()const ;
     Balle& GetBalle() ;
+
+    void repartirPosition(Balle& b);
+    void clearRepartition();
 
 
 };
