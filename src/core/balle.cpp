@@ -6,7 +6,7 @@ Balle :: Balle ()
 {
     SetX(2);
     SetY(2); //valeur au pif pour l'instant
-    Vecteur g(0,-1);
+    Vecteur g(0,1);
     gravite = g;
     Vecteur Vec(0.0,0.0);
     vitesse=Vec;
@@ -63,10 +63,10 @@ void Balle :: AffInitMouvement()
    std::cout<<"INITMOUV: "<<mouvement.GetX()<<";"<<mouvement.GetY();
 }
 
-void Balle :: MoinsHuitMille()
+void Balle :: MoinsHuitMille(int diviser)
 {
-    divise.SetX((mouvement.GetX())/50);
-    divise.SetY((mouvement.GetY())/50);
+    divise.SetX((mouvement.GetX())/diviser);
+    divise.SetY((mouvement.GetY())/diviser);
 }
 
 

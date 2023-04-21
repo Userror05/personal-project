@@ -131,7 +131,7 @@ JeuSDL2 ::JeuSDL2() : gami()
     im_balle.loadFromFile("data/balle.jpg",renderer);
     im_mur.loadFromFile("data/mur.jpg",renderer);
     // IMAGES
-    
+    gami.GetTerrain().ouvrir("./data/niveau1");
 
     /*// FONTS
     font = TTF_OpenFont("data/SIXTY.ttf",50);
@@ -251,7 +251,7 @@ void JeuSDL2 :: sdlaff()
 { 
 
      const Terrain& ter = gami.getConstTerrain();
-     const Balle& b = gami.getConstTerrain().getConstBalle();
+     const Balle& b = gami.getConstBalle();
     SDL_RenderClear(renderer);
 
 im_balle.draw(renderer,b.GetX()*TAILLE_SPRITE,b.GetY()*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
@@ -299,7 +299,7 @@ void JeuSDL2 :: Bouclejeu()
                         case SDLK_j: gami.jouer('j');
                             if(gami.jouer('j')) 
                             {
-                               gami.ActionJoueur(gami.GetTerrain().GetBalle());
+                               gami.ActionJoueur(gami.GetBalle());
                             }
                             cout<< "c'est joué";
                             break;
@@ -348,7 +348,7 @@ void JeuSDL2 :: BouclejeuV2()
                         case SDLK_j: gami.jouer('j');
                             if(gami.jouer('j')) 
                             {
-                               TestAffichageBalleContinue(gami.GetTerrain().GetBalle());
+                               TestAffichageBalleContinue(gami.GetBalle());
                             }
                             cout<< "c'est joué";
                             break;
@@ -386,7 +386,7 @@ void JeuSDL2 :: TestAffichageBalleContinue(Balle& b)
     //for(int t=0;t<=5;t++)
     // while(Rejouer(b.mouvement))
     //{
-        for(int i=0;i<=5;i++)
+        for(int i=0;i<=20;i++)
         { 
             SDL_RenderClear(renderer);
         // if(ter.Collision())
@@ -394,14 +394,14 @@ void JeuSDL2 :: TestAffichageBalleContinue(Balle& b)
        //     ter.ArrangementTrajectoire();
         //}
             
-            b.MoinsHuitMille();
-            for (int i = 0; i <= 50; i++)
+            b.MoinsHuitMille(100);
+            for (int i = 0; i <= 100; i++)
             {
                 gami.GetTerrain().GetGravite().actualiseVecteurV2(b);         
                 gami.GetTerrain().ArrangementTrajectoire(b);
                 sdlaff();
                 SDL_RenderPresent(renderer);
-                usleep(1);
+                usleep(1000);
             }
             gami.GetTerrain().GetGravite().actualiseVecteur(b);
     }

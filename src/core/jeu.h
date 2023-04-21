@@ -7,6 +7,7 @@ class Jeu
 
     private:
     Terrain ter;
+    Balle jp;
     
 
     public:
@@ -32,11 +33,19 @@ class Jeu
     
     void testRegression();
 
+    const Balle& getConstBalle()const ;
+    Balle& GetBalle() ;
+
 
 };
 
 inline  Terrain& Jeu :: GetTerrain() {return ter;}
 inline  const Terrain& Jeu :: getConstTerrain() const {return ter;}
+
+inline Balle& Jeu :: GetBalle() { return jp;}
+
+inline const Balle& Jeu :: getConstBalle() const { return jp;}
+
 
 
 #endif

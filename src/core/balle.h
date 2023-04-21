@@ -75,7 +75,7 @@ public:
      */
     void AffInitMouvement();
 
-    void MoinsHuitMille();
+    void MoinsHuitMille(int diviseur);
 
     void TestRegression();
 };

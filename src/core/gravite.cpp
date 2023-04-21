@@ -52,7 +52,7 @@ void Gravite::actualiseVecteurV2(Balle& b)const
            
             //usleep(1000000);
 
-            std::cout<<"mouv:"<<"("<<b.divise.GetX()<<","<<b.divise.GetY()<<")";
+            std::cout<<"diviser:"<<"("<<b.divise.GetX()<<","<<b.divise.GetY()<<")";
             
             b.AffPosition();
 
@@ -118,7 +118,7 @@ double Gravite :: ConversionY()
 
 Vecteur& Gravite :: Vitesse(Balle& b)
 {
-    Vecteur v (ConversionX(),ConversionY());
+    Vecteur v (ConversionX(),-ConversionY());
     return(b.vitesse=v);
 }
 

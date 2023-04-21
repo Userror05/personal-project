@@ -7,8 +7,8 @@
 
 Terrain :: Terrain()
 {
-    DimX=20;
-    DimY=20;
+    DimX=60;
+    DimY=60;
      //rempli le contour du terrain, d'obstacle
     for(unsigned int k = 0;k<DimX;k++)
     {
@@ -73,6 +73,7 @@ void Terrain :: SetObstacle (unsigned int xmin,unsigned int ymin,unsigned int xm
     for(unsigned int j=ymin;j<=ymax;j++)
     {
         tab[i][j]= new Obstacle; 
+    
     }
   }
 
@@ -88,7 +89,7 @@ void Terrain :: ArrangementTrajectoire(Balle& b)
     if (Collision(b)&& b.divise.GetY()<0)
     {
         float y=b.divise.GetY();
-         b.divise.SetY(-y);
+         b.divise.SetY(y);
     }
 
 
@@ -120,7 +121,7 @@ void Terrain :: TestRegression()
     ter.SetObstacle(2,2,3,3);
     assert(ter.getXY(2,2)!=nullptr);
     
-    const Balle& b = ter.GetBalle();
+     Balle b ;
 
 
     
