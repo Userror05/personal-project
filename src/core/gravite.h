@@ -43,18 +43,10 @@ class Gravite
 
     Vecteur& Vitesse(Balle& b);
 
-    
-
-    /*void accelerationBalle();*/
-
     void AffAng();
 
     void AffPR();
 
-   
-    
-
-    
 
     void TestRegression();
 

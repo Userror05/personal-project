@@ -9,8 +9,8 @@ class Jeu
     private:
     Terrain ter;
     Balle jp;
-    vector<float> tabPosX;
-    vector<float> tabPosY;
+    std ::  vector<float> tabPosX;
+    std :: vector<float> tabPosY;
     
 
     public:
