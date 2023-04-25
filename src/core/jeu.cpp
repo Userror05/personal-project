@@ -1,6 +1,6 @@
 #include"jeu.h"
-#include<iostream>
 #include<cassert>
+#include<iostream>
 
 bool Jeu :: Rejouer(Vecteur v)
 {
@@ -54,6 +54,63 @@ void Jeu :: ActionJoueurVisuelTest45(Balle& b)
     }
 }
 
+void Jeu :: repartirPosition(Balle& b)
+{
+    float x=b.GetX();
+    float y = b.GetY();
+
+
+    tabPosX.push_back(x);
+    tabPosY.push_back(y);
+}       
+
+void Jeu :: clearRepartition()
+{
+    tabPosX.clear();
+    tabPosY.clear();
+}
+
+void Jeu :: BackMouvBalle(Balle& b)
+{
+    ter.GetGravite().Getpow();
+    ter.GetGravite().AffPR();
+    ter.GetGravite().Getangle();
+    ter.GetGravite().AffAng();
+    ter.GetGravite().Vitesse(b);
+    b.AffVitesse();
+    b.InitMouvement();
+    b.AffInitMouvement();
+        for(int i=0;i<=50;i++)
+        { 
+            b.MoinsHuitMille();
+            for (int i = 0; i <=50; i++)
+            {
+                ter.GetGravite().actualiseAdri(b);
+                if (ter.CollisionVect(b.adrien)==true)
+                {
+                    ter.ArrangementTrajectoire(b);
+                    //ter.GetGravite().actualiseVecteurV2(b);
+                    //repartirPosition(b);
+                    break;
+                }
+                else
+                {
+                    ter.GetGravite().actualiseVecteurV2(b);
+                    repartirPosition(b);
+                 }
+            }
+            
+            ter.GetGravite().actualiseMouv(b);   
+        }
+}
+
+//  if(ter.Collision(b)==true)
+               // {
+                   // ter.ArrangementTrajectoire(b);
+                //    break;
+               // }
+               // else
+
 
 
 
@@ -94,19 +151,19 @@ void Jeu :: angleChoisis (const char touche)
 void Jeu :: GetPuis (const char touche)
 {
    
-    float pui = ter.GetGravite().Getpow();
-    int max=5;
+    int pui = ter.GetGravite().Getpow();
+    int max=10;
 				switch (touche) 
                 {
 				case 't':
 
-					if(max>pui){pui=pui+0.5;}else std :: cout<<"max de puissace atteint"<< std ::endl;
+					if(max>pui){pui++;}else std :: cout<<"max de puissace atteint"<< std ::endl;
                       // car Y inverse
 					break;
 
                 case 'g':
 
-                    if(pui>=0){pui=pui-0.5;} else std ::  cout << "min de puissance atteint " << std :: endl;
+                    if(pui>=0){pui--;} else std ::  cout << "min de puissance atteint " << std :: endl;
 
                     break;
 				}
@@ -121,6 +178,7 @@ bool Jeu :: jouer(const char jouer)
     if(jouer=='j') return true; else return false;
 }
 
+
 void Jeu :: testRegression()
 {
     Jeu gami;
@@ -131,14 +189,16 @@ void Jeu :: testRegression()
     assert(gami.GetTerrain().GetGravite().Getangle() && gami.GetTerrain().GetGravite().Getangle()!=ang);
 
     gami.GetPuis('t');
-
-    
 }
 
+
+
+
+
+//********************************BackUp************************************************
 /*
 void Jeu :: ActionJoueurVisuelTest45()
 {
-    
     ter.getGravite().Power=5;
     ter.getGravite().AffPR();
     ter.getGravite().Angle=45;
@@ -154,24 +214,19 @@ void Jeu :: ActionJoueurVisuelTest45()
         {
             ter.ArrangementTrajectoire();
         }
-        ter.getGravite().actualiseVecteur(ter.getGravite().GetBalle());
-        
+        ter.getGravite().actualiseVecteur(ter.getGravite().GetBalle());  
     }
 }
-*/
 
-void Jeu :: repartirPosition(Balle& b)
+
+float Jeu :: GetTabX()const 
 {
-    float x=b.GetX();
-    float y = b.GetY();
-
-
-    tabPosX.push_back(x);
-    tabPosY.push_back(y);
-}       
-
-void Jeu :: clearRepartition()
-{
-    tabPosX.clear();
-    tabPosY.clear();
+    return tabPosX;
 }
+
+float Jeu :: GetTabY()const
+{
+    return tabPosY;
+}
+
+*/

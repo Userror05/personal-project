@@ -10,6 +10,7 @@
 
 
 
+
 //! \brief Pour gérer une image avec SDL2
 class Image {
 
@@ -36,6 +37,7 @@ public:
 
 inline void Image :: SetPolice(TTF_Font * pol){police =pol;}
 inline void Image :: SetColeurPolice(SDL_Color coul){couleur = coul;}
+
 class JeuSDL2
 {
     private :
@@ -52,7 +54,7 @@ class JeuSDL2
     bool withSound; 
     Image im_balle;
     Image im_mur;
-   
+
 
     public:
 
@@ -64,15 +66,17 @@ class JeuSDL2
 
     //void BoucleChoixANG();
 
-    void Bouclejeu();
+    //void Bouclejeu();
     void BouclejeuV2();
-    void TestAffichageBalleContinue(Balle& b);
-
+    //void TestAffichageBalleContinue(Balle& b);
+    void TestAffichageBalleContinueV2(Balle& b);
     void sdlaff();
     Jeu& GetJeu();
-    void TestAll();
-
-    void repartirPosition(Balle& b);
+    //void TestAll();
+    void sdlaff2();
+    //void AffichageBalle();
+    void Replacer(const char touche);
+ 
 
     
 
@@ -83,5 +87,6 @@ class JeuSDL2
 };
 
 inline Jeu& JeuSDL2 :: GetJeu(){return gami;}
+
 
 #endif

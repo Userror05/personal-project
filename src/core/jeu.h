@@ -8,13 +8,14 @@ class Jeu
 
     private:
     Terrain ter;
-    Balle jp;
-    std ::  vector<float> tabPosX;
-    std :: vector<float> tabPosY;
+    
+
     
 
     public:
 
+    std::vector<float> tabPosX;
+    std::vector<float> tabPosY;
     /*void jeu();
 
     void Affichage_txt();*/
@@ -29,28 +30,22 @@ class Jeu
     const Terrain& getConstTerrain() const; 
 
     void angleChoisis(const char touche);
-
+    void BackMouvBalle(Balle& b);
     void GetPuis(const char touche);
 
     bool jouer(const char jouer);
     
     void testRegression();
 
-    const Balle& getConstBalle()const ;
-    Balle& GetBalle() ;
-
     void repartirPosition(Balle& b);
     void clearRepartition();
-
+    float GetTabX() const;
+    float GetTabY() const;
 
 };
 
 inline  Terrain& Jeu :: GetTerrain() {return ter;}
 inline  const Terrain& Jeu :: getConstTerrain() const {return ter;}
-
-inline Balle& Jeu :: GetBalle() { return jp;}
-
-inline const Balle& Jeu :: getConstBalle() const { return jp;}
 
 
 

@@ -38,6 +38,7 @@ void Gravite::actualiseVecteur(Balle& b)const
 
     
 }
+
 void Gravite::actualiseVecteurV2(Balle& b)const
 {
             // b.mouvement= (b.mouvement + b.mouvement)*coef;
@@ -52,7 +53,7 @@ void Gravite::actualiseVecteurV2(Balle& b)const
            
             //usleep(1000000);
 
-            std::cout<<"diviser:"<<"("<<b.divise.GetX()<<","<<b.divise.GetY()<<")";
+            //std::cout<<"divisé:"<<"("<<b.divise.GetX()<<","<<b.divise.GetY()<<")";
             
             b.AffPosition();
 
@@ -60,7 +61,47 @@ void Gravite::actualiseVecteurV2(Balle& b)const
     
 }
 
+void Gravite::actualiseMouv(Balle& b)const
+{
+    float coef=0.9;
+    b.mouvement.SetX((b.mouvement.GetX()+b.gravite.GetX())*coef);
+    b.mouvement.SetY((b.mouvement.GetY()+b.gravite.GetY())*coef);
+}
 
+void Gravite::actualiseAdri(Balle& b)const
+{
+    b.adrien.SetX(b.divise.GetX()+b.GetX());
+    b.adrien.SetY(b.divise.GetY()+b.GetY());
+}
+void Gravite::actualiseDirections(Balle& b)const
+{
+    b.drXP.SetX(b.drXP.GetX()+b.adrien.GetX());
+    b.drXP.SetY(b.drXP.GetY()+b.adrien.GetY());
+    b.drXM.SetX(b.drXM.GetX()+b.adrien.GetX());
+    b.drXM.SetY(b.drXM.GetY()+b.adrien.GetY());
+    b.drYP.SetX(b.drYP.GetX()+b.adrien.GetX());
+    b.drYP.SetY(b.drYP.GetY()+b.adrien.GetY());
+    b.drYM.SetX(b.drYM.GetX()+b.adrien.GetX());
+    b.drYM.SetY(b.drYM.GetY()+b.adrien.GetY());
+}
+void Gravite::ClearDirections(Balle& b)const
+{
+    b.drXP.SetX(1);
+    b.drXP.SetY(0);
+    b.drXM.SetX(-1);
+    b.drXM.SetY(0);
+    b.drYP.SetX(0);
+    b.drYP.SetY(1);
+    b.drYM.SetX(0);
+    b.drYM.SetY(-1);
+}
+
+void Gravite::actualisedivise(Balle& b)const
+{
+    b.divise.SetX(b.divise.GetX()+b.divise.GetX());
+    b.divise.SetY(b.divise.GetY()+b.divise.GetY());
+}
+//PAS BON!!!!
 
 
 
@@ -118,7 +159,7 @@ double Gravite :: ConversionY()
 
 Vecteur& Gravite :: Vitesse(Balle& b)
 {
-    Vecteur v (ConversionX(),-ConversionY());
+    Vecteur v (ConversionX(),ConversionY());
     return(b.vitesse=v);
 }
 

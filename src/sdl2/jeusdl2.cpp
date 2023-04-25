@@ -1,4 +1,5 @@
 #include"jeusdl2.h"
+#include<cassert>
 #include<iostream>
 #include<string>
 #include<unistd.h>
@@ -131,7 +132,7 @@ JeuSDL2 ::JeuSDL2() : gami()
     im_balle.loadFromFile("data/balle.jpg",renderer);
     im_mur.loadFromFile("data/mur.jpg",renderer);
     // IMAGES
-    gami.GetTerrain().ouvrir("./data/niveau1");
+    
 
     /*// FONTS
     font = TTF_OpenFont("data/SIXTY.ttf",50);
@@ -160,7 +161,7 @@ JeuSDL2 ::JeuSDL2() : gami()
     
 }
 
-
+//************************************** JEU ***************************************************************
 JeuSDL2::~JeuSDL2 () {
     //if (withSound) Mix_Quit();
     //TTF_CloseFont(font);
@@ -170,7 +171,248 @@ JeuSDL2::~JeuSDL2 () {
     SDL_Quit();
 }
 
+void JeuSDL2 :: sdlaff()
+{ 
+
+     const Terrain& ter = gami.getConstTerrain();
+     const Balle& b = gami.getConstTerrain().getConstBalle();
+    SDL_RenderClear(renderer);
+
+im_balle.draw(renderer,b.GetX()*TAILLE_SPRITE,b.GetY()*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+for(unsigned int i=0;i<ter.getDimx();i++)
+{
+    for(unsigned int j=0;j<ter.getDimy();j++)
+    {
+        if(ter.getXY(i,j)!=nullptr)
+        im_mur.draw(renderer,i*TAILLE_SPRITE,j*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+    }
+}
+}
+
+
+void JeuSDL2 :: BouclejeuV2()
+{     
+    SDL_Event events;
+
+    bool quit = false;
+    
+    //gami.Rejouer(gami.GetTerrain().GetBalle().mouvement)==0
+    while(!quit){
+        while (SDL_PollEvent(&events)) {
+            
+                if (events.type == SDL_QUIT) quit = true;
+                else if (events.type == SDL_KEYDOWN) {
+                    bool jouer = false;
+                    switch (events.key.keysym.sym) {
+                        // Commandes du 1er joueur
+                        case SDLK_a:
+                            Replacer('a');
+                            break;
+                        case SDLK_z:
+                            gami.angleChoisis('z');
+                            break;
+                        case SDLK_s:
+                            gami.angleChoisis('s');
+                            break;
+                        case SDLK_t:
+                            gami.GetPuis('t');
+                            break;
+                        case SDLK_g:
+                            gami.GetPuis('g');
+                            break;
+                        case SDLK_j: gami.jouer('j');
+                            if(gami.jouer('j')) 
+                            {
+                                //TestAffichageBalleContinue(gami.GetTerrain().GetBalle());
+                                gami.BackMouvBalle(gami.GetTerrain().GetBalle());
+                                sdlaff2();
+                            }
+                            cout<< "c'est joué";
+                            break;
+                        case SDLK_q:
+                            quit = true;
+                            break;
+                        default: break;
+                    }
+                }
+            }
+            sdlaff();
+        SDL_RenderPresent(renderer);
+        }       
+}
+
+void JeuSDL2 :: Replacer(const char touche)
+{
+    const Terrain& ter = gami.getConstTerrain();
+    if (touche=='a')
+    {
+        gami.GetTerrain().GetBalle().SetX(2);
+        gami.GetTerrain().GetBalle().SetY(2);
+        SDL_RenderClear(renderer);
+        im_balle.draw(renderer,gami.GetTerrain().GetBalle().GetX()*TAILLE_SPRITE,gami.GetTerrain().GetBalle().GetY()*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+        for(unsigned int i=0;i<ter.getDimx();i++)
+            {
+                for(unsigned int j=0;j<ter.getDimy();j++)
+                    {
+                        if(ter.getXY(i,j)!=nullptr)
+                        im_mur.draw(renderer,i*TAILLE_SPRITE,j*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+                    }
+            }
+        SDL_RenderPresent(renderer);
+    }
+    
+}
+
+
+void JeuSDL2 :: sdlaff2()
+{
+    const Terrain& ter = gami.getConstTerrain();
+    //while (i==gami.tabPosX.size())
+    cout<<gami.tabPosX.size()<<endl;
+    for (int i = 0; i < gami.tabPosX.size(); i++)
+    {
+        cout<<i<<endl;
+        SDL_RenderClear(renderer);
+        im_balle.draw(renderer,gami.tabPosX[i]*TAILLE_SPRITE,gami.tabPosY[i]*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+        for(unsigned int i=0;i<ter.getDimx();i++)
+            {
+            for(unsigned int j=0;j<ter.getDimy();j++)
+            {
+                if(ter.getXY(i,j)!=nullptr)
+                 im_mur.draw(renderer,i*TAILLE_SPRITE,j*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+            }
+            }
+        SDL_RenderPresent(renderer);
+    }
+    gami.clearRepartition();
+}
+
+
+
+//******************************************BackUP*****************************************************
 /*
+void JeuSDL2 :: TestAll()
+{
+    Balle b;
+    cout<<gami.GetTerrain().GetGravite().Getangle()<<" ";
+    cout<<gami.GetTerrain().GetGravite().ConversionAng()<<" ";
+    cout<<gami.GetTerrain().GetGravite().RecupA()<<" ";
+    cout<<gami.GetTerrain().GetGravite().RecupB()<<" ";
+    cout<<gami.GetTerrain().GetGravite().ConversionX()<<" ";
+    cout<<gami.GetTerrain().GetGravite().ConversionY()<<" ";
+    gami.GetTerrain().GetGravite().Vitesse(b);
+    cout<<"("<<b.vitesse.GetX()<<",";
+    cout<<b.vitesse.GetY()<<") ; ";
+    b.InitMouvement();
+    cout<<b.mouvement.GetX()<<",";
+    cout<<b.mouvement.GetY()<<"; ";
+    gami.GetTerrain().GetGravite().actualiseVecteur(b);
+    gami.ActionJoueurVisuelTest45(b);  
+    
+    
+}
+
+void JeuSDL2 :: TestAffichageBalleContinue(Balle& b)
+{
+     const Terrain& ter = gami.getConstTerrain();
+    // const Balle& b = gami.getConstTerrain().getConstBalle();
+    SDL_RenderClear(renderer);
+
+    //Pour le faire avec une puissance définie de 5: gami.GetTerrain().GetGravite().SetPow(5);
+    gami.GetTerrain().GetGravite().Getpow();
+    gami.GetTerrain().GetGravite().AffPR();
+    //Pour le faire avec un angle définie de 45:     gami.GetTerrain().GetGravite().SetAng(45);
+    gami.GetTerrain().GetGravite().Getangle();
+    gami.GetTerrain().GetGravite().AffAng();
+    gami.GetTerrain().GetGravite().Vitesse(b);
+    b.AffVitesse();
+    b.InitMouvement();
+    b.AffInitMouvement();
+    //for(int t=0;t<=5;t++)
+    // while(Rejouer(b.mouvement))
+    //{
+        for(int i=0;i<=10;i++)
+        { 
+            SDL_RenderClear(renderer);
+        // if(ter.Collision())
+       // {
+       //     ter.ArrangementTrajectoire();
+        //}
+            
+            b.MoinsHuitMille();
+            for (int i = 0; i <= 50; i++)
+            {
+                gami.GetTerrain().GetGravite().actualiseVecteurV2(b);       
+                gami.GetTerrain().ArrangementTrajectoire(b);
+                sdlaff();
+                SDL_RenderPresent(renderer);
+                usleep(1);
+                 if (gami.GetTerrain().Collision(b)) 
+                {
+                    break;
+                } 
+            }
+            // if (gami.GetTerrain().Collision(b)) 
+             //   {
+                //    break;
+              //  } 
+            //else
+            //{
+                gami.GetTerrain().GetGravite().actualiseVecteur(b);
+            //}
+            
+    }
+
+}
+void JeuSDL2 :: Bouclejeu()
+{     
+    SDL_Event events;
+
+    bool quit = false;
+    
+    //gami.Rejouer(gami.GetTerrain().GetBalle().mouvement)==0
+    while(!quit){
+        while (SDL_PollEvent(&events)) {
+            
+                if (events.type == SDL_QUIT) quit = true;
+                else if (events.type == SDL_KEYDOWN) {
+                    bool jouer = false;
+                    switch (events.key.keysym.sym) {
+                        // Commandes du 1er joueur
+                        case SDLK_z:
+                            gami.angleChoisis('z');
+                            break;
+                        case SDLK_s:
+                            gami.angleChoisis('s');
+                            break;
+                        case SDLK_t:
+                            gami.GetPuis('t');
+                            break;
+                        case SDLK_g:
+                            gami.GetPuis('g');
+                            break;
+                        case SDLK_j: gami.jouer('j');
+                            if(gami.jouer('j')) 
+                            {
+                               gami.ActionJoueur(gami.GetTerrain().GetBalle());
+                            }
+                            cout<< "c'est joué";
+                            break;
+                        case SDLK_q:
+                            quit = true;
+                            break;
+                        default: break;
+                    }
+                }
+            }
+            sdlaff();
+        SDL_RenderPresent(renderer);
+        }
+
+        
+        
+ }
+
 void JeuSDL2 :: BoucleChoixPUI()
    
     {
@@ -207,9 +449,8 @@ void JeuSDL2 :: BoucleChoixPUI()
         }
         }
 
-}*/
-
-/*void JeuSDL2 :: BoucleChoixANG()
+}
+void JeuSDL2 :: BoucleChoixANG()
    
     {
           SDL_Event events;
@@ -244,194 +485,8 @@ void JeuSDL2 :: BoucleChoixPUI()
         }
 
 
-*/
 
-
-void JeuSDL2 :: sdlaff()
-{ 
-
-     const Terrain& ter = gami.getConstTerrain();
-     const Balle& b = gami.getConstBalle();
-    SDL_RenderClear(renderer);
-
-im_balle.draw(renderer,b.GetX()*TAILLE_SPRITE,b.GetY()*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
-for(unsigned int i=0;i<ter.getDimx();i++)
-{
-    for(unsigned int j=0;j<ter.getDimy();j++)
-    {
-        if(ter.getXY(i,j)!=nullptr)
-        im_mur.draw(renderer,i*TAILLE_SPRITE,j*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
-    }
-}
-
-
-
-}
-
-
-void JeuSDL2 :: Bouclejeu()
-{     
-    SDL_Event events;
-
-    bool quit = false;
-    
-    //gami.Rejouer(gami.GetTerrain().GetBalle().mouvement)==0
-    while(!quit){
-        while (SDL_PollEvent(&events)) {
-            
-                if (events.type == SDL_QUIT) quit = true;
-                else if (events.type == SDL_KEYDOWN) {
-                    bool jouer = false;
-                    switch (events.key.keysym.sym) {
-                        // Commandes du 1er joueur
-                        case SDLK_z:
-                            gami.angleChoisis('z');
-                            break;
-                        case SDLK_s:
-                            gami.angleChoisis('s');
-                            break;
-                        case SDLK_t:
-                            gami.GetPuis('t');
-                            break;
-                        case SDLK_g:
-                            gami.GetPuis('g');
-                            break;
-                        case SDLK_j: gami.jouer('j');
-                            if(gami.jouer('j')) 
-                            {
-                               gami.ActionJoueur(gami.GetBalle());
-                            }
-                            cout<< "c'est joué";
-                            break;
-                        case SDLK_q:
-                            quit = true;
-                            break;
-                        default: break;
-                    }
-                }
-            }
-            sdlaff();
-        SDL_RenderPresent(renderer);
-        }
-
-        
-        
- }
-
-void JeuSDL2 :: BouclejeuV2()
-{     
-    SDL_Event events;
-
-    bool quit = false;
-    
-    //gami.Rejouer(gami.GetTerrain().GetBalle().mouvement)==0
-    while(!quit){
-        while (SDL_PollEvent(&events)) {
-            
-                if (events.type == SDL_QUIT) quit = true;
-                else if (events.type == SDL_KEYDOWN) {
-                    bool jouer = false;
-                    switch (events.key.keysym.sym) {
-                        // Commandes du 1er joueur
-                        case SDLK_z:
-                            gami.angleChoisis('z');
-                            break;
-                        case SDLK_s:
-                            gami.angleChoisis('s');
-                            break;
-                        case SDLK_t:
-                            gami.GetPuis('t');
-                            break;
-                        case SDLK_g:
-                            gami.GetPuis('g');
-                            break;
-                        case SDLK_j: gami.jouer('j');
-                            if(gami.jouer('j')) 
-                            {
-                               TestAffichageBalleContinue(gami.GetBalle());
-                            }
-                            cout<< "c'est joué";
-                            break;
-                        case SDLK_q:
-                            quit = true;
-                            break;
-                        default: break;
-                    }
-                }
-            }
-            sdlaff();
-        SDL_RenderPresent(renderer);
-        }
-
-        
-        
- }
-
-void JeuSDL2 :: TestAffichageBalleContinue(Balle& b)
-{
-     const Terrain& ter = gami.getConstTerrain();
-     const Balle& b = gami.getConstBalle();
-    SDL_RenderClear(renderer);
-
-    //Pour le faire avec une puissance définie de 5: gami.GetTerrain().GetGravite().SetPow(5);
-    gami.GetTerrain().GetGravite().Getpow();
-    gami.GetTerrain().GetGravite().AffPR();
-    //Pour le faire avec un angle définie de 45:     gami.GetTerrain().GetGravite().SetAng(45);
-    gami.GetTerrain().GetGravite().Getangle();
-    gami.GetTerrain().GetGravite().AffAng();
-    gami.GetTerrain().GetGravite().Vitesse(b);
-    b.AffVitesse();
-    b.InitMouvement();
-    b.AffInitMouvement();
-    //for(int t=0;t<=5;t++)
-    // while(Rejouer(b.mouvement))
-    //{
-        for(int i=0;i<=20;i++)
-        { 
-            SDL_RenderClear(renderer);
-        // if(ter.Collision())
-       // {
-       //     ter.ArrangementTrajectoire();
-        //}
-            
-            b.MoinsHuitMille(100);
-            for (int i = 0; i <= 100; i++)
-            {
-                gami.GetTerrain().GetGravite().actualiseVecteurV2(b);         
-                gami.GetTerrain().ArrangementTrajectoire(b);
-                sdlaff();
-                SDL_RenderPresent(renderer);
-                usleep(1000);
-            }
-            gami.GetTerrain().GetGravite().actualiseVecteur(b);
-    }
-
-
-}
-
-
-
-void JeuSDL2 :: TestAll()
-{
-    const Balle& b =gami.getConstBalle();
-
-    /*cout<<gami.GetTerrain().GetGravite().Getangle()<<" ";
-    cout<<gami.GetTerrain().GetGravite().ConversionAng()<<" ";
-    cout<<gami.GetTerrain().GetGravite().RecupA()<<" ";
-    cout<<gami.GetTerrain().GetGravite().RecupB()<<" ";
-    cout<<gami.GetTerrain().GetGravite().ConversionX()<<" ";
-    cout<<gami.GetTerrain().GetGravite().ConversionY()<<" ";*/
-   /* gami.GetTerrain().GetGravite().Vitesse(b);
-    cout<<"("<<b.vitesse.GetX()<<",";
-    cout<<b.vitesse.GetY()<<") ; ";
-    b.InitMouvement();
-    cout<<b.mouvement.GetX()<<",";
-    cout<<b.mouvement.GetY()<<"; ";
-    gami.GetTerrain().GetGravite().actualiseVecteur(b);*/
-   // gami.ActionJoueurVisuelTest45(b);  
-    
-    
-}
+*/       
         
 
 

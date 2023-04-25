@@ -1,14 +1,12 @@
 #include "terrain.h"
 #include<cassert>
 #include<iostream>
-#include<string>
-#include<fstream>
 
 
 Terrain :: Terrain()
 {
-    DimX=60;
-    DimY=60;
+    DimX=20;
+    DimY=20;
      //rempli le contour du terrain, d'obstacle
     for(unsigned int k = 0;k<DimX;k++)
     {
@@ -73,7 +71,6 @@ void Terrain :: SetObstacle (unsigned int xmin,unsigned int ymin,unsigned int xm
     for(unsigned int j=ymin;j<=ymax;j++)
     {
         tab[i][j]= new Obstacle; 
-    
     }
   }
 
@@ -81,7 +78,78 @@ void Terrain :: SetObstacle (unsigned int xmin,unsigned int ymin,unsigned int xm
 
 void Terrain :: ArrangementTrajectoire(Balle& b)
 {
-    if (Collision(b))
+    float a= b.divise.GetX();
+    float c= b.divise.GetY();
+    gr.actualiseDirections(b);
+    if (a<0 && c<0) // cas jaune (bas gauche)
+    {
+        if (CollisionVect(b.drXM)==true && CollisionVect(b.drYP)==true && CollisionVect(b.drYM)==true)//bas gauche -> bas droite
+        {
+            //inverse le x
+            b.InverseX();
+        }
+        
+        else //bas gauche -> haut gauche
+        {
+            //inverse le y
+            b.InverseY();
+           // b.mouvement.SetY(b.mouvement.GetY()+1);
+        }
+    }
+    if (a>0 && c<0) // cas violet
+    {
+        if (CollisionVect(b.drXM)==true && CollisionVect(b.drXP)==true && CollisionVect(b.drYM)==true)//bas droite -> haut droite
+        {
+            //inverse le y
+            b.InverseY();
+            //b.mouvement.SetY(b.mouvement.GetY()+1);
+        }
+        else //bas droite -> bas gauche 
+        {
+            //inverse le X
+            b.InverseX();
+        }
+    }
+    if (a<0 && c>0) // cas bleu
+    {
+        if (CollisionVect(b.drXM)==true && CollisionVect(b.drYP)==true && CollisionVect(b.drYM)==true)//haut gauche -> haut droite 
+        {
+            //inverser le x
+            b.InverseX();
+        }
+        else //haut gauche -> bas gauche 
+        {
+            //inverse le y
+            b.InverseY();
+        }
+    }
+    if (a>0 && c>0) // cas rose
+    {
+        if (CollisionVect(b.drXP)==true && CollisionVect(b.drYP)==true && CollisionVect(b.drYM)==true)//haut droite -> haut gauche
+        {
+            //inverse le x
+            b.InverseX();
+        }
+        else //haut droite -> bas droite 
+        {
+            //inverse le y
+            b.InverseY();
+        }
+    }
+
+    gr.ClearDirections(b);
+}
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /*if (Collision(b))
     {
         
         b.divise.SetX(b.divise.GetX());
@@ -89,21 +157,40 @@ void Terrain :: ArrangementTrajectoire(Balle& b)
     if (Collision(b)&& b.divise.GetY()<0)
     {
         float y=b.divise.GetY();
-         b.divise.SetY(y);
+         b.divise.SetY(-y);
+         float ym=b.mouvement.GetY()/2;
+         std::cout<<"collision!"<<std::endl;
+         std::cout<<"mouv avant changement:"<<"("<<b.mouvement.GetX()<<","<<b.mouvement.GetY()<<")" << std ::endl;
+        b.mouvement.SetY(-ym);
+        std::cout<<"mouv avant changement:"<<"("<<b.mouvement.GetX()<<","<<b.mouvement.GetY()<<")" << std ::endl;
     }
+*/
 
 
-}
-
-bool Terrain :: Collision(Balle& b)
+bool Terrain :: CollisionBalle(Balle& b)
 {
     float x = b.GetX();
     float y = b.GetY();
-    std::cout<<"collision!"<<std::endl;
     if (getXY(x,y)!= nullptr)return true;
     else return false;
 }
 
+bool Terrain :: CollisionVect(Vecteur& v)
+{
+    float x = v.GetX();
+    float y = v.GetY();
+    if (getXY(x,y)!= nullptr)return true;
+    else return false;
+}
+/* La fonction getXY ici:
+inline Obstacle * Terrain::getXY (unsigned int x, unsigned int y) const {
+	assert(x>=0);
+	assert(y>=0);
+	assert(x<DimX);
+	assert(y<DimY);
+	return tab[x][y];
+}
+*/
 
 void Terrain :: TestRegression()
 {
@@ -121,7 +208,7 @@ void Terrain :: TestRegression()
     ter.SetObstacle(2,2,3,3);
     assert(ter.getXY(2,2)!=nullptr);
     
-     Balle b ;
+    const Balle& b = ter.GetBalle();
 
 
     
@@ -129,39 +216,6 @@ void Terrain :: TestRegression()
 
     
     
-}
-
-void Terrain ::ouvrir(const std :: string & filename)
- {
-
-    std :: ifstream fichier (filename.c_str());
-
-    assert(fichier.is_open());
-
-	unsigned int xmin,ymin,xmax,ymax;
-	//std :: string mot;
-	//dimX = dimY = 0;
-	//fichier >> mot >> dimX >> dimY >> mot;
-	
-	//if (tab != NULL) delete [] tab;
-	//tab = new Pixel [dimX*dimY];
-	
-    while(!fichier.eof())
-	{
-		fichier >> xmin >> ymin >> xmax >> ymax ;
-
-    	assert(xmin > 0 && xmin<xmax && xmax < getDimx());
-
-		assert(ymin > 0 && ymin<ymax && ymax < getDimy());
-
-		SetObstacle(xmin,ymin,xmax,ymax);
-
-		std :: cout << "obstacle posé à   "<<(xmax-xmin)<<" x "<<(ymax-ymin)<< std :: endl;
-	}
-
-    fichier.close();
-
-    std :: cout << "Lecture de niveau  " << filename << " ... OK\n";
 }
 
 

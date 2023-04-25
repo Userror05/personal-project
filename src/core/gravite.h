@@ -8,7 +8,7 @@ class Gravite
 
     private:
    
-    float Power; 
+    int Power; 
 
     int Angle;
 
@@ -21,6 +21,11 @@ class Gravite
 
     void actualiseVecteur(Balle& b) const;
     void actualiseVecteurV2(Balle& b) const;
+    void actualisedivise(Balle& b) const;
+    void actualiseMouv(Balle& b)const;
+    void actualiseAdri(Balle& b)const;
+    void actualiseDirections(Balle& b)const;
+    void ClearDirections(Balle& b)const;
 
     void SetPow(int pow);
 
@@ -43,10 +48,18 @@ class Gravite
 
     Vecteur& Vitesse(Balle& b);
 
+    
+
+    /*void accelerationBalle();*/
+
     void AffAng();
 
     void AffPR();
 
+   
+    
+
+    
 
     void TestRegression();
 
