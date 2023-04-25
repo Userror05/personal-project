@@ -132,7 +132,8 @@ JeuSDL2 ::JeuSDL2() : gami()
     im_balle.loadFromFile("data/balle.jpg",renderer);
     im_mur.loadFromFile("data/mur.jpg",renderer);
     // IMAGES
-    
+    gami.GetTerrain().ouvrir("./data/niveau1");
+
 
     /*// FONTS
     font = TTF_OpenFont("data/SIXTY.ttf",50);
@@ -175,7 +176,7 @@ void JeuSDL2 :: sdlaff()
 { 
 
      const Terrain& ter = gami.getConstTerrain();
-     const Balle& b = gami.getConstTerrain().getConstBalle();
+     const Balle& b = gami.getConstBalle();
     SDL_RenderClear(renderer);
 
 im_balle.draw(renderer,b.GetX()*TAILLE_SPRITE,b.GetY()*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
@@ -224,7 +225,7 @@ void JeuSDL2 :: BouclejeuV2()
                             if(gami.jouer('j')) 
                             {
                                 //TestAffichageBalleContinue(gami.GetTerrain().GetBalle());
-                                gami.BackMouvBalle(gami.GetTerrain().GetBalle());
+                                gami.BackMouvBalle(gami.GetBalle());
                                 sdlaff2();
                             }
                             cout<< "c'est joué";
@@ -246,10 +247,10 @@ void JeuSDL2 :: Replacer(const char touche)
     const Terrain& ter = gami.getConstTerrain();
     if (touche=='a')
     {
-        gami.GetTerrain().GetBalle().SetX(2);
-        gami.GetTerrain().GetBalle().SetY(2);
+        gami.GetBalle().SetX(2);
+        gami.GetBalle().SetY(2);
         SDL_RenderClear(renderer);
-        im_balle.draw(renderer,gami.GetTerrain().GetBalle().GetX()*TAILLE_SPRITE,gami.GetTerrain().GetBalle().GetY()*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+        im_balle.draw(renderer,gami.GetBalle().GetX()*TAILLE_SPRITE,gami.GetBalle().GetY()*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
         for(unsigned int i=0;i<ter.getDimx();i++)
             {
                 for(unsigned int j=0;j<ter.getDimy();j++)
@@ -283,6 +284,7 @@ void JeuSDL2 :: sdlaff2()
             }
             }
         SDL_RenderPresent(renderer);
+        usleep(1000);
     }
     gami.clearRepartition();
 }

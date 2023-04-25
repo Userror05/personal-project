@@ -5,6 +5,7 @@ int main(int argc, char** argv)
     JeuSDL2 jeu;
     jeu.BouclejeuV2();
 
+
 return 0;
 }
 /*

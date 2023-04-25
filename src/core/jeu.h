@@ -8,6 +8,7 @@ class Jeu
 
     private:
     Terrain ter;
+    Balle jp;
     
 
     
@@ -42,10 +43,16 @@ class Jeu
     float GetTabX() const;
     float GetTabY() const;
 
+    const Balle& getConstBalle()const ;
+    Balle& GetBalle() ;
+
 };
 
 inline  Terrain& Jeu :: GetTerrain() {return ter;}
 inline  const Terrain& Jeu :: getConstTerrain() const {return ter;}
+inline Balle& Jeu :: GetBalle() { return jp;}
+
+inline const Balle& Jeu :: getConstBalle() const { return jp;}
 
 
 

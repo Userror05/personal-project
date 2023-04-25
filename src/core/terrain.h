@@ -10,6 +10,7 @@
 #include"obstacle.h"
 #include"gravite.h"
 #include<cassert>
+#include<string>
 
 /**
  * @class Terrain
@@ -23,8 +24,8 @@ private:
     unsigned int DimX; /**< La dimension en X du terrain. */
     unsigned int DimY; /**< La dimension en Y du terrain. */
     Gravite gr; /**< L'objet gravité utilisé pour simuler la gravité sur le terrain. */
-    Obstacle * tab[20][20]; /**< Le tableau de pointeurs d'obstacles représentant les obstacles présents sur le terrain. */
-    Balle jp;
+    Obstacle * tab[60][60]; /**< Le tableau de pointeurs d'obstacles représentant les obstacles présents sur le terrain. */
+
 public:
     /**
      * @brief Constructeur par défaut.
@@ -54,6 +55,7 @@ public:
      * @return True si la balle entre en collision avec un obstacle, False sinon.
      */
     bool CollisionBalle(Balle& B);
+
     bool CollisionVect(Vecteur& V);
 
     /**
@@ -112,6 +114,8 @@ public:
      //bool CollectionItem(Item I,Balle B);
 
      const Balle& getConstBalle()const ;
+
+     void ouvrir (const std :: string& filename);
     
 
      
@@ -132,8 +136,5 @@ inline unsigned int Terrain :: getDimy()const{return DimY;}
 
 inline Gravite& Terrain :: GetGravite(){return gr;}
 
-inline Balle& Terrain :: GetBalle() { return jp;}
-
-inline const Balle& Terrain :: getConstBalle() const { return jp;}
 
 #endif

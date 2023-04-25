@@ -151,19 +151,19 @@ void Jeu :: angleChoisis (const char touche)
 void Jeu :: GetPuis (const char touche)
 {
    
-    int pui = ter.GetGravite().Getpow();
-    int max=10;
+    float pui = ter.GetGravite().Getpow();
+    int max=5;
 				switch (touche) 
                 {
 				case 't':
 
-					if(max>pui){pui++;}else std :: cout<<"max de puissace atteint"<< std ::endl;
+					if(max>pui){pui=pui+0.5;}else std :: cout<<"max de puissace atteint"<< std ::endl;
                       // car Y inverse
 					break;
 
                 case 'g':
 
-                    if(pui>=0){pui--;} else std ::  cout << "min de puissance atteint " << std :: endl;
+                    if(pui>=0){pui=pui-0.5;} else std ::  cout << "min de puissance atteint " << std :: endl;
 
                     break;
 				}

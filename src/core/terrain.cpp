@@ -1,12 +1,14 @@
 #include "terrain.h"
 #include<cassert>
 #include<iostream>
+#include<string>
+#include<fstream>
 
 
 Terrain :: Terrain()
 {
-    DimX=20;
-    DimY=20;
+    DimX=50;
+    DimY=50;
      //rempli le contour du terrain, d'obstacle
     for(unsigned int k = 0;k<DimX;k++)
     {
@@ -24,12 +26,30 @@ Terrain :: Terrain()
     {
         tab[DimX-1][k]=new Obstacle;
     }
+    
+
+      for(unsigned int k = 1;k<DimX-1;k++)
+    {
+        tab[1][k]=new Obstacle;
+    }
+    for(unsigned int k = 2;k<DimX-1;k++)
+    {
+        tab[k][1]=new Obstacle;
+    }
+    for(unsigned int k = 2;k<DimX-1;k++)
+    {
+        tab[k][DimX-2]=new Obstacle;
+    }
+    for(unsigned int k = 2;k<DimX-2;k++)
+    {
+        tab[DimX-2][k]=new Obstacle;
+    }
    
         
         
-    for(unsigned int i=1;i<DimX-1;i++)
+    for(unsigned int i=2;i<DimX-2;i++)
     {
-        for(unsigned int j=1;j<DimY-1;j++)
+        for(unsigned int j=2;j<DimY-2;j++)
         {
            tab[i][j]=nullptr;
         }
@@ -51,7 +71,7 @@ Terrain :: ~Terrain()
               delete tab[i][j];
               tab[i][j]=nullptr;
             }
-            tab[i][j]=nullptr;
+            
             
         }      
 
@@ -197,9 +217,9 @@ void Terrain :: TestRegression()
     Terrain ter;
     
     assert(ter.getDimx()==ter.getDimy());
-    for(unsigned int i=1;i<ter.getDimx()-1;i++)
+    for(unsigned int i=2;i<ter.getDimx()-2;i++)
     {
-        for(unsigned int j=1;j<ter.getDimy()-1;j++)
+        for(unsigned int j=2;j<ter.getDimy()-2;j++)
         {
             assert(tab[i][j]==nullptr);
         }
@@ -208,7 +228,7 @@ void Terrain :: TestRegression()
     ter.SetObstacle(2,2,3,3);
     assert(ter.getXY(2,2)!=nullptr);
     
-    const Balle& b = ter.GetBalle();
+     Balle b ;
 
 
     
@@ -218,6 +238,39 @@ void Terrain :: TestRegression()
     
 }
 
+
+void Terrain ::ouvrir(const std :: string & filename)
+ {
+
+    std :: ifstream fichier (filename.c_str());
+
+    assert(fichier.is_open());
+
+	unsigned int xmin,ymin,xmax,ymax;
+	//std :: string mot;
+	//dimX = dimY = 0;
+	//fichier >> mot >> dimX >> dimY >> mot;
+	
+	//if (tab != NULL) delete [] tab;
+	//tab = new Pixel [dimX*dimY];
+	
+    while(!fichier.eof())
+	{
+		fichier >> xmin >> ymin >> xmax >> ymax ;
+
+    	assert(xmin > 0 && xmin<xmax && xmax < getDimx());
+
+		assert(ymin > 0 && ymin<ymax && ymax < getDimy());
+
+		SetObstacle(xmin,ymin,xmax,ymax);
+
+		std :: cout << "obstacle posé à   "<<(xmax-xmin)<<" x "<<(ymax-ymin)<< std :: endl;
+	}
+
+    fichier.close();
+
+    std :: cout << "Lecture de niveau  " << filename << " ... OK\n";
+}
 
 
 

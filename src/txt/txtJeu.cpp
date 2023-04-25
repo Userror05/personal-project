@@ -9,7 +9,7 @@
 
 void txtAff(WinTXT & win,Jeu & jeu) {
 	const Terrain& ter = jeu.GetTerrain();
-	const Balle& b = jeu.GetTerrain().GetBalle();
+	const Balle& b = jeu.GetBalle();
 
 	win.clear();
 
@@ -44,7 +44,7 @@ void txtBoucle (Jeu & jeu) {
 		usleep(100000);
         #endif // WIN32
 
-		jeu.ActionJoueur(jeu.GetTerrain().GetBalle());
+		jeu.ActionJoueur(jeu.GetBalle());
 
 		c = win.getCh();
 		

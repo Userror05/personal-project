@@ -8,7 +8,7 @@ class Gravite
 
     private:
    
-    int Power; 
+    float Power; 
 
     int Angle;
 
