@@ -127,7 +127,7 @@ void Jeu :: angleChoisis (const char touche)
                 {
 				case  'z':
 					
-                      if(ang<=max){ang++; std :: cout<<"angle = "<< ang;};   // car Y inverse
+                      if(ang<=max){ang++; std :: cout<<"angle = "<< ang;}   // car Y inverse
 					
                     break;
                 

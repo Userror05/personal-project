@@ -6,6 +6,8 @@
 using namespace std;
 
 const int TAILLE_SPRITE = 32;
+const int TAILLE_FONT_X= 25000;
+const int TAILLE_FONT_Y= 1000;
 
 Image::Image () : m_surface(nullptr), m_texture(nullptr), m_hasChanged(false) {
 }
@@ -131,8 +133,9 @@ JeuSDL2 ::JeuSDL2() : gami()
 
     im_balle.loadFromFile("data/balle.jpg",renderer);
     im_mur.loadFromFile("data/mur.jpg",renderer);
+    im_font.loadFromFile("data/font_1.png",renderer);
     // IMAGES
-    gami.GetTerrain().ouvrir("./data/niveau1");
+    //gami.GetTerrain().ouvrir("./data/niveau1");
 
 
     /*// FONTS
@@ -178,8 +181,9 @@ void JeuSDL2 :: sdlaff()
      const Terrain& ter = gami.getConstTerrain();
      const Balle& b = gami.getConstBalle();
     SDL_RenderClear(renderer);
-
+im_font.draw(renderer,0*TAILLE_SPRITE,0*TAILLE_SPRITE,TAILLE_FONT_X,TAILLE_FONT_Y);
 im_balle.draw(renderer,b.GetX()*TAILLE_SPRITE,b.GetY()*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+
 for(unsigned int i=0;i<ter.getDimx();i++)
 {
     for(unsigned int j=0;j<ter.getDimy();j++)
@@ -192,7 +196,8 @@ for(unsigned int i=0;i<ter.getDimx();i++)
 
 
 void JeuSDL2 :: BouclejeuV2()
-{     
+{
+    Raf=1;
     SDL_Event events;
 
     bool quit = false;
@@ -206,6 +211,12 @@ void JeuSDL2 :: BouclejeuV2()
                     bool jouer = false;
                     switch (events.key.keysym.sym) {
                         // Commandes du 1er joueur
+                        case SDLK_o:
+                            Rafraichissement('o');
+                            break;
+                        case SDLK_l:
+                            Rafraichissement('l');
+                            break;
                         case SDLK_a:
                             Replacer('a');
                             break;
@@ -248,8 +259,9 @@ void JeuSDL2 :: Replacer(const char touche)
     if (touche=='a')
     {
         gami.GetBalle().SetX(2);
-        gami.GetBalle().SetY(2);
+        gami.GetBalle().SetY(29);
         SDL_RenderClear(renderer);
+        im_font.draw(renderer,0*TAILLE_SPRITE,0*TAILLE_SPRITE,TAILLE_FONT_X,TAILLE_FONT_Y);
         im_balle.draw(renderer,gami.GetBalle().GetX()*TAILLE_SPRITE,gami.GetBalle().GetY()*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
         for(unsigned int i=0;i<ter.getDimx();i++)
             {
@@ -274,6 +286,7 @@ void JeuSDL2 :: sdlaff2()
     {
         cout<<i<<endl;
         SDL_RenderClear(renderer);
+        im_font.draw(renderer,0*TAILLE_SPRITE,0*TAILLE_SPRITE,TAILLE_FONT_X,TAILLE_FONT_Y);
         im_balle.draw(renderer,gami.tabPosX[i]*TAILLE_SPRITE,gami.tabPosY[i]*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
         for(unsigned int i=0;i<ter.getDimx();i++)
             {
@@ -284,12 +297,33 @@ void JeuSDL2 :: sdlaff2()
             }
             }
         SDL_RenderPresent(renderer);
-        usleep(1000);
+        //usleep(Raf);
     }
     gami.clearRepartition();
 }
 
+void JeuSDL2 :: Rafraichissement (const char touche)
+{
+    int max = 10000;
+				switch (touche) 
+                {
+				case  'o':
+					
+                      if(Raf<=max){Raf*10; std :: cout<<"Taux de rafraichissement = "<< Raf;}  // car Y inverse
+					
+                    break;
+                
+                case 'l':
+                     
+                     if(Raf>=1){Raf/10;std :: cout<<"angle = "<< Raf;}
+                    
+                    break;
+				
+                default: 
+                    break;
+				}
 
+} 
 
 //******************************************BackUP*****************************************************
 /*

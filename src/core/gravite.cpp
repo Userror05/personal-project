@@ -134,7 +134,7 @@ double Gravite :: RecupB()
     double b;
     b=sin(ConversionAng());
     /*std::cout<<" "<<b<<" "<<"le_return:_";*/
-    return b;
+    return -b;
 }
 
 double Gravite :: ConversionAng()

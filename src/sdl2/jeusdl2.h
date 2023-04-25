@@ -54,6 +54,9 @@ class JeuSDL2
     bool withSound; 
     Image im_balle;
     Image im_mur;
+    Image im_font;
+    int Raf;
+    
 
 
     public:
@@ -76,6 +79,7 @@ class JeuSDL2
     void sdlaff2();
     //void AffichageBalle();
     void Replacer(const char touche);
+    void Rafraichissement(const char touche);
  
 
     
@@ -87,6 +91,7 @@ class JeuSDL2
 };
 
 inline Jeu& JeuSDL2 :: GetJeu(){return gami;}
+//inline int JeuSDL2 :: SetRaf(float x){Raf=x;};
 
 
 #endif
