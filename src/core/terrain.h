@@ -88,13 +88,7 @@ public:
      * @return L'objet gravité utilisé pour simuler la gravité sur le terrain.
      */
     Gravite& GetGravite();
-    /**
-     * @brief Renvoie l'objet Balle utilisé par le joueur.
-     *
-     * @return L'objet Balle utilisé sur le terrain.
-     */
-
-     Balle& GetBalle() ;
+    
 
     /**
      * @brief Renvoie le pointeur d'obstacle à la position (x, y) du tableau d'obstacles.
@@ -103,18 +97,16 @@ public:
      * @param y La position en Y de l'obstacle.
      * @return renvoie l'adresse de la case a (x,y)  en indices
      */
-    
-
      Obstacle* getXY (unsigned int x, unsigned int y) const;
 
-     //Obstacle GetObs(int x, int y)const;
 
      bool PositionValide(Cellule evaluee);//bool
 
-     //bool CollectionItem(Item I,Balle B);
-
-     const Balle& GetConstBalle()const ;
-
+     /**
+     * @brief Permet d'ouvrir un fichier texte, d'en recupérer les informations pour écrire un niveau sur le terrain chargé quasiment vierge.
+     *
+     * @param filename nom du chemin du fichier à aller chercher.
+     */
      void Ouvrir (const std :: string& filename);
     
 
