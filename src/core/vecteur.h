@@ -93,13 +93,13 @@ class Vecteur
      * @brief Calcule la magnitude du vecteur
      * @return La magnitude
      */
-    double magnitude()const;
+    double Magnitude()const;
 
     /**
      * @brief Normalise le vecteur
      * @return Le vecteur normalisé
      */
-    Vecteur normalized() const;
+    Vecteur Normalized() const;
 
     /**
      * @brief Récupère l'angle du vecteur

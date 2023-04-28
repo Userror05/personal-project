@@ -73,14 +73,14 @@ public:
      * 
      * @return La dimension en X du terrain.
      */
-    unsigned int getDimx() const;
+    unsigned int GetDimx() const;
 
     /**
      * @brief Renvoie la dimension en Y du terrain.
      *
      * @return La dimension en Y du terrain.
      */
-    unsigned int getDimy() const;
+    unsigned int GetDimy() const;
 
     /**
      * @brief Renvoie l'objet gravité utilisé pour simuler la gravité sur le terrain.
@@ -109,13 +109,13 @@ public:
 
      //Obstacle GetObs(int x, int y)const;
 
-     bool positionValide(Cellule evaluee);//bool
+     bool PositionValide(Cellule evaluee);//bool
 
      //bool CollectionItem(Item I,Balle B);
 
-     const Balle& getConstBalle()const ;
+     const Balle& GetConstBalle()const ;
 
-     void ouvrir (const std :: string& filename);
+     void Ouvrir (const std :: string& filename);
     
 
      
@@ -130,9 +130,9 @@ inline Obstacle * Terrain::getXY (unsigned int x, unsigned int y) const {
 	return tab[x][y];
 }
 
-inline unsigned int Terrain :: getDimx()const{return DimX;}
+inline unsigned int Terrain :: GetDimx()const{return DimX;}
 
-inline unsigned int Terrain :: getDimy()const{return DimY;}
+inline unsigned int Terrain :: GetDimy()const{return DimY;}
 
 inline Gravite& Terrain :: GetGravite(){return gr;}
 

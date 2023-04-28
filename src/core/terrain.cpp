@@ -7,10 +7,10 @@
 
 Terrain :: Terrain()
 {
-    DimX=50;
-    DimY=50;
+    DimX=60;
+    DimY=32;
      //rempli le contour du terrain, d'obstacle
-    for(unsigned int k = 0;k<DimX;k++)
+    for(unsigned int k = 0;k<DimY;k++)
     {
         tab[0][k]=new Obstacle;
     }
@@ -22,13 +22,13 @@ Terrain :: Terrain()
     {
         tab[k][DimY-1]=new Obstacle;
     }
-    for(unsigned int k = 1;k<DimX-1;k++)
+    for(unsigned int k = 1;k<DimY-1;k++)
     {
         tab[DimX-1][k]=new Obstacle;
     }
     
 
-      for(unsigned int k = 1;k<DimX-1;k++)
+    for(unsigned int k = 1;k<DimY-1;k++)
     {
         tab[1][k]=new Obstacle;
     }
@@ -38,9 +38,9 @@ Terrain :: Terrain()
     }
     for(unsigned int k = 2;k<DimX-1;k++)
     {
-        tab[k][DimX-2]=new Obstacle;
+        tab[k][DimY-2]=new Obstacle;
     }
-    for(unsigned int k = 2;k<DimX-2;k++)
+    for(unsigned int k = 2;k<DimY-2;k++)
     {
         tab[DimX-2][k]=new Obstacle;
     }
@@ -100,7 +100,7 @@ void Terrain :: ArrangementTrajectoire(Balle& b)
 {
     float a= b.divise.GetX();
     float c= b.divise.GetY();
-    gr.actualiseDirections(b);
+    gr.ActualiseDirections(b);
     if (a<0 && c<0) // cas jaune (bas gauche)
     {
         if (CollisionVect(b.drXM)==true && CollisionVect(b.drYP)==true && CollisionVect(b.drYM)==true)//bas gauche -> bas droite
@@ -160,33 +160,6 @@ void Terrain :: ArrangementTrajectoire(Balle& b)
     gr.ClearDirections(b);
 }
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    /*if (Collision(b))
-    {
-        
-        b.divise.SetX(b.divise.GetX());
-    }
-    if (Collision(b)&& b.divise.GetY()<0)
-    {
-        float y=b.divise.GetY();
-         b.divise.SetY(-y);
-         float ym=b.mouvement.GetY()/2;
-         std::cout<<"collision!"<<std::endl;
-         std::cout<<"mouv avant changement:"<<"("<<b.mouvement.GetX()<<","<<b.mouvement.GetY()<<")" << std ::endl;
-        b.mouvement.SetY(-ym);
-        std::cout<<"mouv avant changement:"<<"("<<b.mouvement.GetX()<<","<<b.mouvement.GetY()<<")" << std ::endl;
-    }
-*/
-
-
 bool Terrain :: CollisionBalle(Balle& b)
 {
     float x = b.GetX();
@@ -216,10 +189,10 @@ void Terrain :: TestRegression()
 {
     Terrain ter;
     
-    assert(ter.getDimx()==ter.getDimy());
-    for(unsigned int i=2;i<ter.getDimx()-2;i++)
+    assert(ter.GetDimx()==ter.GetDimy());
+    for(unsigned int i=2;i<ter.GetDimx()-2;i++)
     {
-        for(unsigned int j=2;j<ter.getDimy()-2;j++)
+        for(unsigned int j=2;j<ter.GetDimy()-2;j++)
         {
             assert(tab[i][j]==nullptr);
         }
@@ -239,7 +212,7 @@ void Terrain :: TestRegression()
 }
 
 
-void Terrain ::ouvrir(const std :: string & filename)
+void Terrain ::Ouvrir(const std :: string & filename)
  {
 
     std :: ifstream fichier (filename.c_str());
@@ -258,9 +231,9 @@ void Terrain ::ouvrir(const std :: string & filename)
 	{
 		fichier >> xmin >> ymin >> xmax >> ymax ;
 
-    	assert(xmin > 0 && xmin<xmax && xmax < getDimx());
+    	assert(xmin > 0 && xmin<xmax && xmax < GetDimx());
 
-		assert(ymin > 0 && ymin<ymax && ymax < getDimy());
+		assert(ymin > 0 && ymin<ymax && ymax < GetDimy());
 
 		SetObstacle(xmin,ymin,xmax,ymax);
 
@@ -273,4 +246,20 @@ void Terrain ::ouvrir(const std :: string & filename)
 }
 
 
-
+//********************************BackUp************************************************************************
+ /*if (Collision(b))
+    {
+        
+        b.divise.SetX(b.divise.GetX());
+    }
+    if (Collision(b)&& b.divise.GetY()<0)
+    {
+        float y=b.divise.GetY();
+         b.divise.SetY(-y);
+         float ym=b.mouvement.GetY()/2;
+         std::cout<<"collision!"<<std::endl;
+         std::cout<<"mouv avant changement:"<<"("<<b.mouvement.GetX()<<","<<b.mouvement.GetY()<<")" << std ::endl;
+        b.mouvement.SetY(-ym);
+        std::cout<<"mouv avant changement:"<<"("<<b.mouvement.GetX()<<","<<b.mouvement.GetY()<<")" << std ::endl;
+    }
+*/

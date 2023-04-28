@@ -25,12 +25,12 @@ private:
 public:
     Image () ;
     ~Image();
-    void loadFromFile (const char* filename, SDL_Renderer * renderer);
-    void loadFromCurrentSurface (SDL_Renderer * renderer);
-    void draw (SDL_Renderer * renderer, int x, int y, int w=-1, int h=-1);
-    SDL_Texture * getTexture() const;
-    void setSurface(SDL_Surface * surf);
-    void afficherMenu(SDL_Renderer * renderer);
+    void LoadFromFile (const char* filename, SDL_Renderer * renderer);
+    void LoadFromCurrentSurface (SDL_Renderer * renderer);
+    void Draw (SDL_Renderer * renderer, int x, int y, int w=-1, int h=-1);
+    SDL_Texture * GetTexture() const;
+    void SetSurface(SDL_Surface * surf);
+    void AfficherMenu(SDL_Renderer * renderer);
     void SetPolice(TTF_Font * police);
     void SetColeurPolice(SDL_Color couleur);
 };
@@ -63,21 +63,11 @@ class JeuSDL2
 
     JeuSDL2();
     ~JeuSDL2();
-
-    //void BoucleChoixPUI();
-
-
-    //void BoucleChoixANG();
-
-    //void Bouclejeu();
-    void BouclejeuV2();
-    //void TestAffichageBalleContinue(Balle& b);
+    void BoucleJeu();
     void TestAffichageBalleContinueV2(Balle& b);
-    void sdlaff();
+    void SDL_Aff();
     Jeu& GetJeu();
-    //void TestAll();
-    void sdlaff2();
-    //void AffichageBalle();
+    void SDL_Aff_Tab();
     void Replacer(const char touche);
     void Rafraichissement(const char touche);
  
@@ -95,3 +85,13 @@ inline Jeu& JeuSDL2 :: GetJeu(){return gami;}
 
 
 #endif
+//******************************************BackUP*****************************************************
+/*  
+//void BoucleChoixPUI();
+//void BoucleChoixANG();
+//void Bouclejeu();
+//void TestAffichageBalleContinue(Balle& b);
+//void SdlAffContour();
+//void AffichageBalle();
+//void TestAll();
+*/

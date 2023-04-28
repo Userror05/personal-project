@@ -22,7 +22,7 @@ Image::~Image()
     m_hasChanged = false;
 }
 
-void Image::loadFromFile (const char* filename, SDL_Renderer * renderer) {
+void Image::LoadFromFile (const char* filename, SDL_Renderer * renderer) {
     m_surface = IMG_Load(filename);
     if (m_surface == nullptr) {
      string nfn =  string("../") + filename;
@@ -52,7 +52,7 @@ void Image::loadFromFile (const char* filename, SDL_Renderer * renderer) {
     
 }
 
-void Image::loadFromCurrentSurface (SDL_Renderer * renderer) {
+void Image::LoadFromCurrentSurface (SDL_Renderer * renderer) {
     m_texture = SDL_CreateTextureFromSurface(renderer,m_surface);
     if (m_texture == nullptr) {
          cout << "Error: problem to create the texture from surface " << endl;
@@ -61,7 +61,7 @@ void Image::loadFromCurrentSurface (SDL_Renderer * renderer) {
     }
 }
 
-void Image::draw (SDL_Renderer * renderer, int x, int y, int w, int h) {
+void Image::Draw (SDL_Renderer * renderer, int x, int y, int w, int h) {
     int ok;
     SDL_Rect r;
     r.x = x;
@@ -79,9 +79,9 @@ void Image::draw (SDL_Renderer * renderer, int x, int y, int w, int h) {
     assert(ok == 0);
 }
 
-SDL_Texture * Image::getTexture() const {return m_texture;}
+SDL_Texture * Image::GetTexture() const {return m_texture;}
 
-void Image::setSurface(SDL_Surface * surf) {m_surface = surf;}
+void Image::SetSurface(SDL_Surface * surf) {m_surface = surf;}
 
 
 JeuSDL2 ::JeuSDL2() : gami()
@@ -116,8 +116,8 @@ JeuSDL2 ::JeuSDL2() : gami()
     else withSound = true;
 //////////////////
 	int dimx, dimy;
-	dimx = gami.getConstTerrain().getDimx();
-	dimy = gami.getConstTerrain().getDimx();
+	dimx = gami.GetConstTerrain().GetDimx();
+	dimy = gami.GetConstTerrain().GetDimx();
 	dimx = dimx * TAILLE_SPRITE;
 	dimy = dimy * TAILLE_SPRITE;
 
@@ -131,9 +131,9 @@ JeuSDL2 ::JeuSDL2() : gami()
 
     renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
 
-    im_balle.loadFromFile("data/balle.jpg",renderer);
-    im_mur.loadFromFile("data/mur.jpg",renderer);
-    im_font.loadFromFile("data/font_1.png",renderer);
+    im_balle.LoadFromFile("data/balle.jpg",renderer);
+    im_mur.LoadFromFile("data/mur.jpg",renderer);
+    im_font.LoadFromFile("data/font_1.png",renderer);
     // IMAGES
     //gami.GetTerrain().ouvrir("./data/niveau1");
 
@@ -175,27 +175,29 @@ JeuSDL2::~JeuSDL2 () {
     SDL_Quit();
 }
 
-void JeuSDL2 :: sdlaff()
+
+
+void JeuSDL2 :: SDL_Aff()
 { 
 
-     const Terrain& ter = gami.getConstTerrain();
-     const Balle& b = gami.getConstBalle();
+     const Terrain& ter = gami.GetConstTerrain();
+     const Balle& b = gami.GetConstBalle();
     SDL_RenderClear(renderer);
-im_font.draw(renderer,0*TAILLE_SPRITE,0*TAILLE_SPRITE,TAILLE_FONT_X,TAILLE_FONT_Y);
-im_balle.draw(renderer,b.GetX()*TAILLE_SPRITE,b.GetY()*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+im_font.Draw(renderer,0*TAILLE_SPRITE,0*TAILLE_SPRITE,TAILLE_FONT_X,TAILLE_FONT_Y);
+im_balle.Draw(renderer,b.GetX()*TAILLE_SPRITE,b.GetY()*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
 
-for(unsigned int i=0;i<ter.getDimx();i++)
+for(unsigned int i=0;i<ter.GetDimx();i++)
 {
-    for(unsigned int j=0;j<ter.getDimy();j++)
+    for(unsigned int j=0;j<ter.GetDimy();j++)
     {
         if(ter.getXY(i,j)!=nullptr)
-        im_mur.draw(renderer,i*TAILLE_SPRITE,j*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+        im_mur.Draw(renderer,i*TAILLE_SPRITE,j*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
     }
 }
 }
 
 
-void JeuSDL2 :: BouclejeuV2()
+void JeuSDL2 :: BoucleJeu()
 {
     Raf=1;
     SDL_Event events;
@@ -221,10 +223,10 @@ void JeuSDL2 :: BouclejeuV2()
                             Replacer('a');
                             break;
                         case SDLK_z:
-                            gami.angleChoisis('z');
+                            gami.AngleChoisis('z');
                             break;
                         case SDLK_s:
-                            gami.angleChoisis('s');
+                            gami.AngleChoisis('s');
                             break;
                         case SDLK_t:
                             gami.GetPuis('t');
@@ -232,12 +234,11 @@ void JeuSDL2 :: BouclejeuV2()
                         case SDLK_g:
                             gami.GetPuis('g');
                             break;
-                        case SDLK_j: gami.jouer('j');
-                            if(gami.jouer('j')) 
+                        case SDLK_j: gami.Jouer('j');
+                            if(gami.Jouer('j')) 
                             {
-                                //TestAffichageBalleContinue(gami.GetTerrain().GetBalle());
                                 gami.BackMouvBalle(gami.GetBalle());
-                                sdlaff2();
+                                SDL_Aff_Tab();
                             }
                             cout<< "c'est joué";
                             break;
@@ -248,27 +249,27 @@ void JeuSDL2 :: BouclejeuV2()
                     }
                 }
             }
-            sdlaff();
+            SDL_Aff();
         SDL_RenderPresent(renderer);
         }       
 }
 
 void JeuSDL2 :: Replacer(const char touche)
 {
-    const Terrain& ter = gami.getConstTerrain();
+    const Terrain& ter = gami.GetConstTerrain();
     if (touche=='a')
     {
-        gami.GetBalle().SetX(2);
-        gami.GetBalle().SetY(29);
+        gami.GetBalle().SetX(3);
+        gami.GetBalle().SetY(28);
         SDL_RenderClear(renderer);
-        im_font.draw(renderer,0*TAILLE_SPRITE,0*TAILLE_SPRITE,TAILLE_FONT_X,TAILLE_FONT_Y);
-        im_balle.draw(renderer,gami.GetBalle().GetX()*TAILLE_SPRITE,gami.GetBalle().GetY()*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
-        for(unsigned int i=0;i<ter.getDimx();i++)
+        im_font.Draw(renderer,0*TAILLE_SPRITE,0*TAILLE_SPRITE,TAILLE_FONT_X,TAILLE_FONT_Y);
+        im_balle.Draw(renderer,gami.GetBalle().GetX()*TAILLE_SPRITE,gami.GetBalle().GetY()*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+        for(unsigned int i=0;i<ter.GetDimx();i++)
             {
-                for(unsigned int j=0;j<ter.getDimy();j++)
+                for(unsigned int j=0;j<ter.GetDimy();j++)
                     {
                         if(ter.getXY(i,j)!=nullptr)
-                        im_mur.draw(renderer,i*TAILLE_SPRITE,j*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+                        im_mur.Draw(renderer,i*TAILLE_SPRITE,j*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
                     }
             }
         SDL_RenderPresent(renderer);
@@ -277,29 +278,28 @@ void JeuSDL2 :: Replacer(const char touche)
 }
 
 
-void JeuSDL2 :: sdlaff2()
+void JeuSDL2 :: SDL_Aff_Tab()
 {
-    const Terrain& ter = gami.getConstTerrain();
-    //while (i==gami.tabPosX.size())
+    const Terrain& ter = gami.GetConstTerrain();
     cout<<gami.tabPosX.size()<<endl;
     for (int i = 0; i < gami.tabPosX.size(); i++)
     {
         cout<<i<<endl;
         SDL_RenderClear(renderer);
-        im_font.draw(renderer,0*TAILLE_SPRITE,0*TAILLE_SPRITE,TAILLE_FONT_X,TAILLE_FONT_Y);
-        im_balle.draw(renderer,gami.tabPosX[i]*TAILLE_SPRITE,gami.tabPosY[i]*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
-        for(unsigned int i=0;i<ter.getDimx();i++)
+        im_font.Draw(renderer,0*TAILLE_SPRITE,0*TAILLE_SPRITE,TAILLE_FONT_X,TAILLE_FONT_Y);
+        im_balle.Draw(renderer,gami.tabPosX[i]*TAILLE_SPRITE,gami.tabPosY[i]*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+        for(unsigned int i=0;i<ter.GetDimx();i++)
             {
-            for(unsigned int j=0;j<ter.getDimy();j++)
+            for(unsigned int j=0;j<ter.GetDimy();j++)
             {
                 if(ter.getXY(i,j)!=nullptr)
-                 im_mur.draw(renderer,i*TAILLE_SPRITE,j*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+                 im_mur.Draw(renderer,i*TAILLE_SPRITE,j*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
             }
             }
         SDL_RenderPresent(renderer);
         //usleep(Raf);
     }
-    gami.clearRepartition();
+    gami.ClearRepartition();
 }
 
 void JeuSDL2 :: Rafraichissement (const char touche)
@@ -322,6 +322,8 @@ void JeuSDL2 :: Rafraichissement (const char touche)
                 default: 
                     break;
 				}
+std::cout<<"le taux de rafraichissement est "<<Raf<<std::endl;
+
 
 } 
 

@@ -7,7 +7,7 @@ int main()
 {
    Niveau niv;
   std :: string mot = "./data/niveau1";
-   niv.ouvrir(mot);
+   niv.Ouvrir(mot);
 
    
    ;

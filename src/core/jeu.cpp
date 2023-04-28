@@ -4,57 +4,14 @@
 
 bool Jeu :: Rejouer(Vecteur v)
 {
-    if(v.magnitude()>=0.1)
+    if(v.Magnitude()>=0.1)
     {
         return true;
     }
     else return false;
 }
 
-void Jeu :: ActionJoueur(Balle& b)
-{
-    
-    ter.GetGravite().Vitesse(b);
-    b.InitMouvement();
-  
-    while(!Rejouer(b.mouvement))
-    {
-       //  if(ter.Collision())
-       // {
-       //     ter.ArrangementTrajectoire();
-        //}
-        ter.GetGravite().actualiseVecteur(b);
-        
-    }
-   
-}
-
-void Jeu :: ActionJoueurVisuelTest45(Balle& b)
-{
-    
-    ter.GetGravite().SetPow(5);
-    ter.GetGravite().AffPR();
-    ter.GetGravite().SetAng(45);
-    ter.GetGravite().AffAng();
-    ter.GetGravite().Vitesse(b);
-    b.AffVitesse();
-    b.InitMouvement();
-    b.AffInitMouvement();
-    //for(int t=0;t<=5;t++)
-    // while(Rejouer(b.mouvement))
-    //{
-        for(int i=0;i<=5;i++)
-        {
-        // if(ter.Collision())
-       // {
-       //     ter.ArrangementTrajectoire();
-        //}
-        ter.GetGravite().actualiseVecteur(b);
-        
-    }
-}
-
-void Jeu :: repartirPosition(Balle& b)
+void Jeu :: RepartirPosition(Balle& b)
 {
     float x=b.GetX();
     float y = b.GetY();
@@ -64,7 +21,7 @@ void Jeu :: repartirPosition(Balle& b)
     tabPosY.push_back(y);
 }       
 
-void Jeu :: clearRepartition()
+void Jeu :: ClearRepartition()
 {
     tabPosX.clear();
     tabPosY.clear();
@@ -72,9 +29,9 @@ void Jeu :: clearRepartition()
 
 void Jeu :: BackMouvBalle(Balle& b)
 {
-    ter.GetGravite().Getpow();
+    ter.GetGravite().GetPow();
     ter.GetGravite().AffPR();
-    ter.GetGravite().Getangle();
+    ter.GetGravite().GetAngle();
     ter.GetGravite().AffAng();
     ter.GetGravite().Vitesse(b);
     b.AffVitesse();
@@ -85,7 +42,7 @@ void Jeu :: BackMouvBalle(Balle& b)
             b.MoinsHuitMille();
             for (int i = 0; i <=50; i++)
             {
-                ter.GetGravite().actualiseAdri(b);
+                ter.GetGravite().ActualiseAdri(b);
                 if (ter.CollisionVect(b.adrien)==true)
                 {
                     ter.ArrangementTrajectoire(b);
@@ -95,30 +52,18 @@ void Jeu :: BackMouvBalle(Balle& b)
                 }
                 else
                 {
-                    ter.GetGravite().actualiseVecteurV2(b);
-                    repartirPosition(b);
+                    ter.GetGravite().ActualiseBalleViaDiv(b);
+                    RepartirPosition(b);
                  }
             }
             
-            ter.GetGravite().actualiseMouv(b);   
+            ter.GetGravite().ActualiseMouv(b);   
         }
 }
 
-//  if(ter.Collision(b)==true)
-               // {
-                   // ter.ArrangementTrajectoire(b);
-                //    break;
-               // }
-               // else
-
-
-
-
-
-
-void Jeu :: angleChoisis (const char touche)
+void Jeu :: AngleChoisis (const char touche)
 {
-    int ang = ter.GetGravite().Getangle();
+    int ang = ter.GetGravite().GetAngle();
     
     int max=90;
 
@@ -146,12 +91,10 @@ void Jeu :: angleChoisis (const char touche)
 
 } 
 
-
-
 void Jeu :: GetPuis (const char touche)
 {
    
-    float pui = ter.GetGravite().Getpow();
+    float pui = ter.GetGravite().GetPow();
     int max=5;
 				switch (touche) 
                 {
@@ -173,20 +116,20 @@ void Jeu :: GetPuis (const char touche)
     ter.GetGravite().SetPow(pui);
 }
 
-bool Jeu :: jouer(const char jouer)
+bool Jeu :: Jouer(const char jouer)
 {
     if(jouer=='j') return true; else return false;
 }
 
 
-void Jeu :: testRegression()
+void Jeu :: TestRegression()
 {
     Jeu gami;
-    int ang = gami.GetTerrain().GetGravite().Getangle();
+    int ang = gami.GetTerrain().GetGravite().GetAngle();
     assert(ang<=90 && ang>=0);
-    gami.angleChoisis('z');
+    gami.AngleChoisis('z');
 
-    assert(gami.GetTerrain().GetGravite().Getangle() && gami.GetTerrain().GetGravite().Getangle()!=ang);
+    assert(gami.GetTerrain().GetGravite().GetAngle() && gami.GetTerrain().GetGravite().GetAngle()!=ang);
 
     gami.GetPuis('t');
 }
@@ -195,7 +138,7 @@ void Jeu :: testRegression()
 
 
 
-//********************************BackUp************************************************
+//********************************BackUp************************************************************************
 /*
 void Jeu :: ActionJoueurVisuelTest45()
 {
@@ -229,4 +172,52 @@ float Jeu :: GetTabY()const
     return tabPosY;
 }
 
+//  if(ter.Collision(b)==true)
+               // {
+                   // ter.ArrangementTrajectoire(b);
+                //    break;
+               // }
+               // else
+
+void Jeu :: ActionJoueurVisuelTest45(Balle& b)
+{
+    
+    ter.GetGravite().SetPow(5);
+    ter.GetGravite().AffPR();
+    ter.GetGravite().SetAng(45);
+    ter.GetGravite().AffAng();
+    ter.GetGravite().Vitesse(b);
+    b.AffVitesse();
+    b.InitMouvement();
+    b.AffInitMouvement();
+    //for(int t=0;t<=5;t++)
+    // while(Rejouer(b.mouvement))
+    //{
+        for(int i=0;i<=5;i++)
+        {
+        // if(ter.Collision())
+       // {
+       //     ter.ArrangementTrajectoire();
+        //}
+        ter.GetGravite().ActualiseVecteur(b);
+        
+    }
+}
+void Jeu :: ActionJoueur(Balle& b)
+{
+    
+    ter.GetGravite().Vitesse(b);
+    b.InitMouvement();
+  
+    while(!Rejouer(b.mouvement))
+    {
+       //  if(ter.Collision())
+       // {
+       //     ter.ArrangementTrajectoire();
+        //}
+        ter.GetGravite().ActualiseVecteur(b);
+        
+    }
+   
+}
 */

@@ -3,6 +3,7 @@
 
 #include "../core/jeu.h"
 
-void txtBoucle (Jeu & j);
+void TxtAff (WinTXT & win,Jeu & jeu);
+void TxtBoucle (Jeu & j);
 
 #endif

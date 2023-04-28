@@ -82,11 +82,15 @@ public:
 
     void TestRegression();
 
-    void Deplacement_via_divise();
-
-    void ChAdrien();
     void InverseX();
     void InverseY();
 
 };
 #endif
+//********************************BackUp************************************************************************
+/*
+
+    void Deplacement_via_divise();
+
+    void ChAdrien();
+*/

@@ -7,15 +7,15 @@
 #include "winTxt.h"
 #include "../core/jeu.h"
 
-void txtAff(WinTXT & win,Jeu & jeu) {
+void TxtAff(WinTXT & win,Jeu & jeu) {
 	const Terrain& ter = jeu.GetTerrain();
 	const Balle& b = jeu.GetBalle();
 
 	win.clear();
 
     // Affichage des murs
-	for(int x=0;x<ter.getDimx();++x)
-		for(int y=0;y<ter.getDimy();++y)
+	for(int x=0;x<ter.GetDimx();++x)
+		for(int y=0;y<ter.GetDimy();++y)
 			if(ter.getXY(x,y)!=nullptr)
 				win.print( x, y,'1');
 
@@ -26,35 +26,35 @@ void txtAff(WinTXT & win,Jeu & jeu) {
 	win.draw();
 }
 
-void txtBoucle (Jeu & jeu) {
+void TxtBoucle (Jeu & jeu) {
 	// Creation d'une nouvelle fenetre en mode texte
 	// => fenetre de dimension et position (WIDTH,HEIGHT,STARTX,STARTY)
-    WinTXT win (jeu.GetTerrain().getDimx(),jeu.GetTerrain().getDimy());
+    WinTXT win (jeu.GetTerrain().GetDimx(),jeu.GetTerrain().GetDimy());
 	//jeu.Get;
 
 	bool ok = true;
 	int c;
 
 	do {
-	    txtAff(win,jeu);
+	    TxtAff(win,jeu);
 
         #ifdef _WIN32
         Sleep(100);
 		#else
-		usleep(100000);
+		//usleep(100000);
         #endif // WIN32
-
-		jeu.ActionJoueur(jeu.GetBalle());
+		//on a enlever ActionJoueur, ca change quelque chose?
+		//jeu.ActionJoueur(jeu.GetBalle());
 
 		c = win.getCh();
 		
 		
 			switch (c) {
 			case 'z':
-				jeu.angleChoisis('z');
+				jeu.AngleChoisis('z');
 				break;
 			case 's':
-				jeu.angleChoisis('s');
+				jeu.AngleChoisis('s');
 				break;
 				
 				case 't':

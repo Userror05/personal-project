@@ -3,11 +3,17 @@
 int main(int argc, char** argv)
 {
     JeuSDL2 jeu;
-    jeu.BouclejeuV2();
+    jeu.BoucleJeu();
 
 
 return 0;
 }
+
+
+
+
+
+//******************************************BackUP*****************************************************
 /*
 JeuSDL2 jeu;
     jeu.Bouclejeu();

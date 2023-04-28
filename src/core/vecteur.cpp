@@ -73,14 +73,14 @@ Vecteur Vecteur::operator * (float scalar) const{
         return Vecteur (x * scalar, y * scalar);
     }
 
-double Vecteur :: magnitude()const 
+double Vecteur :: Magnitude()const 
 {
   return sqrt(x*x + y*y);
 }
 
-Vecteur Vecteur :: normalized() const 
+Vecteur Vecteur :: Normalized() const 
 {
-    double mag = magnitude();
+    double mag = Magnitude();
         if (mag > 0) {
             return *this / mag;
         } else {
@@ -93,7 +93,7 @@ Vecteur Vecteur :: normalized() const
 double Vecteur :: Recupangle()const
 {
    double temp;
-    temp = acos(x/magnitude());
+    temp = acos(x/Magnitude());
     return temp;
 
 }
