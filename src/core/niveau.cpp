@@ -1,0 +1,88 @@
+#include"niveau.h"
+#include<fstream>
+#include<iostream>
+
+
+const char m_terrain1[15][21] = {
+ "####################",
+ "#.###....##........#",
+ "#.#####..##...####.#",
+ "#........##........#",
+ "#........###.......#",
+ "#...#..#....#......#",
+ "#......#...##......#",
+ "#####..#....#..#####",
+ "#......##...#......#",
+ "#......#....#......#",
+ "#..................#",
+ "#..................#",
+ "#.....#......#.....#",
+ "#.....#......#.....#",
+ "####################"
+};
+
+const char m_terrain2[15][21] = {
+ "####################",
+ "#                  #",
+ "#                  #",
+ "#                  #",
+ "#                  #",
+ "#                  #",
+ "#                  #",
+ "#                  #",
+ "#                  #",
+ "#                  #",
+ "#                  #",
+ "#                  #",
+ "#                  #",
+ "#                  #",
+ "####################"
+};
+
+
+Niveau::Niveau () { Terrain();
+}
+
+
+
+void Niveau::Ouvrir(const std :: string & filename, Terrain& ter)
+ {
+
+    std :: ifstream fichier (filename.c_str());
+
+    assert(fichier.is_open());
+
+	unsigned int xmin,ymin,xmax,ymax;
+	//std :: string mot;
+	//dimX = dimY = 0;
+	//fichier >> mot >> dimX >> dimY >> mot;
+	
+	//if (tab != NULL) delete [] tab;
+	//tab = new Pixel [dimX*dimY];
+	
+    while(!fichier.eof())
+	{
+		fichier >> xmin >> ymin >> xmax >> ymax ;
+
+    	assert(xmin > 0 && xmin<xmax && xmax < ter.GetDimx());
+
+		assert(ymin > 0 && ymin<ymax && ymax < ter.GetDimy());
+
+		ter.SetObstacle(xmin,ymin,xmax,ymax);
+
+		std :: cout << "obstacle posé à   "<<(xmax-xmin)<<" x "<<(ymax-ymin)<< std :: endl;
+	}
+
+    fichier.close();
+
+    std :: cout << "Lecture de niveau  " << filename << " ... OK\n";
+}
+
+
+void Niveau ::  TestRegression()
+{
+	Niveau niv;
+	Terrain teraria;
+	niv.ouvrir("../data/niveau1",teraria);
+	assert(teraria.getXY(2,2)==nullptr);
+}
