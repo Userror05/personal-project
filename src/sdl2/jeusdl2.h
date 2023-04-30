@@ -97,24 +97,74 @@ class JeuSDL2
 
 
     public:
+    /**
+     * @brief constructeur par défaut de la classe.
+     *
+     * @return True si la balle entre en collision avec un obstacle, False sinon.
+     */
 
     JeuSDL2();
+    /**
+     * @brief destructeur par defaut de la classe 
+     *
+     * @return True si la balle entre en collision avec un obstacle, False sinon.
+     */
     ~JeuSDL2();
+    /**
+     * @brief boucle qui permet l'affichage continue ainsi que la recupération des actions du joueur
+     *
+     * @return True si la balle entre en collision avec un obstacle, False sinon.
+     */
     void BoucleJeu();
+
+    /**
+     * @brief fait l'affichage en recupérant des données statiques grâce a la librairie SDL.
+     *
+     * @return True si la balle entre en collision avec un obstacle, False sinon.
+     */
     void SDL_Aff();
     Jeu& GetJeu();
+    /**
+     * @brief fait l'affichage en recupérant les positions stockés précédement dans un tableau dynamique de type entier;utilise la librairie SDL
+     *
+     * @return True si la balle entre en collision avec un obstacle, False sinon.
+     */
     void SDL_Aff_Tab();
+    /**
+     * @brief Replace la balle selon des coordonnées définies a l'intérieur de la la fonction
+     *  @param touche qui est un paramètre de type char
+     * @return True si la balle entre en collision avec un obstacle, False sinon.
+     */
     void Replacer(const char touche);
-
+    
+    /**
+     * @brief Cette fonction gère les différents rectangles constituant le menu
+     *
+     * @return True si la balle entre en collision avec un obstacle, False sinon.
+     */
     void afficherMenu();
 
+    /**
+     * @brief affiche et défini a quelle fonction accéder en fonction de l'emplacement cliqué par le joueur
+     *
+     * @return True si la balle entre en collision avec un obstacle, False sinon.
+     */
     void Menu();
 
+    /**
+     * @brief detruit les différents composants permettant de réaliser l'affichage des différents menus
+     *
+     */
     void destructionFenetre_m();
-    void InitJeu();
-    void Lancement();
+    /**
+     * @brief affiche le menu et le score après le game over
+     *
+     */
     void affiche_game_over();
-
+    /**
+     * @brief affiche le menu et le score après le game over en plus de gérer les différents choix tels que rjouer,retourner au menu ou bien quitter
+     *
+     */
     void tab_de_score();
  
  
