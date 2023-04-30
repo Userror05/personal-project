@@ -84,6 +84,26 @@ SDL_Texture * Image::GetTexture() const {return m_texture;}
 void Image::SetSurface(SDL_Surface * surf) {m_surface = surf;}
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//************************************** JEU ***************************************************************
+
+
+
+
+
 JeuSDL2 ::JeuSDL2() : gami()
 {
     // Initialisation de la SDL
@@ -117,7 +137,7 @@ JeuSDL2 ::JeuSDL2() : gami()
 //////////////////
 	int dimx, dimy;
 	dimx = gami.GetConstTerrain().GetDimx();
-	dimy = gami.GetConstTerrain().GetDimx();
+	dimy = gami.GetConstTerrain().GetDimy();
 	dimx = dimx * TAILLE_SPRITE;
 	dimy = dimy * TAILLE_SPRITE;
 
@@ -131,45 +151,20 @@ JeuSDL2 ::JeuSDL2() : gami()
 
     renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
 
-    im_balle.LoadFromFile("data/balle.jpg",renderer);
+    
     im_mur.LoadFromFile("data/mur.jpg",renderer);
-    im_font.LoadFromFile("data/font_1.png",renderer);
+    im_font.LoadFromFile("data/fond_1.jpg",renderer);
+    im_balle.LoadFromFile("data/balle_s.png",renderer);
     // IMAGES
     //gami.GetTerrain().ouvrir("./data/niveau1");
 
-
-    /*// FONTS
-    font = TTF_OpenFont("data/SIXTY.ttf",50);
-    if (font == nullptr)
-        font = TTF_OpenFont("../data/SIXTY.ttf",50);
-    if (font == nullptr) {
-            cout << "Failed to load SIXTY.ttf! SDL_TTF Error: " << TTF_GetError() << endl; 
-            SDL_Quit(); 
-            exit(1);
-	}
-	font_color.r = 50;font_color.g = 50;font_color.b = 255;
-	font_im.setSurface(TTF_RenderText_Solid(font,"golfnic",font_color));
-	font_im.loadFromCurrentSurface(renderer);
-
-   if (withSound)
-    {
-        sound = Mix_LoadWAV("data/son.wav");
-        if (sound == nullptr) 
-            sound = Mix_LoadWAV("../data/son.wav");
-        if (sound == nullptr) {
-               std ::   cout << "Failed to load son.wav! SDL_mixer Error: " << Mix_GetError() << std ::  endl; 
-                SDL_Quit();
-                exit(1);
-        }
-    }*/ // SONS
+ // SONS
     
 }
 
-//************************************** JEU ***************************************************************
+
 JeuSDL2::~JeuSDL2 () {
-    //if (withSound) Mix_Quit();
-    //TTF_CloseFont(font);
-    //TTF_Quit();
+    
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
@@ -186,14 +181,14 @@ void JeuSDL2 :: SDL_Aff()
 im_font.Draw(renderer,0*TAILLE_SPRITE,0*TAILLE_SPRITE,TAILLE_FONT_X,TAILLE_FONT_Y);
 im_balle.Draw(renderer,b.GetX()*TAILLE_SPRITE,b.GetY()*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
 
-for(unsigned int i=0;i<ter.GetDimx();i++)
+/*for(unsigned int i=0;i<ter.GetDimx();i++)
 {
     for(unsigned int j=0;j<ter.GetDimy();j++)
     {
         if(ter.getXY(i,j)!=nullptr)
         im_mur.Draw(renderer,i*TAILLE_SPRITE,j*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
     }
-}
+}*/
 }
 
 
