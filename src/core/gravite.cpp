@@ -9,7 +9,7 @@
 Gravite :: Gravite ()
 {
     Angle = 45;
-    Power = 5;
+    Power = 2.5;
 }
 
 void Gravite::ActualiseBalleViaDiv(Balle& b)const
@@ -26,10 +26,30 @@ void Gravite::ActualiseMouv(Balle& b)const
     b.mouvement.SetY((b.mouvement.GetY()+b.gravite.GetY())*coef);
 }
 
-void Gravite::ActualiseAdri(Balle& b)const
+void Gravite::ActualiseAdri(Balle& b, int n)const
 {
-    b.adrien.SetX(b.divise.GetX()+b.GetX());
-    b.adrien.SetY(b.divise.GetY()+b.GetY());
+   // b.adrien.SetX(b.divise.GetX()+b.GetX());
+   // b.adrien.SetY(b.divise.GetY()+b.GetY());
+    if (n==1)
+    {
+        b.adrien.SetX(b.divise.GetX()+b.GetX());
+        b.adrien.SetY(b.divise.GetY()+b.GetY());
+    }
+    if (n==2)
+    {
+        b.adrien.SetX(b.divise.GetX()+b.pos_x2);
+        b.adrien.SetY(b.divise.GetY()+b.pos_y2);
+    }
+    if (n==3)
+    {
+        b.adrien.SetX(b.divise.GetX()+b.pos_x3);
+        b.adrien.SetY(b.divise.GetY()+b.pos_y3);
+    }
+    if (n==4)
+    {
+        b.adrien.SetX(b.divise.GetX()+b.pos_x4);
+        b.adrien.SetY(b.divise.GetY()+b.pos_y4);
+    }
 }
 void Gravite::ActualiseDirections(Balle& b)const
 {

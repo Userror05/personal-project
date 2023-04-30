@@ -29,6 +29,15 @@ public:
     Vecteur drXM;
     Vecteur drYP;
     Vecteur drYM;
+    //le cas de x-y 2 est le cas en haut a droite
+    double pos_x2;
+    double pos_y2;
+    // le cas de x-y 3 est le cas en bas a gauche
+    double pos_x3;
+    double pos_y3;
+    // le vas de x-y 4 est le cas en bas a droite
+    double pos_x4;
+    double pos_y4;
     /**
      * @brief Constructeur par défaut de la classe Balle
      */
@@ -84,6 +93,7 @@ public:
 
     void InverseX();
     void InverseY();
+    void ActualisePosition();
 
 };
 #endif

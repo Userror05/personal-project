@@ -21,6 +21,13 @@ Balle :: Balle ()
     drYP=dr3;
     Vecteur dr4(0,-1);
     drYM=dr4;
+    pos_x2=GetX()+1;
+    pos_x3=GetX();
+    pos_x4=GetX()+1;
+    pos_y2=GetY();
+    pos_y3=GetY()+1;
+    pos_y4=GetY()+1;
+
 }
 
 double Balle :: GetX()const 
@@ -86,6 +93,16 @@ void Balle :: InverseY()
     float x4=mouvement.GetY();
     divise.SetY(-x2);
     mouvement.SetY(-x4);
+}
+
+void Balle :: ActualisePosition()
+{
+    pos_x2=GetX()+1;
+    pos_x3=GetX();
+    pos_x4=GetX()+1;
+    pos_y2=GetY();
+    pos_y3=GetY()+1;
+    pos_y4=GetY()+1;
 }
 
 void Balle :: TestRegression()

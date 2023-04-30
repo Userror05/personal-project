@@ -20,13 +20,13 @@ class Gravite
     Gravite();
     void ActualiseBalleViaDiv(Balle& b) const;
     void ActualiseMouv(Balle& b)const;
-    void ActualiseAdri(Balle& b)const;
+    void ActualiseAdri(Balle& b, int n)const;
     void ActualiseDirections(Balle& b)const;
     void ClearDirections(Balle& b)const;
-    void SetPow(int pow);
+    void SetPow(float pow);
     void SetAng(int ang);
     int GetAngle()const;
-    int GetPow()const;
+    float GetPow()const;
     double RecupA();
     double RecupB();
     double ConversionAng();
@@ -38,12 +38,12 @@ class Gravite
     void TestRegression();
 
 };
-inline void Gravite :: SetPow(int pow)
+inline void Gravite :: SetPow(float pow)
 {   Power = pow;}
 inline void Gravite :: SetAng(int ang)
 {   Angle = ang;}
 
-inline int Gravite :: GetPow() const {return Power;}
+inline float Gravite :: GetPow() const {return Power;}
 inline int Gravite :: GetAngle() const {return Angle;}
 
 

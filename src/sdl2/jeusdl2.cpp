@@ -76,7 +76,7 @@ void Image::Draw (SDL_Renderer * renderer, int x, int y, int w, int h) {
     }
 
     ok = SDL_RenderCopy(renderer,m_texture,nullptr,&r);
-    assert(ok == 0);
+    //assert(ok == 0);
 }
 
 SDL_Texture * Image::GetTexture() const {return m_texture;}
@@ -153,7 +153,7 @@ JeuSDL2 ::JeuSDL2() : gami()
 
     
     im_mur.LoadFromFile("data/mur.jpg",renderer);
-    im_font.LoadFromFile("data/fond_1.jpg",renderer);
+    im_font.LoadFromFile("data/font_1.png",renderer);
     im_balle.LoadFromFile("data/balle_s.png",renderer);
     // IMAGES
     gami.GetTerrain().Ouvrir("./data/niveau1");
@@ -303,7 +303,7 @@ void JeuSDL2 :: SDL_Aff_Tab()
             }
             }
         SDL_RenderPresent(renderer);
-        usleep(Raf);
+        //usleep(Raf);
     }
     gami.ClearRepartition();
 }

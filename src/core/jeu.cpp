@@ -40,21 +40,47 @@ void Jeu :: BackMouvBalle(Balle& b)
         for(int i=0;i<=50;i++)
         { 
             b.MoinsHuitMille();
-            for (int i = 0; i <=50; i++)
+            for (int j= 0; j <=50; j++)
             {
-                ter.GetGravite().ActualiseAdri(b);
+                ter.GetGravite().ActualiseAdri(b,1);
                 if (ter.CollisionVect(b.adrien)==true)
                 {
                     ter.ArrangementTrajectoire(b);
-                    //ter.GetGravite().actualiseVecteurV2(b);
-                    //repartirPosition(b);
                     break;
                 }
                 else
                 {
-                    ter.GetGravite().ActualiseBalleViaDiv(b);
-                    RepartirPosition(b);
-                 }
+                    ter.GetGravite().ActualiseAdri(b,2);
+                    if (ter.CollisionVect(b.adrien)==true)
+                    {
+                        ter.ArrangementTrajectoire(b);
+                        break;
+                    }
+                    else
+                    {
+                        ter.GetGravite().ActualiseAdri(b,3);
+                        if (ter.CollisionVect(b.adrien)==true)
+                        {
+                            ter.ArrangementTrajectoire(b);
+                            break;
+                        }
+                        else
+                        {
+                            ter.GetGravite().ActualiseAdri(b,4);
+                            if (ter.CollisionVect(b.adrien)==true)
+                            {
+                                ter.ArrangementTrajectoire(b);
+                                break;
+                            }
+                            else
+                            {
+                                ter.GetGravite().ActualiseBalleViaDiv(b);
+                                b.ActualisePosition();
+                                RepartirPosition(b);
+                            }
+                        }
+                    }
+                }
             }
             
             ter.GetGravite().ActualiseMouv(b);   
@@ -118,21 +144,20 @@ void Jeu :: ChangerRafraichissement (const char touche)
 } 
 
 void Jeu :: GetPuis (const char touche)
-{
-   
+{    
     float pui = ter.GetGravite().GetPow();
     int max=5;
 				switch (touche) 
                 {
 				case 't':
 
-					if(max>pui){pui=pui+0.5;}else std :: cout<<"max de puissace atteint"<< std ::endl;
+					if(pui<5){pui=pui+0.5;}else {std :: cout<<"max de puissace atteint"<< std ::endl;}
                       // car Y inverse
 					break;
 
                 case 'g':
 
-                    if(pui>=0){pui=pui-0.5;} else std ::  cout << "min de puissance atteint " << std :: endl;
+                    if(pui>=0.5){pui=pui-0.5;} else{ std ::  cout << "min de puissance atteint " << std :: endl;}
 
                     break;
 				}
