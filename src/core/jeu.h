@@ -8,6 +8,7 @@
 
 #include "terrain.h"
 #include <vector>
+#include<iostream>
 
 /**
  * @class Jeu
@@ -20,7 +21,7 @@ class Jeu
     Terrain ter;
     Balle jp;
     int Raf;
-    
+    unsigned int score = 10;
 
 public:
     std::vector<float> tabPosX; ///< Vecteur de positions X utilisé pour stocker les positions de la balle lorsqu'elle est jouée
@@ -92,8 +93,13 @@ public:
 
      Balle& GetBalle() ;
 
-};
+     void SScore(const char touche);
 
+     int Getscore();
+
+};
+inline int Jeu :: Getscore(){return score; std::cout<<score;}
+inline void Jeu :: SScore(const char touche ){  if (Jouer(touche)) score=score-5;}
 inline  Terrain& Jeu :: GetTerrain() {return ter;}
 inline  const Terrain& Jeu :: GetConstTerrain() const {return ter;}
 inline Balle& Jeu :: GetBalle() { return jp;}

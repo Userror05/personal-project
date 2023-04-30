@@ -45,6 +45,9 @@ class JeuSDL2
     
     SDL_Window * window;
     SDL_Renderer * renderer;
+    int Largeur_fenetre;
+    int Hauteur_fenetre;
+
 
     Image font_im;
 
@@ -53,7 +56,43 @@ class JeuSDL2
     Image im_mur;
     Image im_font;
     Image im_trou;
+    Image fond_menu;
+    Image titre_menu;
     int Raf;
+    ///////////////////////// associé au menu
+    SDL_Rect jouerButton;
+    SDL_Surface* jouerTextSurface;
+    SDL_Texture* jouerTextTexture;
+    SDL_Rect jouerText;
+
+    SDL_Rect quitterButton;
+    SDL_Surface* quitterTextSurface;
+    SDL_Texture* quitterTextTexture;
+    SDL_Rect quitterText;
+
+     /**
+     * @brief Surface de la fenêtre.
+     */
+    SDL_Surface * Image_Fenetre;
+
+    /**
+     * @brief Texture de la fenêtre.
+     */
+    SDL_Texture * Texture_Fenetre;
+
+    /**
+     * @brief Rectangle pour la fenêtre.
+     */
+    SDL_Rect rect_fenetre;
+    /**
+     * @brief Variable pour determiner la police des ecritures.
+     */
+
+    SDL_Rect menu,rejouer,quitter;
+    SDL_Surface * quitter_surface;
+    SDL_Surface * rejouer_surface;
+    SDL_Texture * quitter_texture;
+    SDL_Texture * rejouer_texture;
     
 
 
@@ -66,6 +105,18 @@ class JeuSDL2
     Jeu& GetJeu();
     void SDL_Aff_Tab();
     void Replacer(const char touche);
+
+    void afficherMenu();
+
+    void Menu();
+
+    void destructionFenetre_m();
+    void InitJeu();
+    void Lancement();
+    void affiche_game_over();
+
+    void tab_de_score();
+ 
  
 
     

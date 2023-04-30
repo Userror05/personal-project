@@ -3,7 +3,7 @@
 int main(int argc, char** argv)
 {
     JeuSDL2 jeu;
-    jeu.BoucleJeu();
+    jeu.Menu();
 
 
     return 0;

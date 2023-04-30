@@ -199,6 +199,23 @@ im_balle.Draw(renderer,b.GetX()*TAILLE_SPRITE,b.GetY()*TAILLE_SPRITE,TAILLE_SPRI
 
 void JeuSDL2 :: BoucleJeu()
 {
+
+     Mix_Chunk * wav=Mix_LoadWAV("data/son_jeu.wav");
+
+    if (wav == NULL) {
+        std ::cout<<"Impossible de charger le fichier audio : %s\n";
+ 
+    }
+    
+     int channel = Mix_PlayChannel(-1, wav, 0);
+   
+    if (channel == -1) {
+        printf("Impossible de jouer le fichier audio : %s\n", Mix_GetError());
+
+    }
+
+    Mix_Volume(channel,MIX_MAX_VOLUME/4);
+
     gami.SetRaf(1);
     SDL_Event events;
 
@@ -234,15 +251,18 @@ void JeuSDL2 :: BoucleJeu()
                         case SDLK_g:
                             gami.GetPuis('g');
                             break;
-                        case SDLK_j: gami.Jouer('j');
+                        case SDLK_j: gami.Jouer('j');gami.SScore('j');
                             if(gami.Jouer('j')) 
                             {
                                 gami.BackMouvBalle(gami.GetBalle());
                                 SDL_Aff_Tab();
                             }
-                            cout<< "c'est joué";
+                             cout << "c'est joué";
+                            if(gami.Getscore()==0)tab_de_score();
                             break;
                         case SDLK_q:
+                            Mix_HaltChannel(channel);
+                            Mix_FreeChunk(wav);
                             quit = true;
                             break;
                         default: break;
@@ -310,6 +330,375 @@ void JeuSDL2 :: SDL_Aff_Tab()
 }
 
 
+void JeuSDL2 :: afficherMenu ()
+{
+    Largeur_fenetre=gami.GetConstTerrain().GetDimx()*TAILLE_SPRITE;
+    Hauteur_fenetre=gami.GetConstTerrain().GetDimy()*TAILLE_SPRITE;
+    //Ces variables ont servis a positionner les carrées a ne pas effacer, on sait jamais 
+    int pos_y= Hauteur_fenetre/2;
+    int pos_x= Largeur_fenetre/2;
+    int transparence_bouton=175;
+    int hauteur_boutton=100;
+    int largeur_boutton=100;
+
+    int decale_text=5;
+
+       
+    // Variable pour l'ecriture
+    TTF_Font * font = TTF_OpenFont("data/pac.ttf", 30);
+
+
+   
+    
+    if (font == nullptr)
+    {
+        // Erreur : impossible de charger la police
+        std::cout<<"Erreur init 3"<<endl;
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_Quit();
+    }
+ 
+  //Mise en place du fond
+      fond_menu.LoadFromFile("./data/fond_menu.jpg",renderer);
+      fond_menu.Draw(renderer,0,0,Largeur_fenetre,Hauteur_fenetre);
+
+      //titre_menu.LoadFromFile("data/coin.png",renderer);
+      //titre_menu.Draw(renderer,pos_x,pos_y,Largeur_fenetre/4,Hauteur_fenetre/4);
+
+
+    SDL_SetRenderDrawBlendMode(renderer,SDL_BLENDMODE_BLEND);
+    // Créer un bouton "Jouer"
+    jouerButton.x =(pos_x-largeur_boutton/2);
+    jouerButton.y = pos_y-hauteur_boutton/2;
+    jouerButton.w = largeur_boutton;
+    jouerButton.h = hauteur_boutton;
+    SDL_SetRenderDrawColor(renderer, 98, 8, 125, transparence_bouton);
+    SDL_RenderFillRect(renderer, &jouerButton);
+    
+    jouerTextSurface = TTF_RenderText_Solid(font, "Jouer", {0, 0, 0});
+    jouerTextTexture = SDL_CreateTextureFromSurface(renderer, jouerTextSurface);
+    jouerText.x = jouerButton.x+decale_text;
+    jouerText.y = jouerButton.y+decale_text;
+    jouerText.w = 100;
+    jouerText.h = 50;
+    SDL_RenderCopy(renderer, jouerTextTexture, nullptr, &jouerText);
+
+    // Créer un bouton "Quitter"
+    quitterButton.x =  pos_x-largeur_boutton/2;
+    quitterButton.y = (pos_y-hauteur_boutton/2 )+hauteur_boutton*2;
+    quitterButton.w = largeur_boutton;
+    quitterButton.h = hauteur_boutton;
+    SDL_SetRenderDrawColor(renderer, 98,8,125,transparence_bouton);
+    SDL_RenderFillRect(renderer, &quitterButton);
+    
+    quitterTextSurface = TTF_RenderText_Solid(font, "Quitter", {0, 0, 0});
+    quitterTextTexture = SDL_CreateTextureFromSurface(renderer, quitterTextSurface);
+    quitterText.x =quitterButton.x+decale_text;
+    quitterText.y = quitterButton.y+decale_text;
+    quitterText.w =largeur_boutton;
+    quitterText.h = hauteur_boutton;
+    SDL_RenderCopy(renderer, quitterTextTexture, nullptr, &quitterText);
+
+
+    
+    // Afficher le menu
+  
+    
+    SDL_RenderPresent(renderer);
+
+}
+
+void JeuSDL2::Menu(){
+
+
+    Mix_Chunk * wav=Mix_LoadWAV("data/son_menu.wav");
+
+    if (wav == NULL) {
+        std ::cout<<"Impossible de charger le fichier audio : %s\n";
+ 
+    }
+    
+     int channel = Mix_PlayChannel(-1, wav, 0);
+   
+    if (channel == -1) {
+        printf("Impossible de jouer le fichier audio : %s\n", Mix_GetError());
+
+    }
+
+    Mix_Volume(channel,MIX_MAX_VOLUME/4);
+
+    SDL_Event event;
+    bool ouvert=true;
+    
+    while (ouvert)
+    
+    {
+        afficherMenu();
+        
+        while(SDL_PollEvent(&event))
+        
+        {
+            switch (event.type)
+            
+            {
+                case SDL_QUIT:
+                       
+                    destructionFenetre_m();
+                    
+                    ouvert=false;
+                    Mix_HaltChannel(channel);
+                    Mix_FreeChunk(wav);
+                    break;
+            
+
+                case SDL_MOUSEBUTTONDOWN:
+                    // L'utilisateur a cliqué sur un bouton
+                    
+                    int mouseX = event.button.x;
+                    int mouseY = event.button.y;   
+                    Mix_HaltChannel(channel);
+                    Mix_FreeChunk(wav);
+                        
+                    if (mouseX >= jouerButton.x && mouseX <= jouerButton.x + jouerButton.w && mouseY >= jouerButton.y && mouseY <= jouerButton.y + jouerButton.h)
+                    {
+                        
+                        ouvert=false;
+
+                        //SDL_RenderClear(renderer);
+                        //SDL_RenderPresent(renderer);  marche sans mais bizarre 
+
+                        BoucleJeu();
+                      
+                        break;
+                    }
+                    
+                    else if (mouseX >= quitterButton.x && mouseX <= quitterButton.x + quitterButton.w && mouseY >= quitterButton.y && mouseY <= quitterButton.y + quitterButton.h)
+                    {
+                        // L'utilisateur a cliqué sur le bouton "Quitter"
+                        ouvert=false;
+                      
+                        destructionFenetre_m();
+                        break;
+                    }
+                    
+                   /* else if (mouseX >= didactitielButton.x && mouseX <= didactitielButton.x + didactitielButton.w && mouseY >= didactitielButton.y && mouseY <= didactitielButton.y + didactitielButton.h)
+                    {
+                        // L'utilisateur a cliqué sur le bouton "Didactitiel"
+                        // écrire le code
+                   
+                        tab_score();
+                        ouvert=false;
+                     ;
+                        break;
+                    }*/
+                     
+             }
+            
+        }
+    }
+}
+     
+void JeuSDL2:: destructionFenetre_m(){
+
+   std :: cout<<"DESTRUCTION :"<<endl;
+    
+    SDL_DestroyTexture(jouerTextTexture);
+   std :: cout<<"1 bouge "<<endl;
+    SDL_FreeSurface(jouerTextSurface);
+    std ::cout<<"2 bouge "<<endl;
+
+    SDL_DestroyTexture(quitterTextTexture);
+    std ::cout<<"3 bouge "<<endl;
+
+    SDL_FreeSurface(quitterTextSurface);
+
+    std ::cout<<"4 bouge "<<endl;
+
+    
+    
+    SDL_DestroyRenderer(renderer);
+    std ::cout<<"rendu bouge "<<endl;
+
+    SDL_DestroyWindow(window);
+
+    std ::cout<<"fenetre bouge "<<endl;
+
+    SDL_DestroyTexture(Texture_Fenetre);
+    std :: cout<<"TEXTURE FENETRE DETRUITE"<<endl;
+
+    SDL_FreeSurface(Image_Fenetre);
+    std :: cout<<"SURFACE IMAGE DETRUITE"<<endl; 
+    
+    IMG_Quit();
+    SDL_Quit();
+    TTF_Quit();
+    
+    
+}
+
+void JeuSDL2::affiche_game_over()
+{
+    SDL_SetRenderDrawColor(renderer, 230, 240, 255, 255);
+    SDL_RenderClear(renderer);
+    int dimx=gami.GetConstTerrain().GetDimx()*TAILLE_SPRITE;
+    int dimy=gami.GetConstTerrain().GetDimy()*TAILLE_SPRITE;
+SDL_Rect squareRect;
+  squareRect.w = 600;
+  squareRect.h = 630;
+  squareRect.x = (dimx/2-squareRect.w/2);
+  squareRect.y = (dimy/2-squareRect.w/2);
+
+  SDL_SetRenderDrawColor(renderer, 98, 8, 125, 175);
+  SDL_RenderFillRect(renderer, &squareRect);
+
+  TTF_Font* font1 = TTF_OpenFont("data/pac.ttf", 100);
+  SDL_Color textColor = { 0, 0, 0 }; 
+
+  SDL_Surface* textSurface = TTF_RenderText_Solid(font1, "SCORE :", textColor);
+  SDL_Texture* textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
+ 
+  SDL_Rect textRect;
+  textRect.w = 100;
+  textRect.h = 50;
+  textRect.x = squareRect.x  + squareRect.w/4;
+  textRect.y = squareRect.y + squareRect.w/4;
+  SDL_RenderCopy(renderer, textTexture, NULL, &textRect);
+ 
+  SDL_FreeSurface(textSurface);
+  SDL_DestroyTexture(textTexture);
+  char score_str[32];
+  cout<<gami.Getscore()<<endl;
+  sprintf(score_str, " %d", SDL_GetTicks()/1000);
+
+
+  textSurface = TTF_RenderText_Solid(font1,score_str, textColor);
+  textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
+  SDL_Rect numberRect;
+  
+  numberRect.w = textSurface->w;
+  numberRect.h = textSurface->h;
+  numberRect.x = squareRect.x  + squareRect.w/4;
+  numberRect.y =squareRect.y + squareRect.w/2;
+  
+  SDL_RenderCopy(renderer, textTexture, NULL, &numberRect);
+  
+  SDL_SetRenderDrawColor(renderer, 125, 190, 131, 175);
+
+    SDL_FreeSurface(textSurface);
+    SDL_DestroyTexture(textTexture);
+  //Le nombre d'etoile changera en fonction du score
+  //Il faut trouver notre facon de calculer le score aussi 
+
+ 
+  menu.x=squareRect.x+squareRect.w-200;
+  menu.y=squareRect.y+squareRect.w/2;
+  menu.h=60;
+  menu.w=60;
+ 
+  rejouer.x=menu.x;
+  rejouer.y=menu.y+menu.h*2;
+  rejouer.h=60;
+  rejouer.w=60;
+ 
+  quitter.x=menu.x;
+  quitter.y=menu.y+menu.h*4;
+  quitter.h=60;
+  quitter.w=60;
+
+  textSurface=IMG_Load("data/house.png");
+  textTexture=SDL_CreateTextureFromSurface(renderer,textSurface);
+
+  quitter_surface=IMG_Load("data/quitter.png");
+  rejouer_surface=IMG_Load("data/rejouer.png");
+
+  quitter_texture=SDL_CreateTextureFromSurface(renderer,quitter_surface);
+  rejouer_texture=SDL_CreateTextureFromSurface(renderer,rejouer_surface);
+
+  SDL_FreeSurface(quitter_surface);
+  SDL_FreeSurface(rejouer_surface);
+
+  SDL_RenderCopy(renderer,textTexture, NULL, &menu);
+  SDL_RenderCopy(renderer,rejouer_texture, NULL, &rejouer);
+  SDL_RenderCopy(renderer,quitter_texture, NULL, &quitter);
+  
+ 
+  SDL_RenderPresent(renderer);
+
+  SDL_FreeSurface(textSurface);
+  SDL_DestroyTexture(textTexture);
+  SDL_DestroyTexture(quitter_texture);
+  SDL_DestroyTexture(rejouer_texture);
+  
+  TTF_CloseFont(font1);
+
+ 
+
+
+}
+
+void JeuSDL2 ::tab_de_score(){
+
+  Mix_Chunk * wav=Mix_LoadWAV("data/game_over.wav");
+
+  if (wav == NULL) {
+        cout<<"Impossible de charger le fichier audio : %s\n";
+ 
+    }
+    
+  int channel = Mix_PlayChannel(-1, wav, 0);
+   
+  if (channel == -1) {
+        printf("Impossible de jouer le fichier audio : %s\n", Mix_GetError());
+
+    }
+
+  Mix_Volume(channel,MIX_MAX_VOLUME/4);
+
+
+  // possible dans game_over SDL_RenderCopy(renderer,Texture_Fenetre,NULL,&rect_fenetre);
+
+    affiche_game_over();
+    bool ouvert=true;
+    SDL_Event e;
+    while(ouvert){
+        
+        while(SDL_PollEvent(&e)){
+                
+            if(e.type==SDL_MOUSEBUTTONDOWN){
+                    
+                int mouseX = e.button.x;
+                int mouseY = e.button.y;
+                Mix_HaltChannel(channel);
+                Mix_FreeChunk(wav);
+                 
+                if(mouseX >= menu.x && mouseX <= menu.x + menu.w && mouseY >= menu.y && mouseY <= menu.y + menu.h){
+                    ouvert=false;
+                    Menu();
+                    break;
+                }
+
+                if( mouseX >= rejouer.x && mouseX <= rejouer.x + rejouer.w && mouseY >= rejouer.y && mouseY <= rejouer.y + rejouer.h){
+                    
+                    ouvert=false;
+                    BoucleJeu();
+                }
+
+                if( mouseX >= quitter.x && mouseX <= quitter.x +  quitter.w && mouseY >=  quitter.y && mouseY <=  quitter.y +  quitter.h){
+                    
+                    ouvert=false;
+                    destructionFenetre_m();
+                    break;
+                }
+
+                    //J'ajouterai le code quand je trouverai les images pour recommancer une partie, aller au menu et quitter le jeu
+                }
+            }
+    
+    
+    }
+    
+}
 
 //******************************************BackUP*****************************************************
 /*
