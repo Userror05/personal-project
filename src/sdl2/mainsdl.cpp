@@ -6,7 +6,7 @@ int main(int argc, char** argv)
     jeu.BoucleJeu();
 
 
-return 0;
+    return 0;
 }
 
 
