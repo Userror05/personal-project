@@ -51,7 +51,7 @@ class JeuSDL2
     bool withSound; 
     Image im_balle;
     Image im_mur;
-    Image im_font; 
+    Image im_font;
     Image im_trou;
     int Raf;
     
@@ -62,12 +62,10 @@ class JeuSDL2
     JeuSDL2();
     ~JeuSDL2();
     void BoucleJeu();
-    void TestAffichageBalleContinueV2(Balle& b);
     void SDL_Aff();
     Jeu& GetJeu();
     void SDL_Aff_Tab();
     void Replacer(const char touche);
-    void Rafraichissement(const char touche);
  
 
     
@@ -85,6 +83,9 @@ inline Jeu& JeuSDL2 :: GetJeu(){return gami;}
 #endif
 //******************************************BackUP*****************************************************
 /*  
+    void Rafraichissement(const char touche);
+
+void TestAffichageBalleContinueV2(Balle& b);
 //void BoucleChoixPUI();
 //void BoucleChoixANG();
 //void Bouclejeu();

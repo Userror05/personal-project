@@ -7,7 +7,7 @@ using namespace std;
 
 const int TAILLE_SPRITE = 32;
 const int TAILLE_FONT_X= 25000;
-const int TAILLE_FONT_Y= 1000;
+const int TAILLE_FONT_Y= 2000;
 
 Image::Image () : m_surface(nullptr), m_texture(nullptr), m_hasChanged(false) {
 }
@@ -198,7 +198,7 @@ im_balle.Draw(renderer,b.GetX()*TAILLE_SPRITE,b.GetY()*TAILLE_SPRITE,TAILLE_SPRI
 
 void JeuSDL2 :: BoucleJeu()
 {
-    Raf=1;
+    gami.SetRaf(1);
     SDL_Event events;
 
     bool quit = false;
@@ -213,10 +213,10 @@ void JeuSDL2 :: BoucleJeu()
                     switch (events.key.keysym.sym) {
                         // Commandes du 1er joueur
                         case SDLK_o:
-                            Rafraichissement('o');
+                            gami.ChangerRafraichissement('o');
                             break;
                         case SDLK_l:
-                            Rafraichissement('l');
+                            gami.ChangerRafraichissement('l');
                             break;
                         case SDLK_a:
                             Replacer('a');
@@ -284,7 +284,7 @@ void JeuSDL2 :: SDL_Aff_Tab()
 {
     const Terrain& ter = gami.GetConstTerrain();
     cout<<gami.tabPosX.size()<<endl;
-    for (int i = 0; i < gami.tabPosX.size(); i++)
+    for (int i = 0; i < gami.tabPosX.size(); i=i+gami.GetRaf())
     {
         cout<<i<<endl;
         SDL_RenderClear(renderer);
@@ -308,30 +308,7 @@ void JeuSDL2 :: SDL_Aff_Tab()
     gami.ClearRepartition();
 }
 
-void JeuSDL2 :: Rafraichissement (const char touche)
-{
-    int max = 10000;
-				switch (touche) 
-                {
-				case  'o':
-					
-                      if(Raf<=max){Raf*10; std :: cout<<"Taux de rafraichissement = "<< Raf;}  // car Y inverse
-					
-                    break;
-                
-                case 'l':
-                     
-                     if(Raf>=1){Raf/10;std :: cout<<"angle = "<< Raf;}
-                    
-                    break;
-				
-                default: 
-                    break;
-				}
-std::cout<<"le taux de rafraichissement est "<<Raf<<std::endl;
 
-
-} 
 
 //******************************************BackUP*****************************************************
 /*
@@ -529,7 +506,30 @@ void JeuSDL2 :: BoucleChoixANG()
         }
 
 
+void JeuSDL2 :: Rafraichissement (const char touche)
+{
+    int max = 10000;
+				switch (touche) 
+                {
+				case  'o':
+					
+                      if(Raf<=max){Raf*10; std :: cout<<"Taux de rafraichissement = "<< Raf;}  // car Y inverse
+					
+                    break;
+                
+                case 'l':
+                     
+                     if(Raf>=1){Raf/10;std :: cout<<"angle = "<< Raf;}
+                    
+                    break;
+				
+                default: 
+                    break;
+				}
+std::cout<<"le taux de rafraichissement est "<<Raf<<std::endl;
 
+
+} 
 */       
         
 

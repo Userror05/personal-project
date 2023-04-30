@@ -16,9 +16,11 @@
 class Jeu
 {
 
-private:
-    Terrain ter; ///< Objet Terrain utilisé pour représenter le terrain de jeu
-    Balle jp; ///< Objet Balle utilisé pour représenter la balle du jeu
+    private:
+    Terrain ter;
+    Balle jp;
+    int Raf;
+    
 
 public:
     std::vector<float> tabPosX; ///< Vecteur de positions X utilisé pour stocker les positions de la balle lorsqu'elle est jouée
@@ -48,11 +50,7 @@ public:
      * @param touche Touche pressée pour choisir l'angle de frappe de la balle
      */
     void AngleChoisis(const char touche);
-
-    /**
-     * @brief Fonction qui permet de déplacer la balle dans la direction opposée à sa dernière direction
-     * @param b Objet Balle à déplacer
-     */
+    void ChangerRafraichissement(const char touche);
     void BackMouvBalle(Balle& b);
 
     /**
@@ -83,25 +81,8 @@ public:
      * @brief Fonction qui permet de vider les vecteurs de positions X et Y
      */
     void ClearRepartition();
-
-    /**
-     * @brief Fonction qui renvoie la position X stockée dans le premier élément du vecteur de positions X
-     * @return Retourne la position X stockée dans le premier élément du vecteur de positions X
-    */
-    float GetTabX() const;
-
-    /**
-     * @brief Fonction qui renvoie la position Y stockée dans le premier élément du vecteur de positions Y
-     * @return Retourne la position Y stockée dans le premier élément du vecteur de positions Y
-     */
-    float GetTabY() const;
-
-    /**
-     * @brief Renvoie l'objet Balle utilisé par le joueur.
-     *
-     * @return L'objet Balle utilisé sur le terrain. (mode const)
-     */
-
+    int GetRaf()const;
+    void SetRaf(int raf);
     const Balle& GetConstBalle()const ;
     /**
      * @brief Renvoie l'objet Balle utilisé par le joueur.
@@ -116,7 +97,9 @@ public:
 inline  Terrain& Jeu :: GetTerrain() {return ter;}
 inline  const Terrain& Jeu :: GetConstTerrain() const {return ter;}
 inline Balle& Jeu :: GetBalle() { return jp;}
-
+inline int Jeu :: GetRaf() const {return Raf;}
+inline void Jeu :: SetRaf(int raf)
+{   Raf = raf;}
 inline const Balle& Jeu :: GetConstBalle() const { return jp;}
 
 
@@ -127,4 +110,6 @@ inline const Balle& Jeu :: GetConstBalle() const { return jp;}
 
     void ActionJoueur(Balle& b);
     void ActionJoueurVisuelTest45(Balle& b);
+    float GetTabX() const;
+    float GetTabY() const;
 */

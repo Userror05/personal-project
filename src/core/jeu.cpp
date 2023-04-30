@@ -65,7 +65,7 @@ void Jeu :: AngleChoisis (const char touche)
 {
     int ang = ter.GetGravite().GetAngle();
     
-    int max=90;
+    int max=360;
 
     
 				switch (touche) 
@@ -88,6 +88,32 @@ void Jeu :: AngleChoisis (const char touche)
                 std :: cout<< "  angle choisie  "<< ang << std::endl;
             
      ter.GetGravite().SetAng(ang);
+
+} 
+void Jeu :: ChangerRafraichissement (const char touche)
+{
+    int Rafraichissement = GetRaf();
+    int max=9;
+				switch (touche) 
+                {
+				case  'o':
+					
+                      if(Rafraichissement<=max){Rafraichissement++; std :: cout<<"Vitesse du jeu = "<< Rafraichissement;}
+					
+                    break;
+                
+                case 'l':
+                     
+                     if(Rafraichissement>=2){Rafraichissement--;std :: cout<<"Vitesse du jeu = "<< Rafraichissement;}
+                    
+                    break;
+				
+                default: 
+                    break;
+				}
+                std :: cout<< "  Vitesse du jeu "<< Rafraichissement << std::endl;
+            
+     SetRaf(Rafraichissement);
 
 } 
 
