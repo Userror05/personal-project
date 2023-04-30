@@ -2,8 +2,8 @@
 
 int main()
 {
-    Jeu jeu;
-    jeu.GetPuis('t');
+    Terrain ter;
+    ter.TestRegression();
 }
 
 

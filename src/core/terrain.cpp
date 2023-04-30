@@ -12,38 +12,39 @@ Terrain :: Terrain()
      //rempli le contour du terrain, d'obstacle
     for(unsigned int k = 0;k<DimY;k++)
     {
-        tab[0][k]=new Obstacle;
+        tab[0][k]=new Obstacle;tab[0][k]->SelectType(1);
     }
     for(unsigned int k = 1;k<DimX;k++)
     {
-        tab[k][0]=new Obstacle;
+        tab[k][0]=new Obstacle;tab[k][0]->SelectType(1);
     }
     for(unsigned int k = 1;k<DimX;k++)
     {
-        tab[k][DimY-1]=new Obstacle;
+        tab[k][DimY-1]=new Obstacle;tab[k][DimY-1]->SelectType(1);
     }
     for(unsigned int k = 1;k<DimY-1;k++)
     {
-        tab[DimX-1][k]=new Obstacle;
+        tab[DimX-1][k]=new Obstacle;tab[DimX-1][k]->SelectType(1);
     }
     
 
     for(unsigned int k = 1;k<DimY-1;k++)
     {
-        tab[1][k]=new Obstacle;
+        tab[1][k]=new Obstacle;tab[1][k]->SelectType(1);
     }
     for(unsigned int k = 2;k<DimX-1;k++)
     {
-        tab[k][1]=new Obstacle;
+        tab[k][1]=new Obstacle;tab[k][1]->SelectType(1);
     }
     for(unsigned int k = 2;k<DimX-1;k++)
     {
-        tab[k][DimY-2]=new Obstacle;
+        tab[k][DimY-2]=new Obstacle;tab[k][DimY-2]->SelectType(1);
     }
     for(unsigned int k = 2;k<DimY-2;k++)
     {
-        tab[DimX-2][k]=new Obstacle;
+        tab[DimX-2][k]=new Obstacle;tab[DimX-2][k]->SelectType(1);
     }
+   
    
         
         
@@ -82,15 +83,18 @@ Terrain :: ~Terrain()
 
 }
 // positionne des obstacles
-void Terrain :: SetObstacle (unsigned int xmin,unsigned int ymin,unsigned int xmax,unsigned int ymax)
+void Terrain :: SetObstacle (unsigned int xmin,unsigned int ymin,unsigned int xmax,unsigned int ymax, unsigned int type)
 {
     assert(1<=xmin && xmax<DimX-1);
     assert(1<=ymin && ymax<DimY-1);
+    assert(type==0 || type==1);
+
     for (unsigned int i=xmin;i<=xmax;i++)    
   {
     for(unsigned int j=ymin;j<=ymax;j++)
     {
-        tab[i][j]= new Obstacle; 
+        tab[i][j]= new Obstacle;tab[i][j]->SelectType(type); 
+        
     }
   }
 
@@ -164,7 +168,7 @@ bool Terrain :: CollisionBalle(Balle& b)
 {
     float x = b.GetX();
     float y = b.GetY();
-    if (getXY(x,y)!= nullptr)return true;
+    if (getXY(x,y)!= nullptr && getXY(x,y)->R)return true;
     else return false;
 }
 
@@ -174,6 +178,11 @@ bool Terrain :: CollisionVect(Vecteur& v)
     float y = v.GetY();
     if (getXY(x,y)!= nullptr)return true;
     else return false;
+    /*debut de la nouvelle version:
+     float x = v.GetX();
+    float y = v.GetY();
+    if (getXY(x,y)!= nullptr && getXY(x,y)->R)return true;
+    else return false;*/
 }
 /* La fonction getXY ici:
 inline Obstacle * Terrain::getXY (unsigned int x, unsigned int y) const {
@@ -187,9 +196,9 @@ inline Obstacle * Terrain::getXY (unsigned int x, unsigned int y) const {
 
 void Terrain :: TestRegression()
 {
-    Terrain ter;
+   Terrain ter;
     
-    assert(ter.GetDimx()==ter.GetDimy());
+   
     for(unsigned int i=2;i<ter.GetDimx()-2;i++)
     {
         for(unsigned int j=2;j<ter.GetDimy()-2;j++)
@@ -198,10 +207,32 @@ void Terrain :: TestRegression()
         }
     }
     
-    ter.SetObstacle(2,2,3,3);
+    
+    if(ter.getXY(0,2)->R) std :: cout<<"je suis la";
+
+    ter.SetObstacle(2,2,4,4,1);
     assert(ter.getXY(2,2)!=nullptr);
+    if(ter.getXY(3,3)->F)
+    {
+        std::cout<<"c'est la ligne d'arrivée";
+    }
+
+    ter.getXY(3,3)->SelectType(1);
+    if(ter.getXY(3,3)->obs==ter.getXY(3,3)->F){std::cout<<"peut etre le debut de la fin"<< std::endl;}
+
+
+    ter.SetObstacle(10,10,12,12,0);
+    if(ter.getXY(11,11)->R)
+    {
+        std::cout<<"c'est KKKKKKKKKK ";
+    }
+
+    
     
      Balle b ;
+
+
+    
 
 
     
@@ -214,12 +245,11 @@ void Terrain :: TestRegression()
 
 void Terrain ::Ouvrir(const std :: string & filename)
  {
-
-    std :: ifstream fichier (filename.c_str());
+ std :: ifstream fichier (filename.c_str());
 
     assert(fichier.is_open());
 
-	unsigned int xmin,ymin,xmax,ymax;
+	unsigned int xmin,ymin,xmax,ymax,type;
 	//std :: string mot;
 	//dimX = dimY = 0;
 	//fichier >> mot >> dimX >> dimY >> mot;
@@ -229,13 +259,13 @@ void Terrain ::Ouvrir(const std :: string & filename)
 	
     while(!fichier.eof())
 	{
-		fichier >> xmin >> ymin >> xmax >> ymax ;
+		fichier >> xmin >> ymin >> xmax >> ymax >> type;
 
     	assert(xmin > 0 && xmin<xmax && xmax < GetDimx());
 
 		assert(ymin > 0 && ymin<ymax && ymax < GetDimy());
 
-		SetObstacle(xmin,ymin,xmax,ymax);
+		SetObstacle(xmin,ymin,xmax,ymax,type);
 
 		std :: cout << "obstacle posé à   "<<(xmax-xmin)<<" x "<<(ymax-ymin)<< std :: endl;
 	}

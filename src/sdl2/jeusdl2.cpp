@@ -156,7 +156,7 @@ JeuSDL2 ::JeuSDL2() : gami()
     im_font.LoadFromFile("data/fond_1.jpg",renderer);
     im_balle.LoadFromFile("data/balle_s.png",renderer);
     // IMAGES
-    //gami.GetTerrain().ouvrir("./data/niveau1");
+    gami.GetTerrain().Ouvrir("./data/niveau1");
 
  // SONS
     
@@ -174,21 +174,25 @@ JeuSDL2::~JeuSDL2 () {
 
 void JeuSDL2 :: SDL_Aff()
 { 
-
-     const Terrain& ter = gami.GetConstTerrain();
+ const Terrain& ter = gami.GetConstTerrain();
      const Balle& b = gami.GetConstBalle();
     SDL_RenderClear(renderer);
 im_font.Draw(renderer,0*TAILLE_SPRITE,0*TAILLE_SPRITE,TAILLE_FONT_X,TAILLE_FONT_Y);
 im_balle.Draw(renderer,b.GetX()*TAILLE_SPRITE,b.GetY()*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
 
-/*for(unsigned int i=0;i<ter.GetDimx();i++)
-{
-    for(unsigned int j=0;j<ter.GetDimy();j++)
-    {
-        if(ter.getXY(i,j)!=nullptr)
-        im_mur.Draw(renderer,i*TAILLE_SPRITE,j*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
-    }
-}*/
+        for(unsigned int i=0;i<ter.GetDimx();i++)
+            {
+                for(unsigned int j=0;j<ter.GetDimy();j++)
+                    {
+                        if(ter.getXY(i,j)!=nullptr)
+                        {
+                            if(ter.getXY(i,j)->obs==ter.getXY(i,j)->R){im_mur.Draw(renderer,i*TAILLE_SPRITE,j*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);}
+                            if(ter.getXY(i,j)->obs==ter.getXY(i,j)->F){im_trou.Draw(renderer,i*TAILLE_SPRITE,j*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);}
+                            
+                        }
+                        
+                    }
+            }
 }
 
 
@@ -251,7 +255,7 @@ void JeuSDL2 :: BoucleJeu()
 
 void JeuSDL2 :: Replacer(const char touche)
 {
-    const Terrain& ter = gami.GetConstTerrain();
+     const Terrain& ter = gami.GetConstTerrain();
     if (touche=='a')
     {
         gami.GetBalle().SetX(3);
@@ -264,12 +268,15 @@ void JeuSDL2 :: Replacer(const char touche)
                 for(unsigned int j=0;j<ter.GetDimy();j++)
                     {
                         if(ter.getXY(i,j)!=nullptr)
-                        im_mur.Draw(renderer,i*TAILLE_SPRITE,j*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+                        {
+                             if(ter.getXY(i,j)->obs==ter.getXY(i,j)->R){im_mur.Draw(renderer,i*TAILLE_SPRITE,j*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);}
+                            if(ter.getXY(i,j)->obs==ter.getXY(i,j)->F){im_trou.Draw(renderer,i*TAILLE_SPRITE,j*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);}
+                            
+                        }
                     }
             }
         SDL_RenderPresent(renderer);
     }
-    
 }
 
 
@@ -287,12 +294,16 @@ void JeuSDL2 :: SDL_Aff_Tab()
             {
             for(unsigned int j=0;j<ter.GetDimy();j++)
             {
-                if(ter.getXY(i,j)!=nullptr)
-                 im_mur.Draw(renderer,i*TAILLE_SPRITE,j*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+                 if(ter.getXY(i,j)!=nullptr)
+                        {
+                            if(ter.getXY(i,j)->obs==ter.getXY(i,j)->R){im_mur.Draw(renderer,i*TAILLE_SPRITE,j*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);}
+                            if(ter.getXY(i,j)->obs==ter.getXY(i,j)->F){im_trou.Draw(renderer,i*TAILLE_SPRITE,j*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);}
+                            
+                        }
             }
             }
         SDL_RenderPresent(renderer);
-        //usleep(Raf);
+        usleep(Raf);
     }
     gami.ClearRepartition();
 }

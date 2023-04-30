@@ -47,7 +47,7 @@ public:
      * @param xmax La position maximale en X de l'obstacle.
      * @param ymax La position maximale en Y de l'obstacle.
      */
-    void SetObstacle(unsigned int xmin, unsigned int ymin, unsigned int xmax, unsigned int ymax);
+    void SetObstacle(unsigned int xmin, unsigned int ymin, unsigned int xmax, unsigned int ymax,unsigned int type);
 
     /**
      * @brief Vérifie si la balle entre en collision avec un obstacle.

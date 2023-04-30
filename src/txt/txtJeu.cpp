@@ -15,10 +15,10 @@ void TxtAff(WinTXT & win,Jeu & jeu) {
 
     // Affichage des murs
 	for(int x=0;x<ter.GetDimx();++x)
-		for(int y=0;y<ter.GetDimy();++y)
-			if(ter.getXY(x,y)!=nullptr)
-				win.print( x, y,'1');
-
+		{for(int y=0;y<ter.GetDimy();++y)
+			{if(ter.getXY(x,y)!=nullptr )
+				{if (ter.getXY(x,y)->F)win.print( x, y,'1');
+			       if(ter.getXY(x,y)->R) win.print(x,y,'z');}}}
     // Affichage de la balle
 	win.print(b.GetX(),b.GetY(),'O');
 	

@@ -51,7 +51,8 @@ class JeuSDL2
     bool withSound; 
     Image im_balle;
     Image im_mur;
-    Image im_font;
+    Image im_font; 
+    Image im_trou;
     int Raf;
     
 
