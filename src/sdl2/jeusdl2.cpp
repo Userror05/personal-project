@@ -258,7 +258,9 @@ void JeuSDL2 :: BoucleJeu()
                                 SDL_Aff_Tab();
                             }
                              cout << "c'est joué";
-                            if(gami.Getscore()==0)tab_de_score();
+                            if(gami.Getscore()==0)
+                            {Mix_HaltChannel(channel);
+                            Mix_FreeChunk(wav);tab_de_score();}
                             break;
                         case SDLK_q:
                             Mix_HaltChannel(channel);
