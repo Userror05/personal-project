@@ -143,6 +143,7 @@ inline void SetColeurPolice(SDL_Color coul);
         Image im_pic;
         Image im_sonic1;
         Image im_sonic2;
+        Image im_sonicmort;
         Image fond_menu; /// Image pour le fond du menu
         Image titre_menu; /// Image pour le titre du menu
 
@@ -289,7 +290,7 @@ inline void SetColeurPolice(SDL_Color coul);
     void affiche_info_pui();
     void affiche_infos_ang();
     void SDL_Animation();
-    
+    void SDL_Aff_Sonic_Mort();
   
  
 

@@ -166,6 +166,7 @@ JeuSDL2 ::JeuSDL2() : gami()
     im_pic.LoadFromFile("./data/pic.png",renderer);
     im_sonic1.LoadFromFile("./data/SonicWait1.png",renderer);
     im_sonic2.LoadFromFile("./data/SonicWait2.png",renderer);
+    im_sonicmort.LoadFromFile("./data/SonicMort.png",renderer);
     // IMAGES
     gami.GetTerrain().Ouvrir("./data/niveau1");
 
@@ -265,6 +266,8 @@ void JeuSDL2 :: BoucleJeu()
                             }
                             if(gami.GetFinal()==2)
                             { 
+                                SDL_Aff_Sonic_Mort();
+                                usleep(2000000);
                                 quit=true;
                                 Mix_HaltChannel(channel);
                                 Mix_FreeChunk(wav);
@@ -320,6 +323,18 @@ void JeuSDL2::ReplacerSansTouche()
         SDL_Aff_Creation_Niveau();
         SDL_RenderPresent(renderer);
     
+}
+
+void JeuSDL2 :: SDL_Aff_Sonic_Mort()
+{ 
+ const Terrain& ter = gami.GetConstTerrain();
+     const Balle& b = gami.GetConstBalle();
+    SDL_RenderClear(renderer);
+    im_font.Draw(renderer,0*TAILLE_SPRITE,0*TAILLE_SPRITE,TAILLE_FONT_X,TAILLE_FONT_Y);
+    SDL_Aff_Creation_Niveau();
+    SDL_Aff_cote();
+    im_sonicmort.Draw(renderer,gami.GetBalle().GetX()*TAILLE_SPRITE,gami.GetBalle().GetY()*TAILLE_SPRITE,TAILLE_SONIC_X,TAILLE_SONIC_Y);
+    SDL_RenderPresent(renderer);
 }
 
 void JeuSDL2 :: SDL_Animation()

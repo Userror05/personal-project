@@ -146,7 +146,7 @@ inline int Jeu :: GetCoups()const{return nbCoups;}
 inline int Jeu :: SetScore(int x){score=x;}
 inline int Jeu :: GetFinal()const{return Final;}
 inline int Jeu :: Getscore()const {return score; std::cout<<score;}
-inline void Jeu :: SScore(const char touche ){ if(Jouer(touche)&& nbCoups<20) {nbCoups++;score=score/2;}}
+inline void Jeu :: SScore(const char touche ){ if(Jouer(touche)&& nbCoups<20) {nbCoups++;score=score-5;}}
 inline  Terrain& Jeu :: GetTerrain() {return ter;}
 inline  const Terrain& Jeu :: GetConstTerrain() const {return ter;}
 inline Balle& Jeu :: GetBalle() { return jp;}
