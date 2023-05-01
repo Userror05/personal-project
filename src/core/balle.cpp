@@ -112,21 +112,6 @@ void Balle :: TestRegression()
     assert(b.vitesse.GetX()==0);
     b.InitMouvement();
     assert(b.mouvement.GetX()==b.vitesse.GetX());
-    //assert(b.mouvement == v && b.vitesse == v );
+    
     
 }
-//********************************BackUp************************************************************************
-/*
-    void Balle :: ChAdrien()
-{
-    adrien.SetX(adrien.GetX()+divise.GetX());
-    adrien.SetY(adrien.GetY()+divise.GetY());
-}
-
-void Balle :: Deplacement_via_divise()
-{
-    SetX(divise.GetX());
-    SetY(divise.GetY());
-}
-
-*/

@@ -60,6 +60,9 @@ Pour **ajouter/soustraire** de la fréquence de rafraichissement pour adapter le
 Pour **Lancer la balle**:
 - appuyer sur la touche **j**
 
+Pour **se replacer**:
+- appuyer sur la touche a
+
 ## Astuces
 
 vous pouvez  **replacer la balle** si vous n'arrivez plus à avancer avec la touche a.<br/>
@@ -73,16 +76,16 @@ Après **20 coups** vous perdrez donc essayer d'n faire le moins possible !.<br/
 **SCORE :**
 
 - début à 1000.
-- vous perdez des points en jouant (-1000-sqrt(1000)/2 par action)
+- vous perdez des points en jouant (1000-5 par action)
 
 
 
 ## Contenu de l'archive
 
 - Le dossier `bin` qui contient **les éxecutables**.
+- Le dossier 'obj' qui contient **les fichiers temporaires**.
 - Le dossier `data` qui contient **les données audio, images, niveau**.
-- Le dossier `doc` qui contient **la documentation doxygen** ainsi que les **diagramme de Gant et UML**.
-- Le dossier `save` qui contient **les sauvegardes du jeu**.
+- Le dossier `doc` qui contient **la documentation doxygen** ainsi que les **diagramme de Gant et UML(à jours) + documentation qui a permis réalisation sprites**.
 - Le dossier `src` qui contient **les sources**.
 - dans src il y a les dossier 'core', 'sdl2', 'txt' qui contiennent **les différents fichiers header et cpp**
 

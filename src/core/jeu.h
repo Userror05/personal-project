@@ -54,7 +54,16 @@ public:
      * @param touche Touche pressée pour choisir l'angle de frappe de la balle
      */
     void AngleChoisis(const char touche);
+    /**
+     * @brief Fonction qui permet de choisir la frequence de rafraichissement
+     * @param touche Touche pressée pour choisir l'angle de frappe de la balle
+     */
+
     void ChangerRafraichissement(const char touche);
+    /**
+     * @brief Fonction qui permet d'effectuer les actions apres choix de l'angle et puissance de la balle
+     * @param b représente l'objet balle (inout)
+     */
     void BackMouvBalle(Balle& b);
 
     /**
@@ -136,7 +145,17 @@ public:
      * @return un entier.
      */
      int GetFinal()const;
+     /**
+     * @brief Met a jour Final, utiliser dans le code pour savoir quoi faire pour l'arrivé et les game-over.
+     *
+     * 
+     */
     void SetFinal(int x);
+     /**
+     * @brief Met a jour le score, utiliser dans le code pour savoir quoi faire pour l'arrivé et les game-over.
+     *
+     * 
+     */
     int SetScore(int x);
 
 };

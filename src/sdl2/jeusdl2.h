@@ -133,7 +133,7 @@ inline void SetColeurPolice(SDL_Color coul);
         Image font_im; /// Image pour le texte
         bool withSound; /// Booléen indiquant si le son est activé
         Image im_balle; /// Image de la balle
-        Image im_mur; /// Image du mur
+       
         Image im_font; /// Image pour le texte
         Image im_trou; /// Image du trou
         Image im_case;
@@ -250,6 +250,11 @@ inline void SetColeurPolice(SDL_Color coul);
      * 
      */
     void Replacer(const char touche);
+    /**
+     * @brief Replace la balle selon des coordonnées définies a l'intérieur de la la fonction après la défaite/victoire du joueur
+     *  
+     * 
+     */
     void ReplacerSansTouche();
     
     /**
@@ -286,9 +291,21 @@ inline void SetColeurPolice(SDL_Color coul);
      * 
      */
     void SDL_Aff_Creation_Niveau();
+    /**
+     * @brief affiche la puissance choisie par l'utilisateur
+     * 
+     */
 
     void affiche_info_pui();
+    /**
+     * @brief affiche l'angle choisie par l'utilisateur
+     * 
+     */
     void affiche_infos_ang();
+    /**
+     * @brief anime le sprite de sonic
+     * 
+     */
     void SDL_Animation();
     void SDL_Aff_Sonic_Mort();
   

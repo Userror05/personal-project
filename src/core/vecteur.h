@@ -103,12 +103,5 @@ class Vecteur
 
     
 };
-//********************************BackUp************************************************************************
-/*
 
-      @brief Récupère l'angle du vecteur
-      @return L'angle en radians
-     
-    double Recupangle()const;
-*/
 #endif

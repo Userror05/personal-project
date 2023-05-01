@@ -181,9 +181,3 @@ void TestRegression();
     }
 
 #endif
-//********************************BackUp************************************************************************
-/*
-    void ActualiseDivise(Balle& b) const;
-    void ActualiseVecteur(Balle& b) const;
-void accelerationBalle();
-*/

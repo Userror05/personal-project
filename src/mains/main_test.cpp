@@ -4,15 +4,8 @@ int main()
 {
     Terrain ter;
     ter.TestRegression();
-}
-
-
-
-
-//******************************************BackUP*****************************************************
-/*
     Jeu jeu;
-    jeu.testRegression();
+    jeu.TestRegression();
     Terrain ter;
     Gravite gr;
     Balle b;
@@ -25,4 +18,5 @@ int main()
 
 
 return 0;
-*/
+}
+
