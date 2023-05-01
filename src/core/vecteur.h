@@ -101,11 +101,14 @@ class Vecteur
      */
     Vecteur Normalized() const;
 
-    /**
-     * @brief Récupère l'angle du vecteur
-     * @return L'angle en radians
-     */
-    double Recupangle()const;
+    
 };
+//********************************BackUp************************************************************************
+/*
 
+      @brief Récupère l'angle du vecteur
+      @return L'angle en radians
+     
+    double Recupangle()const;
+*/
 #endif

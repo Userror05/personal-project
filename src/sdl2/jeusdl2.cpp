@@ -8,6 +8,7 @@ using namespace std;
 const int TAILLE_SPRITE = 32;
 const int TAILLE_FONT_X= 25000;
 const int TAILLE_FONT_Y= 2000;
+const int TAILLE_HERBE_Y= 64;
 
 Image::Image () : m_surface(nullptr), m_texture(nullptr), m_hasChanged(false) {
 }
@@ -158,6 +159,9 @@ JeuSDL2 ::JeuSDL2() : gami()
     im_trou.LoadFromFile("./data/trou_1.png",renderer);
     im_case.LoadFromFile("./data/Case1.png",renderer);
     im_case_cote.LoadFromFile("./data/case_cote1.png",renderer);
+    im_case_cote2.LoadFromFile("./data/case_cote2.png",renderer);
+    im_herbe.LoadFromFile("./data/herbe.png",renderer);
+    im_pic.LoadFromFile("./data/pic.png",renderer);
     // IMAGES
     gami.GetTerrain().Ouvrir("./data/niveau1");
 
@@ -180,38 +184,12 @@ void JeuSDL2 :: SDL_Aff()
  const Terrain& ter = gami.GetConstTerrain();
      const Balle& b = gami.GetConstBalle();
     SDL_RenderClear(renderer);
-im_font.Draw(renderer,0*TAILLE_SPRITE,0*TAILLE_SPRITE,TAILLE_FONT_X,TAILLE_FONT_Y);
-im_balle.Draw(renderer,b.GetX()*TAILLE_SPRITE,b.GetY()*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
-
-        for(unsigned int i=0;i<ter.GetDimx();i++)
-            {
-                for(unsigned int j=0;j<ter.GetDimy();j++)
-                    {
-                        if(ter.getXY(i,j)!=nullptr)
-                        {
-                            if(ter.getXY(i,j)->obs==ter.getXY(i,j)->R){im_case.Draw(renderer,i*TAILLE_SPRITE,j*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);}
-                            if(ter.getXY(i,j)->obs==ter.getXY(i,j)->F){im_trou.Draw(renderer,i*TAILLE_SPRITE,j*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);}
-                            if(ter.getXY(i,j)->obs==ter.getXY(i,j)->M){im_mur.Draw(renderer,i*TAILLE_SPRITE,j*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);}
-                            
-                        }
-                        
-                    }
-            }
+    im_font.Draw(renderer,0*TAILLE_SPRITE,0*TAILLE_SPRITE,TAILLE_FONT_X,TAILLE_FONT_Y);
+    im_balle.Draw(renderer,b.GetX()*TAILLE_SPRITE,b.GetY()*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+    SDL_Aff_Creation_Niveau();
     SDL_Aff_cote();
 }
-void JeuSDL2 :: SDL_Aff_cote()
-{
-    for (int i=0;i<=31;i++)
-    {
-        im_case_cote.Draw(renderer,1*TAILLE_SPRITE,i*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
-    }
-    for (int i=18;i<=31;i++)
-    {
-        im_case_cote.Draw(renderer,45*TAILLE_SPRITE,i*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
-    }
-    im_case_cote.Draw(renderer,7*TAILLE_SPRITE,8*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
 
-}
 void JeuSDL2 :: BoucleJeu()
 {
 
@@ -273,6 +251,18 @@ void JeuSDL2 :: BoucleJeu()
                                 SDL_Aff_Tab();
                             }
                              cout << "c'est joué";
+                            if (gami.GetFinal()==1)
+                            {
+                                tab_de_score();
+                                Mix_HaltChannel(channel);
+                                Mix_FreeChunk(wav);
+                            }
+                            if(gami.GetFinal()==2)
+                            {
+                                tab_de_score();
+                                Mix_HaltChannel(channel);
+                                Mix_FreeChunk(wav);
+                            }
                             if(gami.Getscore()==0 || gami.GetCoups()==20)
                             {Mix_HaltChannel(channel);
                             Mix_FreeChunk(wav);tab_de_score();}
@@ -280,6 +270,7 @@ void JeuSDL2 :: BoucleJeu()
                         case SDLK_q:
                             Mix_HaltChannel(channel);
                             Mix_FreeChunk(wav);
+                            SDL_RenderClear(renderer);
                             quit = true;
                             break;
                         default: break;
@@ -301,18 +292,7 @@ void JeuSDL2 :: Replacer(const char touche)
         SDL_RenderClear(renderer);
         im_font.Draw(renderer,0*TAILLE_SPRITE,0*TAILLE_SPRITE,TAILLE_FONT_X,TAILLE_FONT_Y);
         im_balle.Draw(renderer,gami.GetBalle().GetX()*TAILLE_SPRITE,gami.GetBalle().GetY()*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
-        for(unsigned int i=0;i<ter.GetDimx();i++)
-            {
-                for(unsigned int j=0;j<ter.GetDimy();j++)
-                    {
-                        if(ter.getXY(i,j)!=nullptr)
-                        {
-                             if(ter.getXY(i,j)->obs==ter.getXY(i,j)->R){im_mur.Draw(renderer,i*TAILLE_SPRITE,j*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);}
-                            if(ter.getXY(i,j)->obs==ter.getXY(i,j)->F){im_trou.Draw(renderer,i*TAILLE_SPRITE,j*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);}
-                            
-                        }
-                    }
-            }
+        SDL_Aff_Creation_Niveau();
         SDL_RenderPresent(renderer);
     }
 }
@@ -328,24 +308,182 @@ void JeuSDL2 :: SDL_Aff_Tab()
         SDL_RenderClear(renderer);
         im_font.Draw(renderer,0*TAILLE_SPRITE,0*TAILLE_SPRITE,TAILLE_FONT_X,TAILLE_FONT_Y);
         im_balle.Draw(renderer,gami.tabPosX[i]*TAILLE_SPRITE,gami.tabPosY[i]*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
-        for(unsigned int i=0;i<ter.GetDimx();i++)
-            {
-            for(unsigned int j=0;j<ter.GetDimy();j++)
-            {
-                 if(ter.getXY(i,j)!=nullptr)
-                        {
-                            if(ter.getXY(i,j)->obs==ter.getXY(i,j)->R){im_mur.Draw(renderer,i*TAILLE_SPRITE,j*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);}
-                            if(ter.getXY(i,j)->obs==ter.getXY(i,j)->F){im_trou.Draw(renderer,i*TAILLE_SPRITE,j*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);}
-                            
-                        }
-            }
-            }
+        SDL_Aff_Creation_Niveau();
+        SDL_Aff_cote();
         SDL_RenderPresent(renderer);
         //usleep(Raf);
     }
+    
     gami.ClearRepartition();
 }
+void JeuSDL2 :: SDL_Aff_Creation_Niveau()
+{
+    const Terrain& ter = gami.GetConstTerrain();
+    for(unsigned int i=0;i<ter.GetDimx();i++)
+            {
+                for(unsigned int j=0;j<ter.GetDimy();j++)
+                    {
+                        if(ter.getXY(i,j)!=nullptr)
+                        {
+                            if(ter.getXY(i,j)->obs==ter.getXY(i,j)->R){im_case.Draw(renderer,i*TAILLE_SPRITE,j*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);}
+                            if(ter.getXY(i,j)->obs==ter.getXY(i,j)->F){im_trou.Draw(renderer,i*TAILLE_SPRITE,j*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);}
+                            if(ter.getXY(i,j)->obs==ter.getXY(i,j)->M){im_pic.Draw(renderer,i*TAILLE_SPRITE,j*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);}
+                            
+                        }
+                        
+                    }
+            }
+}
 
+void JeuSDL2 :: SDL_Aff_cote()
+{
+    for (int i=0;i<=31;i++)
+    {
+        im_case_cote.Draw(renderer,1*TAILLE_SPRITE,i*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+    }
+    for (int i=18;i<=31;i++)
+    {
+        im_case_cote.Draw(renderer,45*TAILLE_SPRITE,i*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+    }
+    im_case_cote.Draw(renderer,7*TAILLE_SPRITE,8*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+    im_case_cote.Draw(renderer,7*TAILLE_SPRITE,7*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+    im_case_cote2.Draw(renderer,4*TAILLE_SPRITE,7*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+    im_case_cote2.Draw(renderer,4*TAILLE_SPRITE,8*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+    
+    for (int i=7;i<=8;i++)
+    {
+        im_case_cote.Draw(renderer,25*TAILLE_SPRITE,i*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+    }
+    for (int i=7;i<=8;i++)
+    {
+        im_case_cote2.Draw(renderer,18*TAILLE_SPRITE,i*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+    }
+   
+    for (int i=12;i<=13;i++)
+    {
+        im_case_cote.Draw(renderer,32*TAILLE_SPRITE,i*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+    }
+    for (int i=12;i<=13;i++)
+    {
+        im_case_cote2.Draw(renderer,28*TAILLE_SPRITE,i*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+    }
+    for (int i=13;i<=14;i++)
+    {
+        im_case_cote.Draw(renderer,15*TAILLE_SPRITE,i*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+    }
+    for (int i=13;i<=14;i++)
+    {
+        im_case_cote2.Draw(renderer,12*TAILLE_SPRITE,i*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+    }
+    for (int i=2;i<=5;i++)
+    {
+        im_case_cote.Draw(renderer,38*TAILLE_SPRITE,i*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+    }
+    for (int i=2;i<=5;i++)
+    {
+        im_case_cote2.Draw(renderer,33*TAILLE_SPRITE,i*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+    }
+    for (int i=10;i<=11;i++)
+    {
+        im_case_cote.Draw(renderer,43*TAILLE_SPRITE,i*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+    }
+    for (int i=10;i<=11;i++)
+    {
+        im_case_cote2.Draw(renderer,39*TAILLE_SPRITE,i*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+    }
+    for (int i=22;i<=31;i++)
+    {
+        im_case_cote.Draw(renderer,14*TAILLE_SPRITE,i*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+    }
+    
+    for (int i=23;i<=31;i++)
+    {
+        im_case_cote.Draw(renderer,15*TAILLE_SPRITE,i*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+    }
+    
+    for (int i=24;i<=31;i++)
+    {
+        im_case_cote.Draw(renderer,16*TAILLE_SPRITE,i*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+    }
+    
+    for (int i=25;i<=31;i++)
+    {
+        im_case_cote.Draw(renderer,17*TAILLE_SPRITE,i*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+    }
+    
+    for (int i=26;i<=31;i++)
+    {
+        im_case_cote.Draw(renderer,18*TAILLE_SPRITE,i*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+    }
+    
+    for (int i=24;i<=31;i++)
+    {
+        im_case_cote2.Draw(renderer,41*TAILLE_SPRITE,i*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+    }
+   
+    for (int i=22;i<=31;i++)
+    {
+        im_case_cote2.Draw(renderer,42*TAILLE_SPRITE,i*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+    }
+    
+    for (int i=20;i<=31;i++)
+    {
+        im_case_cote2.Draw(renderer,43*TAILLE_SPRITE,i*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+    }
+    for (int i=18;i<=31;i++)
+    {
+        im_case_cote2.Draw(renderer,44*TAILLE_SPRITE,i*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+    }
+    for (int i=18;i<=31;i++)
+    {
+        im_case_cote2.Draw(renderer,49*TAILLE_SPRITE,i*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+    }
+     for (int i=44;i<=45;i++)
+    {
+        im_herbe.Draw(renderer,i*TAILLE_SPRITE,17*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_HERBE_Y);//herbe
+    }
+    for (int i=2;i<=14;i++)
+    {
+        im_herbe.Draw(renderer,i*TAILLE_SPRITE,21*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_HERBE_Y);//herbe
+    }
+    for (int i=4;i<=7;i++)
+    {
+        im_herbe.Draw(renderer,i*TAILLE_SPRITE,6*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_HERBE_Y);//herbe
+    }
+    for (int i=18;i<=25;i++)
+    {
+        im_herbe.Draw(renderer,i*TAILLE_SPRITE,6*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_HERBE_Y);//herbe
+    }
+
+    for (int i=28;i<=32;i++)
+    {
+        im_herbe.Draw(renderer,i*TAILLE_SPRITE,11*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_HERBE_Y);//herbe
+    }
+    for (int i=12;i<=15;i++)
+    {
+        im_herbe.Draw(renderer,i*TAILLE_SPRITE,12*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_HERBE_Y);//herbe
+    }
+    for (int i=39;i<=43;i++)
+    {
+        im_herbe.Draw(renderer,i*TAILLE_SPRITE,9*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_HERBE_Y);//herbe
+    }
+     for (int i=49;i<=58;i++)
+    {
+        im_herbe.Draw(renderer,i*TAILLE_SPRITE,17*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_HERBE_Y);//herbe
+    }
+    for (int i=19;i<=40;i++)
+    {
+        im_herbe.Draw(renderer,i*TAILLE_SPRITE,25*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_HERBE_Y);//herbe
+    }
+    im_herbe.Draw(renderer,14*TAILLE_SPRITE,21*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_HERBE_Y);//herbe
+    im_herbe.Draw(renderer,15*TAILLE_SPRITE,22*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_HERBE_Y);//herbe
+    im_herbe.Draw(renderer,16*TAILLE_SPRITE,23*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_HERBE_Y);//herbe
+    im_herbe.Draw(renderer,17*TAILLE_SPRITE,24*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_HERBE_Y);//herbe
+    im_herbe.Draw(renderer,18*TAILLE_SPRITE,25*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_HERBE_Y);//herbe
+    im_herbe.Draw(renderer,41*TAILLE_SPRITE,23*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_HERBE_Y);//herbe
+    im_herbe.Draw(renderer,42*TAILLE_SPRITE,21*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_HERBE_Y);//herbe
+    im_herbe.Draw(renderer,43*TAILLE_SPRITE,19*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_HERBE_Y);//herbe
+}
 
 void JeuSDL2 :: afficherMenu ()
 {
@@ -606,8 +744,6 @@ SDL_Rect squareRect;
     SDL_DestroyTexture(textTexture);
   //Le nombre d'etoile changera en fonction du score
   //Il faut trouver notre facon de calculer le score aussi 
-
- 
   menu.x=squareRect.x+squareRect.w-200;
   menu.y=squareRect.y+squareRect.w/2;
   menu.h=60;
@@ -648,10 +784,6 @@ SDL_Rect squareRect;
   SDL_DestroyTexture(rejouer_texture);
   
   TTF_CloseFont(font1);
-
- 
-
-
 }
 
 void JeuSDL2 ::tab_de_score(){

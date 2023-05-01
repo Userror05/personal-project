@@ -24,6 +24,7 @@ class Jeu
     int Raf; ///  Rafraîchissement de l'affichage en millisecondes
     unsigned int score = 1000;/// représente le score initialisé a 1000 qui se décrémente
     unsigned int nbCoups=0;/// représente le nombre de coups effectué par le joueur
+    int Final;
 
 public:
     std::vector<float> tabPosX; ///< Vecteur de positions X utilisé pour stocker les positions de la balle lorsqu'elle est jouée
@@ -116,10 +117,19 @@ public:
      * @return un entier.
      */
      int GetCoups()const ;
+      /**
+     * @brief Renvoie Final, utiliser dans le code pour savoir quoi faire pour l'arrivé et les game-over.
+     *
+     * @return un entier.
+     */
+     int GetFinal()const;
+    void SetFinal(int x);
 
 };
+inline void Jeu::SetFinal(int x){Final=x;}
 inline void Jeu :: resetScore(){score=0;}
 inline int Jeu :: GetCoups()const{return nbCoups;}
+inline int Jeu :: GetFinal()const{return Final;}
 inline int Jeu :: Getscore()const {return score; std::cout<<score;}
 inline void Jeu :: SScore(const char touche ){ if(Jouer(touche)&& nbCoups<20) {nbCoups++;score=score-sqrt(score)/2;}}
 inline  Terrain& Jeu :: GetTerrain() {return ter;}

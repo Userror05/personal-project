@@ -29,6 +29,7 @@ void Jeu :: ClearRepartition()
 
 void Jeu :: BackMouvBalle(Balle& b)
 {
+    SetFinal(0);
     ter.GetGravite().GetPow();
     ter.GetGravite().AffPR();
     ter.GetGravite().GetAngle();
@@ -39,6 +40,8 @@ void Jeu :: BackMouvBalle(Balle& b)
     b.AffInitMouvement();
         for(int i=0;i<=50;i++)
         { 
+           if(GetFinal()==0)
+           { std :: cout << "yo"<< std::endl;
             b.MoinsHuitMille();
             for (int j= 0; j <=50; j++)
             {
@@ -47,7 +50,21 @@ void Jeu :: BackMouvBalle(Balle& b)
                 if (ter.CollisionObsType0(b.adrien)==true)
                 {
                     std::cout<<"GG mon reuf ta gagné";
+                    if (GetFinal()==0)
+                    {
+                        SetFinal(1);
+                    }
+                    break;
                 }
+                if (ter.CollisionObsType2(b.adrien)==true)
+                    {
+                        std::cout<<"OH! t mort cousin";
+                        if (GetFinal()==0)
+                    {
+                        SetFinal(2);
+                    }
+                    break;
+                    }
                 if (ter.CollisionObsType1(b.adrien)==true)
                 {
                     ter.ArrangementTrajectoire(b);
@@ -60,10 +77,20 @@ void Jeu :: BackMouvBalle(Balle& b)
                     if (ter.CollisionObsType0(b.adrien)==true)
                     {
                         std::cout<<"GG mon reuf ta gagné";
+                        if (GetFinal()==0)
+                        {
+                            SetFinal(1);
+                        }
+                        break;
                     }
                     if (ter.CollisionObsType2(b.adrien)==true)
                     {
                         std::cout<<"OH! t mort cousin";
+                        if (GetFinal()==0)
+                        {
+                            SetFinal(2);
+                        }
+                        break;
                     }
                     
                     if (ter.CollisionObsType1(b.adrien)==true)
@@ -78,6 +105,20 @@ void Jeu :: BackMouvBalle(Balle& b)
                         if (ter.CollisionObsType0(b.adrien)==true)
                         {
                             std::cout<<"GG mon reuf ta gagné";
+                            if (GetFinal()==0)
+                            {
+                                SetFinal(1);
+                            }
+                            break;
+                        }
+                        if (ter.CollisionObsType2(b.adrien)==true)
+                        {
+                            std::cout<<"OH! t mort cousin";
+                            if (GetFinal()==0)
+                            {
+                                SetFinal(2);
+                            }
+                            break;
                         }
                         if (ter.CollisionObsType1(b.adrien)==true)
                         {
@@ -91,6 +132,20 @@ void Jeu :: BackMouvBalle(Balle& b)
                             if (ter.CollisionObsType0(b.adrien)==true)
                             {
                                 std::cout<<"GG mon reuf ta gagné";
+                                if (GetFinal()==0)
+                                {
+                                 SetFinal(1);
+                                }
+                                break;
+                            }
+                            if (ter.CollisionObsType2(b.adrien)==true)
+                            {
+                                std::cout<<"OH! t mort cousin";
+                                if (GetFinal()==0)
+                                {
+                                 SetFinal(2);
+                                }
+                                break;
                             }
                             if (ter.CollisionObsType1(b.adrien)==true)
                             {
@@ -109,6 +164,11 @@ void Jeu :: BackMouvBalle(Balle& b)
             }
             
             ter.GetGravite().ActualiseMouv(b);   
+           }
+           else
+           {
+            break;
+           }
         }
 }
 

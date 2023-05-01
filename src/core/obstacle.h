@@ -62,13 +62,13 @@ inline void Obstacle :: SelectType(unsigned int choix){ assert(choix==1 ||choix=
  *   Cette méthode permet de sélectionner le type d'obstacle en fonction d'un choix donné.
   *  @param choix Le choix du type d'obstacle (0 pour F et 1 pour R)
     */
-    inline void Obstacle::SelectType(unsigned int choix)
+/*   inline void Obstacle::SelectType(unsigned int choix)
     {
     assert(choix == 1 || choix == 0);
     if (choix == 1)
     obs = R;
     else
     obs = F;
-    }
+    }*/
 
 #endif

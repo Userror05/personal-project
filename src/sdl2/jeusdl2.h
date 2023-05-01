@@ -134,6 +134,9 @@ inline void SetColeurPolice(SDL_Color coul);
         Image im_trou; /// Image du trou
         Image im_case;
         Image im_case_cote;
+        Image im_case_cote2;
+        Image im_herbe;
+        Image im_pic;
         Image fond_menu; /// Image pour le fond du menu
         Image titre_menu; /// Image pour le titre du menu
 
@@ -222,7 +225,6 @@ inline void SetColeurPolice(SDL_Color coul);
      */
     void SDL_Aff();
     void SDL_Aff_cote();
-    Jeu& GetJeu();
     /**
      * @brief fait l'affichage en recupérant les positions stockés précédement dans un tableau dynamique de type entier;utilise la librairie SDL
      *
@@ -265,7 +267,13 @@ inline void SetColeurPolice(SDL_Color coul);
      *
      */
     void tab_de_score();
- 
+     /**
+     * @brief affiche les différents obstacle élémentaire, notamment ceux lors de la création du niveau
+     * 
+     */
+    void SDL_Aff_Creation_Niveau();
+    
+  
  
 
     
@@ -276,7 +284,6 @@ inline void SetColeurPolice(SDL_Color coul);
 
 };
 
-inline Jeu& JeuSDL2 :: GetJeu(){return gami;}
 
 
 
@@ -293,4 +300,5 @@ void TestAffichageBalleContinueV2(Balle& b);
 //void SdlAffContour();
 //void AffichageBalle();
 //void TestAll();
+//inline Jeu& JeuSDL2 :: GetJeu(){return gami;}
 */

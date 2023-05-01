@@ -89,11 +89,12 @@ Vecteur Vecteur :: Normalized() const
         
      }
 
-
+//********************************BackUp************************************************************************
+/*
 double Vecteur :: Recupangle()const
 {
    double temp;
     temp = acos(x/Magnitude());
     return temp;
 
-}
+}*/
