@@ -281,6 +281,9 @@ inline void SetColeurPolice(SDL_Color coul);
      * 
      */
     void SDL_Aff_Creation_Niveau();
+
+    void affiche_info_pui();
+    void affiche_infos_ang();
     
   
  

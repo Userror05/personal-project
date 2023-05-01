@@ -281,8 +281,12 @@ void JeuSDL2 :: BoucleJeu()
                     }
                 }
             }
+            
             SDL_Aff();
+            affiche_info_pui();
+            affiche_infos_ang();          
         SDL_RenderPresent(renderer);
+        
         }       
 }
 
@@ -648,6 +652,125 @@ void JeuSDL2::Menu(){
     }
 }
      
+void JeuSDL2::affiche_info_pui()
+{
+   // SDL_SetRenderDrawColor(renderer, 210,105,30, 255);
+    
+    int dimx=gami.GetConstTerrain().GetDimx()*TAILLE_SPRITE;
+    int dimy=gami.GetConstTerrain().GetDimy()*TAILLE_SPRITE;
+
+  TTF_Font* font1 = TTF_OpenFont("data/pac.ttf", 20);
+  SDL_Color textColor = { 0, 0, 0 }; 
+SDL_Rect squareRect;
+  squareRect.w = 100;
+  squareRect.h = 100;
+  squareRect.x = 180+20*3;
+  squareRect.y = (dimy-32)-squareRect.w*2;
+
+  SDL_SetRenderDrawColor(renderer, 210,105,30, 175);
+  SDL_RenderFillRect(renderer, &squareRect);
+
+
+  SDL_Surface* textSurface = TTF_RenderText_Solid(font1, "power:", textColor);
+  SDL_Texture* textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
+ 
+  SDL_Rect textRect;
+  textRect.w = 60;
+  textRect.h = 50;
+  textRect.x = squareRect.x  + squareRect.w/4;
+  textRect.y = squareRect.y + squareRect.w/4;
+  SDL_RenderCopy(renderer, textTexture, NULL, &textRect);
+ 
+  SDL_FreeSurface(textSurface);
+  SDL_DestroyTexture(textTexture);
+  char pui_str[32];
+  float pow=gami.GetTerrain().GetGravite().GetPow();
+  cout<<pow<<endl;
+  sprintf(pui_str, " %.1f",pow);
+
+
+  textSurface = TTF_RenderText_Solid(font1,pui_str, textColor);
+  textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
+  SDL_Rect numberRect;
+  
+  numberRect.w = textSurface->w;
+  numberRect.h = textSurface->h;
+  numberRect.x = squareRect.x  + squareRect.w/4;
+  numberRect.y =squareRect.y + squareRect.w/2 +15;
+  
+  SDL_RenderCopy(renderer, textTexture, NULL, &numberRect);
+  SDL_FreeSurface(textSurface);
+  SDL_DestroyTexture(textTexture);
+  SDL_SetRenderDrawColor(renderer, 125, 190, 131, 175);
+
+    
+ 
+  
+  
+
+  TTF_CloseFont(font1);
+  SDL_RenderPresent(renderer);
+
+  
+}
+
+void JeuSDL2::affiche_infos_ang()
+{
+    
+    int dimx=gami.GetConstTerrain().GetDimx()*TAILLE_SPRITE;
+    int dimy=gami.GetConstTerrain().GetDimy()*TAILLE_SPRITE;
+  TTF_Font* font1 = TTF_OpenFont("data/pac.ttf", 20);
+  SDL_Color textColor = { 0, 0, 0 }; 
+  
+  SDL_Rect squareRectang;
+  squareRectang.w = 100;
+  squareRectang.h = 100;
+  squareRectang.x = 20*3;
+  squareRectang.y = (dimy-32)-squareRectang.w*2;
+
+  SDL_SetRenderDrawColor(renderer, 210,105,30, 175);
+  SDL_RenderFillRect(renderer, &squareRectang);
+
+  
+  SDL_Surface * textSurface = TTF_RenderText_Solid(font1, "angle:", textColor);
+  SDL_Texture *  textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
+ 
+  SDL_Rect textRectang;
+  textRectang.w = 60;
+  textRectang.h = 50;
+  textRectang.x = squareRectang.x  + squareRectang.w/4;
+  textRectang.y = squareRectang.y + squareRectang.w/4;
+  SDL_RenderCopy(renderer, textTexture, NULL, &textRectang);
+ 
+  SDL_FreeSurface(textSurface);
+  SDL_DestroyTexture(textTexture);
+  char ang_str[32];
+  int ang=gami.GetTerrain().GetGravite().GetAngle();
+  cout<<ang<<endl;
+  sprintf(ang_str, " %d",ang);
+
+
+  textSurface = TTF_RenderText_Solid(font1,ang_str, textColor);
+  textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
+  SDL_Rect numberRectang;
+  
+  numberRectang.w = textSurface->w;
+  numberRectang.h = textSurface->h;
+  numberRectang.x = squareRectang.x  + squareRectang.w/4;
+  numberRectang.y =squareRectang.y + squareRectang.w/2 +15;
+  
+  SDL_RenderCopy(renderer, textTexture, NULL, &numberRectang);
+  SDL_FreeSurface(textSurface);
+  SDL_DestroyTexture(textTexture);
+  SDL_SetRenderDrawColor(renderer, 125, 190, 131, 175);
+
+  
+
+
+  TTF_CloseFont(font1);
+SDL_RenderPresent(renderer);
+
+}
 void JeuSDL2:: destructionFenetre_m(){
 
    std :: cout<<"DESTRUCTION :"<<endl;
