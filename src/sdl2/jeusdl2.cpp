@@ -155,7 +155,7 @@ JeuSDL2 ::JeuSDL2() : gami()
     renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
 
     
-    im_mur.LoadFromFile("data/mur.jpg",renderer);
+    
     im_font.LoadFromFile("data/font_1.png",renderer);
     im_balle.LoadFromFile("data/BalleVF.png",renderer);
     im_trou.LoadFromFile("./data/trou_1.png",renderer);

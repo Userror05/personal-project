@@ -133,7 +133,7 @@ inline void SetColeurPolice(SDL_Color coul);
         Image font_im; /// Image pour le texte
         bool withSound; /// Booléen indiquant si le son est activé
         Image im_balle; /// Image de la balle
-        Image im_mur; /// Image du mur
+       
         Image im_font; /// Image pour le texte
         Image im_trou; /// Image du trou
         Image im_case;
