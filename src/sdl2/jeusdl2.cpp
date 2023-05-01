@@ -414,7 +414,7 @@ void JeuSDL2 :: afficherMenu ()
 void JeuSDL2::Menu(){
 
 
-    Mix_Chunk * wav=Mix_LoadWAV("data/son_menu.wav");
+    Mix_Chunk * wav=Mix_LoadWAV("data/golfnic_menu.wav");
 
     if (wav == NULL) {
         std ::cout<<"Impossible de charger le fichier audio : %s\n";
