@@ -43,31 +43,51 @@ void Jeu :: BackMouvBalle(Balle& b)
             for (int j= 0; j <=50; j++)
             {
                 ter.GetGravite().ActualiseAdri(b,1);
-                if (ter.CollisionVect(b.adrien)==true)
+                /***************************cas d'étude sur le coin haut gauche*****************************/
+                if (ter.CollisionObsType0(b.adrien)==true)
+                {
+                    std::cout<<"GG mon reuf ta gagné";
+                }
+                if (ter.CollisionObsType1(b.adrien)==true)
                 {
                     ter.ArrangementTrajectoire(b);
                     break;
                 }
                 else
                 {
+                    /***************************cas d'étude sur le coin haut droit*****************************/
                     ter.GetGravite().ActualiseAdri(b,2);
-                    if (ter.CollisionVect(b.adrien)==true)
+                    if (ter.CollisionObsType0(b.adrien)==true)
+                    {
+                        std::cout<<"GG mon reuf ta gagné";
+                    }
+                    if (ter.CollisionObsType1(b.adrien)==true)
                     {
                         ter.ArrangementTrajectoire(b);
                         break;
                     }
                     else
                     {
+                        /***************************cas d'étude sur le coin bas gauche*****************************/
                         ter.GetGravite().ActualiseAdri(b,3);
-                        if (ter.CollisionVect(b.adrien)==true)
+                        if (ter.CollisionObsType0(b.adrien)==true)
+                        {
+                            std::cout<<"GG mon reuf ta gagné";
+                        }
+                        if (ter.CollisionObsType1(b.adrien)==true)
                         {
                             ter.ArrangementTrajectoire(b);
                             break;
                         }
                         else
                         {
+                            /***************************cas d'étude sur le coin bas droit*****************************/
                             ter.GetGravite().ActualiseAdri(b,4);
-                            if (ter.CollisionVect(b.adrien)==true)
+                            if (ter.CollisionObsType0(b.adrien)==true)
+                            {
+                                std::cout<<"GG mon reuf ta gagné";
+                            }
+                            if (ter.CollisionObsType1(b.adrien)==true)
                             {
                                 ter.ArrangementTrajectoire(b);
                                 break;

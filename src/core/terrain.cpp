@@ -184,6 +184,27 @@ bool Terrain :: CollisionVect(Vecteur& v)
     if (getXY(x,y)!= nullptr && getXY(x,y)->R)return true;
     else return false;*/
 }
+
+bool Terrain :: CollisionObsType0(Vecteur& v)
+{
+    float x = v.GetX();
+    float y = v.GetY();
+    if(getXY(x,y)!=nullptr)
+    {
+        if(getXY(x,y)->obs==getXY(x,y)->F)return true;
+        else return false;
+    }
+}
+bool Terrain :: CollisionObsType1(Vecteur& v)
+{
+    float x = v.GetX();
+    float y = v.GetY();
+    if(getXY(x,y)!=nullptr)
+    {
+        if(getXY(x,y)->obs==getXY(x,y)->R)return true;
+        else return false;
+    }
+}
 /* La fonction getXY ici:
 inline Obstacle * Terrain::getXY (unsigned int x, unsigned int y) const {
 	assert(x>=0);

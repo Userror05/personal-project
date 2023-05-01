@@ -154,7 +154,7 @@ JeuSDL2 ::JeuSDL2() : gami()
     
     im_mur.LoadFromFile("data/mur.jpg",renderer);
     im_font.LoadFromFile("data/font_1.png",renderer);
-    im_balle.LoadFromFile("data/balle_s.png",renderer);
+    im_balle.LoadFromFile("data/BalleVF.png",renderer);
     im_trou.LoadFromFile("./data/trou_1.png",renderer);
     // IMAGES
     gami.GetTerrain().Ouvrir("./data/niveau1");
