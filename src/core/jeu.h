@@ -158,11 +158,3 @@ inline const Balle& Jeu :: GetConstBalle() const { return jp;}
 
 
 #endif
-//********************************BackUp************************************************************************
-/*
-
-    void ActionJoueur(Balle& b);
-    void ActionJoueurVisuelTest45(Balle& b);
-    float GetTabX() const;
-    float GetTabY() const;
-*/

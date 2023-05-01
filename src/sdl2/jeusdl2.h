@@ -305,17 +305,3 @@ inline void SetColeurPolice(SDL_Color coul);
 
 
 #endif
-//******************************************BackUP*****************************************************
-/*  
-    void Rafraichissement(const char touche);
-
-void TestAffichageBalleContinueV2(Balle& b);
-//void BoucleChoixPUI();
-//void BoucleChoixANG();
-//void Bouclejeu();
-//void TestAffichageBalleContinue(Balle& b);
-//void SdlAffContour();
-//void AffichageBalle();
-//void TestAll();
-//inline Jeu& JeuSDL2 :: GetJeu(){return gami;}
-*/

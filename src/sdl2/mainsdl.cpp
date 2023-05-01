@@ -13,12 +13,3 @@ int main(int argc, char** argv)
 
 
 
-//******************************************BackUP*****************************************************
-/*
-JeuSDL2 jeu;
-    jeu.Bouclejeu();
-    
-    return 0;
-*/
-/*int pui = jeu.GetJeu().GetTerrain().GetGravite().Getpow();
-     std::cout<<pui;*/
