@@ -85,15 +85,28 @@ public:
      * @brief Fonction qui permet de vider les vecteurs de positions X et Y
      */
     void ClearRepartition();
+    /**
+     * @brief Fonction qui permet de changer le rafraichissement en fonction de l'appareil
+     * @return renvoie le rafaichissement choisis
+     */
     int GetRaf()const;
+    /**
+     * @brief Procédure qui permet de changer le rafraichissement en fonction de l'appareil
+     * 
+     */
     void SetRaf(int raf);
+    /**
+     * @brief Renvoie l'objet Balle utilisé par le joueur.
+     *
+     * @return L'objet Balle utilisé sur le terrain en mode const.
+     */
+
     const Balle& GetConstBalle()const ;
     /**
      * @brief Renvoie l'objet Balle utilisé par le joueur.
      *
      * @return L'objet Balle utilisé sur le terrain.
      */
-
      Balle& GetBalle() ;
     /**
      * @brief Incrémente le score ainsi que le nombre de coups si le joueur à joué.

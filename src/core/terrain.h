@@ -14,7 +14,7 @@
 
 /**
  * @class Terrain
- * @brief Classe pour la simulation d'un terrain de jeu.
+ * @brief Classe pour le terrain de jeu.
  *
  * Cette classe permet de simuler un terrain de jeu pour une balle en mouvement, en prenant en compte la gravité et les obstacles présents sur le terrain.
  */
@@ -55,8 +55,17 @@ public:
      * @return True si la balle entre en collision avec un obstacle, False sinon.
      */
     bool CollisionBalle(Balle& B);
-
+    /**
+     * @brief Vérifie si le vecteur qui est au point n+1 de la balle se trouve dans un obstacle.
+     * @param V Vecteur (mode inout)
+     * @return True si les coordonnées du vecteur entre en collision avec un obstacle, False sinon.
+     */
     bool CollisionVect(Vecteur& V);
+    /**
+     * @brief Vérifie si le vecteur qui est au point n+1 de la balle se trouve dans un obstacle et verifie les type de l'obstacle.
+     * @param V Vecteur (mode inout)
+     * @return True si les coordonnées du vecteur entre en collision avec un obstacle, False sinon.
+     */
     bool CollisionObsType0(Vecteur& V);
     bool CollisionObsType1(Vecteur& V);
     bool CollisionObsType2(Vecteur& V);
