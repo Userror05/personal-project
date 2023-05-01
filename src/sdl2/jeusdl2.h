@@ -1,3 +1,7 @@
+/**
+ * @file jeusdl2.h
+ * @brief Déclaration de la classe Jeusdl2 et de ses fonctions membres qui permet un affichage du jeu avec la librairie SDL2
+ */
 #ifndef _JEUSDL
 #define _JEUSDL
 #include "../core/jeu.h"
@@ -221,8 +225,13 @@ inline void SetColeurPolice(SDL_Color coul);
      * 
      */
     void SDL_Aff();
+
+    /**
+     * @brief fait l'affichage de manière plus précise en recupérant des données statiques grâce a la librairie SDL.
+     *
+     */
     void SDL_Aff_cote();
-    Jeu& GetJeu();
+    
     /**
      * @brief fait l'affichage en recupérant les positions stockés précédement dans un tableau dynamique de type entier;utilise la librairie SDL
      *
@@ -276,7 +285,6 @@ inline void SetColeurPolice(SDL_Color coul);
 
 };
 
-inline Jeu& JeuSDL2 :: GetJeu(){return gami;}
 
 
 

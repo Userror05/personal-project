@@ -1,16 +1,14 @@
 /**
-
-    @file Cellule.h
-    @brief Fichier d'en-tête pour la classe Cellule
+ *  @file Cellule.h qui définit une celle du terrain
+ *  @brief Fichier d'en-tête pour la classe Cellule
     */
 
 #ifndef _CELLULE
 #define _CELLULE
 
 /**
-
-    @class Cellule
-    @brief Représente une cellule unique dans une grille de terrain
+ *  @class Cellule
+ *  @brief Représente une cellule unique dans une grille de terrain
     */
 
 class Cellule
