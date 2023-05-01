@@ -197,7 +197,7 @@ void JeuSDL2 :: SDL_Aff()
 void JeuSDL2 :: BoucleJeu()
 {
     PasDeTemps=0;
-     Mix_Chunk * wav=Mix_LoadWAV("data/son_jeu.wav");
+     Mix_Chunk * wav=Mix_LoadWAV("data/golfnic_menu.wav");
 
     if (wav == NULL) {
         std ::cout<<"Impossible de charger le fichier audio : %s\n";
@@ -605,7 +605,7 @@ void JeuSDL2 :: afficherMenu ()
 void JeuSDL2::Menu(){
 
 
-    Mix_Chunk * wav=Mix_LoadWAV("data/golfnic_menu.wav");
+    Mix_Chunk * wav=Mix_LoadWAV("data/son_jeu.wav");
 
     if (wav == NULL) {
         std ::cout<<"Impossible de charger le fichier audio : %s\n";
