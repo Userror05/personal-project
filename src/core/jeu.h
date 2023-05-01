@@ -9,6 +9,7 @@
 #include "terrain.h"
 #include <vector>
 #include<iostream>
+#include<math.h>
 
 /**
  * @class Jeu
@@ -18,10 +19,11 @@ class Jeu
 {
 
     private:
-    Terrain ter;
-    Balle jp;
-    int Raf;
-    unsigned int score = 10;
+    Terrain ter;///Tableau représentant le terrain utilisé pour stocker les diiférents types d'obstacles présent sur le terrain
+    Balle jp;///Balle qui représente le joueur sur le terrain 
+    int Raf; ///  Rafraîchissement de l'affichage en millisecondes
+    unsigned int score = 1000;/// représente le score initialisé a 1000 qui se décrémente
+    unsigned int nbCoups=0;/// représente le nombre de coups effectué par le joueur
 
 public:
     std::vector<float> tabPosX; ///< Vecteur de positions X utilisé pour stocker les positions de la balle lorsqu'elle est jouée
@@ -92,14 +94,34 @@ public:
      */
 
      Balle& GetBalle() ;
-
+    /**
+     * @brief Incrémente le score ainsi que le nombre de coups si le joueur à joué.
+     *
+     */
      void SScore(const char touche);
-
-     int Getscore();
+      /**
+     * @brief Renvoie le score gagné par le joueur.
+     *
+     * @return un entier.
+     */
+     int Getscore() const;
+    /**
+     * @brief Réinitialise le score à 0 quand le maximum de coup à été tiré.
+     *
+     */
+     void resetScore();
+     /**
+     * @brief Renvoie le nombre de coups réalisés.
+     *
+     * @return un entier.
+     */
+     int GetCoups()const ;
 
 };
-inline int Jeu :: Getscore(){return score; std::cout<<score;}
-inline void Jeu :: SScore(const char touche ){  if (Jouer(touche)) score=score-5;}
+inline void Jeu :: resetScore(){score=0;}
+inline int Jeu :: GetCoups()const{return nbCoups;}
+inline int Jeu :: Getscore()const {return score; std::cout<<score;}
+inline void Jeu :: SScore(const char touche ){ if(Jouer(touche)&& nbCoups<20) {nbCoups++;score=score-sqrt(score)/2;}}
 inline  Terrain& Jeu :: GetTerrain() {return ter;}
 inline  const Terrain& Jeu :: GetConstTerrain() const {return ter;}
 inline Balle& Jeu :: GetBalle() { return jp;}

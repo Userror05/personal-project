@@ -258,7 +258,7 @@ void JeuSDL2 :: BoucleJeu()
                                 SDL_Aff_Tab();
                             }
                              cout << "c'est joué";
-                            if(gami.Getscore()==0)
+                            if(gami.Getscore()==0 || gami.GetCoups()==20)
                             {Mix_HaltChannel(channel);
                             Mix_FreeChunk(wav);tab_de_score();}
                             break;
@@ -406,7 +406,7 @@ void JeuSDL2 :: afficherMenu ()
     
     // Afficher le menu
   
-    
+    TTF_CloseFont(font);
     SDL_RenderPresent(renderer);
 
 }
@@ -526,15 +526,15 @@ void JeuSDL2:: destructionFenetre_m(){
 
     std ::cout<<"fenetre bouge "<<endl;
 
-    SDL_DestroyTexture(Texture_Fenetre);
+    //SDL_DestroyTexture(Texture_Fenetre);
     std :: cout<<"TEXTURE FENETRE DETRUITE"<<endl;
 
-    SDL_FreeSurface(Image_Fenetre);
+    //SDL_FreeSurface(Image_Fenetre);
     std :: cout<<"SURFACE IMAGE DETRUITE"<<endl; 
     
-    IMG_Quit();
+    //IMG_Quit();
     SDL_Quit();
-    TTF_Quit();
+    //TTF_Quit();
     
     
 }

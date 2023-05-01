@@ -173,6 +173,7 @@ bool Jeu :: Jouer(const char jouer)
 }
 
 
+
 void Jeu :: TestRegression()
 {
     Jeu gami;
