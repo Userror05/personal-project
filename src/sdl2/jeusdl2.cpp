@@ -252,16 +252,18 @@ void JeuSDL2 :: BoucleJeu()
                             }
                              cout << "c'est joué";
                             if (gami.GetFinal()==1)
-                            {
-                                tab_de_score();
+                            { 
                                 Mix_HaltChannel(channel);
                                 Mix_FreeChunk(wav);
+                                tab_de_score();
+                                
                             }
                             if(gami.GetFinal()==2)
-                            {
-                                tab_de_score();
+                            { 
                                 Mix_HaltChannel(channel);
                                 Mix_FreeChunk(wav);
+                                tab_de_score();
+                               
                             }
                             if(gami.Getscore()==0 || gami.GetCoups()==20)
                             {Mix_HaltChannel(channel);
@@ -818,23 +820,26 @@ void JeuSDL2 ::tab_de_score(){
                     
                 int mouseX = e.button.x;
                 int mouseY = e.button.y;
-                Mix_HaltChannel(channel);
-                Mix_FreeChunk(wav);
+               
                  
                 if(mouseX >= menu.x && mouseX <= menu.x + menu.w && mouseY >= menu.y && mouseY <= menu.y + menu.h){
                     ouvert=false;
+                    Mix_HaltChannel(channel);
+                    Mix_FreeChunk(wav);
                     Menu();
                     break;
                 }
 
                 if( mouseX >= rejouer.x && mouseX <= rejouer.x + rejouer.w && mouseY >= rejouer.y && mouseY <= rejouer.y + rejouer.h){
-                    
+                    Mix_HaltChannel(channel);
+                    Mix_FreeChunk(wav);
                     ouvert=false;
                     BoucleJeu();
                 }
 
                 if( mouseX >= quitter.x && mouseX <= quitter.x +  quitter.w && mouseY >=  quitter.y && mouseY <=  quitter.y +  quitter.h){
-                    
+                    Mix_HaltChannel(channel);
+                    Mix_FreeChunk(wav);
                     ouvert=false;
                     destructionFenetre_m();
                     break;

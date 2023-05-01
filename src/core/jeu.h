@@ -24,7 +24,7 @@ class Jeu
     int Raf; ///  Rafraîchissement de l'affichage en millisecondes
     unsigned int score = 1000;/// représente le score initialisé a 1000 qui se décrémente
     unsigned int nbCoups=0;/// représente le nombre de coups effectué par le joueur
-    int Final;
+    int Final; /// variable qui représente en fonction d'un entier si on affiche le game over, la victoire affiche globalement le tableau des scores
 
 public:
     std::vector<float> tabPosX; ///< Vecteur de positions X utilisé pour stocker les positions de la balle lorsqu'elle est jouée
