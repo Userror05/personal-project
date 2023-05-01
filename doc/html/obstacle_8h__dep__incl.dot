@@ -12,6 +12,4 @@ digraph "src/core/obstacle.h"
   Node4 [label="src/sdl2/jeusdl2.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$jeusdl2_8h.html",tooltip="Déclaration de la classe Jeusdl2 et de ses fonctions membres qui permet un affichage du jeu avec la l..."];
   Node3 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node5 [label="src/txt/txtJeu.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$txtJeu_8h.html",tooltip="Définition de la classe txtJeu pour réaliser un affichage en mode txt du terrain."];
-  Node2 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node6 [label="src/core/niveau.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$niveau_8h_source.html",tooltip=" "];
 }

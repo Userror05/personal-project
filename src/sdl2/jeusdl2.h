@@ -249,6 +249,11 @@ inline void SetColeurPolice(SDL_Color coul);
      * 
      */
     void Replacer(const char touche);
+    /**
+     * @brief Replace la balle selon des coordonnées définies a l'intérieur de la la fonction après la défaite/victoire du joueur
+     *  
+     * 
+     */
     void ReplacerSansTouche();
     
     /**
@@ -285,9 +290,21 @@ inline void SetColeurPolice(SDL_Color coul);
      * 
      */
     void SDL_Aff_Creation_Niveau();
+    /**
+     * @brief affiche la puissance choisie par l'utilisateur
+     * 
+     */
 
     void affiche_info_pui();
+    /**
+     * @brief affiche l'angle choisie par l'utilisateur
+     * 
+     */
     void affiche_infos_ang();
+    /**
+     * @brief anime le sprite de sonic
+     * 
+     */
     void SDL_Animation();
     
   
