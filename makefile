@@ -56,7 +56,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	$(CC) -c $(CPPFLAGS) $(INCLUDE_DIR_SDL) $(INCLUDE_DIR) $< -o $@
 
 docu: doc/golfnic.doxy
-	cd doc ; doxygen golfnic.doxy
+	doxygen doc/golfnic.doxy
 
 clean:
 ifeq ($(OS),Windows_NT)
