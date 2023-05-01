@@ -9,6 +9,8 @@ const int TAILLE_SPRITE = 32;
 const int TAILLE_FONT_X= 25000;
 const int TAILLE_FONT_Y= 2000;
 const int TAILLE_HERBE_Y= 64;
+const int TAILLE_SONIC_X=52 ;
+const int TAILLE_SONIC_Y= 64;
 
 Image::Image () : m_surface(nullptr), m_texture(nullptr), m_hasChanged(false) {
 }
@@ -162,6 +164,8 @@ JeuSDL2 ::JeuSDL2() : gami()
     im_case_cote2.LoadFromFile("./data/case_cote2.png",renderer);
     im_herbe.LoadFromFile("./data/herbe.png",renderer);
     im_pic.LoadFromFile("./data/pic.png",renderer);
+    im_sonic1.LoadFromFile("./data/SonicWait1.png",renderer);
+    im_sonic2.LoadFromFile("./data/SonicWait2.png",renderer);
     // IMAGES
     gami.GetTerrain().Ouvrir("./data/niveau1");
 
@@ -185,14 +189,14 @@ void JeuSDL2 :: SDL_Aff()
      const Balle& b = gami.GetConstBalle();
     SDL_RenderClear(renderer);
     im_font.Draw(renderer,0*TAILLE_SPRITE,0*TAILLE_SPRITE,TAILLE_FONT_X,TAILLE_FONT_Y);
-    im_balle.Draw(renderer,b.GetX()*TAILLE_SPRITE,b.GetY()*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+    SDL_Animation();
     SDL_Aff_Creation_Niveau();
     SDL_Aff_cote();
 }
 
 void JeuSDL2 :: BoucleJeu()
 {
-
+    PasDeTemps=0;
      Mix_Chunk * wav=Mix_LoadWAV("data/son_jeu.wav");
 
     if (wav == NULL) {
@@ -257,7 +261,7 @@ void JeuSDL2 :: BoucleJeu()
                                 Mix_HaltChannel(channel);
                                 Mix_FreeChunk(wav);
                                 tab_de_score();
-                                
+                        
                             }
                             if(gami.GetFinal()==2)
                             { 
@@ -265,13 +269,13 @@ void JeuSDL2 :: BoucleJeu()
                                 Mix_HaltChannel(channel);
                                 Mix_FreeChunk(wav);
                                 tab_de_score();
-                               
                             }
                             if(gami.Getscore()==0 || gami.GetCoups()==20)
                             {Mix_HaltChannel(channel);
                             Mix_FreeChunk(wav);tab_de_score();}
                             break;
                         case SDLK_q:
+                            gami.ResetScore();
                             Mix_HaltChannel(channel);
                             Mix_FreeChunk(wav);
                             //SDL_RenderClear(renderer);
@@ -291,17 +295,44 @@ void JeuSDL2 :: Replacer(const char touche)
      const Terrain& ter = gami.GetConstTerrain();
     if (touche=='a')
     {
-        gami.GetBalle().SetX(2);
+        gami.GetBalle().SetX(3);
         gami.GetBalle().SetY(21);
         SDL_RenderClear(renderer);
         im_font.Draw(renderer,0*TAILLE_SPRITE,0*TAILLE_SPRITE,TAILLE_FONT_X,TAILLE_FONT_Y);
-        im_balle.Draw(renderer,gami.GetBalle().GetX()*TAILLE_SPRITE,gami.GetBalle().GetY()*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+        SDL_Animation();
         SDL_Aff_Creation_Niveau();
         SDL_RenderPresent(renderer);
     }
 }
 
+void JeuSDL2::ReplacerSansTouche()
+{
+    const Terrain& ter = gami.GetConstTerrain();
+      gami.GetBalle().SetX(3);
+        gami.GetBalle().SetY(21);
+        SDL_RenderClear(renderer);
+        im_font.Draw(renderer,0*TAILLE_SPRITE,0*TAILLE_SPRITE,TAILLE_FONT_X,TAILLE_FONT_Y);
+        SDL_Animation();
+        SDL_Aff_Creation_Niveau();
+        SDL_RenderPresent(renderer);
+    
+}
 
+void JeuSDL2 :: SDL_Animation()
+{
+    if (PasDeTemps%2==0)
+    {
+        im_sonic1.Draw(renderer,gami.GetBalle().GetX()*TAILLE_SPRITE,(gami.GetBalle().GetY()-1)*TAILLE_SPRITE,TAILLE_SONIC_X,TAILLE_SONIC_Y);
+        PasDeTemps=PasDeTemps+1;
+        usleep(100000);
+    }
+    else
+    {
+        im_sonic2.Draw(renderer,gami.GetBalle().GetX()*TAILLE_SPRITE,(gami.GetBalle().GetY()-1)*TAILLE_SPRITE,TAILLE_SONIC_X,TAILLE_SONIC_Y);
+        PasDeTemps=PasDeTemps+1;
+        usleep(100000);
+    }
+}
 void JeuSDL2 :: SDL_Aff_Tab()
 {
     const Terrain& ter = gami.GetConstTerrain();
@@ -717,8 +748,9 @@ SDL_Rect squareRect;
   SDL_FreeSurface(textSurface);
   SDL_DestroyTexture(textTexture);
   char score_str[32];
-  cout<<gami.Getscore()<<endl;
-  sprintf(score_str, " %d", SDL_GetTicks()/1000);
+  int score=gami.Getscore();
+  cout<<score<<endl;
+  sprintf(score_str, " %d",score);
 
 
   textSurface = TTF_RenderText_Solid(font1,score_str, textColor);
@@ -818,6 +850,8 @@ void JeuSDL2 ::tab_de_score(){
                     ouvert=false;
                     Mix_HaltChannel(channel);
                     Mix_FreeChunk(wav);
+                    ReplacerSansTouche();
+                    gami.SetFinal(0);
                     Menu();
                     break;
                 }
@@ -826,6 +860,9 @@ void JeuSDL2 ::tab_de_score(){
                     Mix_HaltChannel(channel);
                     Mix_FreeChunk(wav);
                     ouvert=false;
+                    ReplacerSansTouche();
+                    gami.SetFinal(0);
+                    gami.SetScore(1000);
                     BoucleJeu();
                 }
 

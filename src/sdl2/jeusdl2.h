@@ -124,7 +124,7 @@ inline void SetColeurPolice(SDL_Color coul);
         Jeu gami; /// Instance de la classe Jeu
 
             
-
+        int PasDeTemps;
         SDL_Window * window; /// Fenêtre d'affichage
         SDL_Renderer* renderer; /// Rendu d'affichage
         int Largeur_fenetre; /// Largeur de la fenêtre
@@ -141,8 +141,11 @@ inline void SetColeurPolice(SDL_Color coul);
         Image im_case_cote2;
         Image im_herbe;
         Image im_pic;
+        Image im_sonic1;
+        Image im_sonic2;
         Image fond_menu; /// Image pour le fond du menu
         Image titre_menu; /// Image pour le titre du menu
+
 
      /**
      * @brief Tout les variables associées aux boutons du menu et du tableau des scores.
@@ -246,6 +249,7 @@ inline void SetColeurPolice(SDL_Color coul);
      * 
      */
     void Replacer(const char touche);
+    void ReplacerSansTouche();
     
     /**
      * @brief Cette fonction gère les différents rectangles constituant le menu
@@ -281,6 +285,7 @@ inline void SetColeurPolice(SDL_Color coul);
      * 
      */
     void SDL_Aff_Creation_Niveau();
+    void SDL_Animation();
     
   
  

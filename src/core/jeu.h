@@ -123,7 +123,7 @@ public:
      * @brief Réinitialise le score à 0 quand le maximum de coup à été tiré.
      *
      */
-     void resetScore();
+     void ResetScore();
      /**
      * @brief Renvoie le nombre de coups réalisés.
      *
@@ -137,14 +137,16 @@ public:
      */
      int GetFinal()const;
     void SetFinal(int x);
+    int SetScore(int x);
 
 };
 inline void Jeu::SetFinal(int x){Final=x;}
-inline void Jeu :: resetScore(){score=0;}
+inline void Jeu :: ResetScore(){score=1000;}
 inline int Jeu :: GetCoups()const{return nbCoups;}
+inline int Jeu :: SetScore(int x){score=x;}
 inline int Jeu :: GetFinal()const{return Final;}
 inline int Jeu :: Getscore()const {return score; std::cout<<score;}
-inline void Jeu :: SScore(const char touche ){ if(Jouer(touche)&& nbCoups<20) {nbCoups++;score=score-sqrt(score)/2;}}
+inline void Jeu :: SScore(const char touche ){ if(Jouer(touche)&& nbCoups<20) {nbCoups++;score=score/2;}}
 inline  Terrain& Jeu :: GetTerrain() {return ter;}
 inline  const Terrain& Jeu :: GetConstTerrain() const {return ter;}
 inline Balle& Jeu :: GetBalle() { return jp;}
