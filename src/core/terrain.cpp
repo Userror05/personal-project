@@ -87,7 +87,7 @@ void Terrain :: SetObstacle (unsigned int xmin,unsigned int ymin,unsigned int xm
 {
     assert(1<=xmin && xmax<DimX-1);
     assert(1<=ymin && ymax<DimY-1);
-    assert(type==0 || type==1);
+    assert(type==0 || type==1 || type==2);
 
     for (unsigned int i=xmin;i<=xmax;i++)    
   {
@@ -205,6 +205,16 @@ bool Terrain :: CollisionObsType1(Vecteur& v)
         else return false;
     }
 }
+bool Terrain :: CollisionObsType2(Vecteur& v)
+{
+    float x = v.GetX();
+    float y = v.GetY();
+    if(getXY(x,y)!=nullptr)
+    {
+        if(getXY(x,y)->obs==getXY(x,y)->M)return true;
+        else return false;
+    }
+}
 /* La fonction getXY ici:
 inline Obstacle * Terrain::getXY (unsigned int x, unsigned int y) const {
 	assert(x>=0);
@@ -282,9 +292,9 @@ void Terrain ::Ouvrir(const std :: string & filename)
 	{
 		fichier >> xmin >> ymin >> xmax >> ymax >> type;
 
-    	assert(xmin > 0 && xmin<xmax && xmax < GetDimx());
+    	assert(xmin > 0 && xmin<=xmax && xmax < GetDimx());
 
-		assert(ymin > 0 && ymin<ymax && ymax < GetDimy());
+		assert(ymin > 0 && ymin<=ymax && ymax < GetDimy());
 
 		SetObstacle(xmin,ymin,xmax,ymax,type);
 

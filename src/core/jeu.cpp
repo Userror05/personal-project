@@ -61,6 +61,11 @@ void Jeu :: BackMouvBalle(Balle& b)
                     {
                         std::cout<<"GG mon reuf ta gagné";
                     }
+                    if (ter.CollisionObsType2(b.adrien)==true)
+                    {
+                        std::cout<<"OH! t mort cousin";
+                    }
+                    
                     if (ter.CollisionObsType1(b.adrien)==true)
                     {
                         ter.ArrangementTrajectoire(b);
@@ -191,6 +196,7 @@ bool Jeu :: Jouer(const char jouer)
 {
     if(jouer=='j') return true; else return false;
 }
+
 
 
 void Jeu :: TestRegression()

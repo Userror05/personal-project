@@ -14,7 +14,7 @@ class Obstacle
     
 
     public:
-    enum typeOBS{ R=2, F=1 };
+    enum typeOBS{M=3, R=2, F=1 };
 
     typeOBS obs;
     
@@ -30,7 +30,7 @@ class Obstacle
 
 };
 
-inline void Obstacle :: SelectType(unsigned int choix){ assert(choix==1 || choix==0);if(choix==1)obs=R;else obs=F;   }
+inline void Obstacle :: SelectType(unsigned int choix){ assert(choix==1 ||choix==2 || choix==0);if(choix==1){obs=R;}else {if(choix== 2){obs=M;}else{obs=F;}}}
 
 
 #endif

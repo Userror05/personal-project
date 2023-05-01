@@ -5,7 +5,7 @@
 Balle :: Balle ()
 {
     SetX(3);
-    SetY(28); //valeur au pif pour l'instant
+    SetY(21); //valeur au pif pour l'instant
     Vecteur g(0,+1);
     gravite = g;
     Vecteur Vec(0.0,0.0);

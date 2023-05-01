@@ -156,6 +156,8 @@ JeuSDL2 ::JeuSDL2() : gami()
     im_font.LoadFromFile("data/font_1.png",renderer);
     im_balle.LoadFromFile("data/BalleVF.png",renderer);
     im_trou.LoadFromFile("./data/trou_1.png",renderer);
+    im_case.LoadFromFile("./data/Case1.png",renderer);
+    im_case_cote.LoadFromFile("./data/case_cote1.png",renderer);
     // IMAGES
     gami.GetTerrain().Ouvrir("./data/niveau1");
 
@@ -187,16 +189,29 @@ im_balle.Draw(renderer,b.GetX()*TAILLE_SPRITE,b.GetY()*TAILLE_SPRITE,TAILLE_SPRI
                     {
                         if(ter.getXY(i,j)!=nullptr)
                         {
-                            if(ter.getXY(i,j)->obs==ter.getXY(i,j)->R){im_mur.Draw(renderer,i*TAILLE_SPRITE,j*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);}
+                            if(ter.getXY(i,j)->obs==ter.getXY(i,j)->R){im_case.Draw(renderer,i*TAILLE_SPRITE,j*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);}
                             if(ter.getXY(i,j)->obs==ter.getXY(i,j)->F){im_trou.Draw(renderer,i*TAILLE_SPRITE,j*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);}
+                            if(ter.getXY(i,j)->obs==ter.getXY(i,j)->M){im_mur.Draw(renderer,i*TAILLE_SPRITE,j*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);}
                             
                         }
                         
                     }
             }
+    SDL_Aff_cote();
 }
+void JeuSDL2 :: SDL_Aff_cote()
+{
+    for (int i=0;i<=31;i++)
+    {
+        im_case_cote.Draw(renderer,1*TAILLE_SPRITE,i*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+    }
+    for (int i=18;i<=31;i++)
+    {
+        im_case_cote.Draw(renderer,45*TAILLE_SPRITE,i*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
+    }
+    im_case_cote.Draw(renderer,7*TAILLE_SPRITE,8*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
 
-
+}
 void JeuSDL2 :: BoucleJeu()
 {
 
@@ -258,7 +273,9 @@ void JeuSDL2 :: BoucleJeu()
                                 SDL_Aff_Tab();
                             }
                              cout << "c'est joué";
-                            if(gami.Getscore()==0)tab_de_score();
+                            if(gami.Getscore()==0 || gami.GetCoups()==20)
+                            {Mix_HaltChannel(channel);
+                            Mix_FreeChunk(wav);tab_de_score();}
                             break;
                         case SDLK_q:
                             Mix_HaltChannel(channel);
@@ -279,8 +296,8 @@ void JeuSDL2 :: Replacer(const char touche)
      const Terrain& ter = gami.GetConstTerrain();
     if (touche=='a')
     {
-        gami.GetBalle().SetX(3);
-        gami.GetBalle().SetY(28);
+        gami.GetBalle().SetX(2);
+        gami.GetBalle().SetY(21);
         SDL_RenderClear(renderer);
         im_font.Draw(renderer,0*TAILLE_SPRITE,0*TAILLE_SPRITE,TAILLE_FONT_X,TAILLE_FONT_Y);
         im_balle.Draw(renderer,gami.GetBalle().GetX()*TAILLE_SPRITE,gami.GetBalle().GetY()*TAILLE_SPRITE,TAILLE_SPRITE,TAILLE_SPRITE);
@@ -404,7 +421,7 @@ void JeuSDL2 :: afficherMenu ()
     
     // Afficher le menu
   
-    
+    TTF_CloseFont(font);
     SDL_RenderPresent(renderer);
 
 }
@@ -412,7 +429,7 @@ void JeuSDL2 :: afficherMenu ()
 void JeuSDL2::Menu(){
 
 
-    Mix_Chunk * wav=Mix_LoadWAV("data/son_menu.wav");
+    Mix_Chunk * wav=Mix_LoadWAV("data/golfnic_menu.wav");
 
     if (wav == NULL) {
         std ::cout<<"Impossible de charger le fichier audio : %s\n";
@@ -524,15 +541,15 @@ void JeuSDL2:: destructionFenetre_m(){
 
     std ::cout<<"fenetre bouge "<<endl;
 
-    SDL_DestroyTexture(Texture_Fenetre);
+    //SDL_DestroyTexture(Texture_Fenetre);
     std :: cout<<"TEXTURE FENETRE DETRUITE"<<endl;
 
-    SDL_FreeSurface(Image_Fenetre);
+    //SDL_FreeSurface(Image_Fenetre);
     std :: cout<<"SURFACE IMAGE DETRUITE"<<endl; 
     
-    IMG_Quit();
+    //IMG_Quit();
     SDL_Quit();
-    TTF_Quit();
+    //TTF_Quit();
     
     
 }

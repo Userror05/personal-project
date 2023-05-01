@@ -59,6 +59,7 @@ public:
     bool CollisionVect(Vecteur& V);
     bool CollisionObsType0(Vecteur& V);
     bool CollisionObsType1(Vecteur& V);
+    bool CollisionObsType2(Vecteur& V);
     /**
      * @brief Modifie la trajectoire de la balle en prenant en compte les obstacles présents sur le terrain.
      */
