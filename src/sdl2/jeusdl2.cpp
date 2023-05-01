@@ -253,6 +253,7 @@ void JeuSDL2 :: BoucleJeu()
                              cout << "c'est joué";
                             if (gami.GetFinal()==1)
                             { 
+                                quit=true;
                                 Mix_HaltChannel(channel);
                                 Mix_FreeChunk(wav);
                                 tab_de_score();
@@ -260,6 +261,7 @@ void JeuSDL2 :: BoucleJeu()
                             }
                             if(gami.GetFinal()==2)
                             { 
+                                quit=true;
                                 Mix_HaltChannel(channel);
                                 Mix_FreeChunk(wav);
                                 tab_de_score();
@@ -272,7 +274,7 @@ void JeuSDL2 :: BoucleJeu()
                         case SDLK_q:
                             Mix_HaltChannel(channel);
                             Mix_FreeChunk(wav);
-                            SDL_RenderClear(renderer);
+                            //SDL_RenderClear(renderer);
                             quit = true;
                             break;
                         default: break;
@@ -520,8 +522,7 @@ void JeuSDL2 :: afficherMenu ()
       fond_menu.LoadFromFile("./data/fond_menu.jpg",renderer);
       fond_menu.Draw(renderer,0,0,Largeur_fenetre,Hauteur_fenetre);
 
-      //titre_menu.LoadFromFile("data/coin.png",renderer);
-      //titre_menu.Draw(renderer,pos_x,pos_y,Largeur_fenetre/4,Hauteur_fenetre/4);
+
 
 
     SDL_SetRenderDrawBlendMode(renderer,SDL_BLENDMODE_BLEND);
@@ -614,12 +615,13 @@ void JeuSDL2::Menu(){
                     
                     int mouseX = event.button.x;
                     int mouseY = event.button.y;   
-                    Mix_HaltChannel(channel);
-                    Mix_FreeChunk(wav);
+                    
                         
                     if (mouseX >= jouerButton.x && mouseX <= jouerButton.x + jouerButton.w && mouseY >= jouerButton.y && mouseY <= jouerButton.y + jouerButton.h)
                     {
-                        
+                        //l'utilisateur a cliqué sur jouer
+                        Mix_HaltChannel(channel);
+                        Mix_FreeChunk(wav);
                         ouvert=false;
 
                         //SDL_RenderClear(renderer);
@@ -639,16 +641,6 @@ void JeuSDL2::Menu(){
                         break;
                     }
                     
-                   /* else if (mouseX >= didactitielButton.x && mouseX <= didactitielButton.x + didactitielButton.w && mouseY >= didactitielButton.y && mouseY <= didactitielButton.y + didactitielButton.h)
-                    {
-                        // L'utilisateur a cliqué sur le bouton "Didactitiel"
-                        // écrire le code
-                   
-                        tab_score();
-                        ouvert=false;
-                     ;
-                        break;
-                    }*/
                      
              }
             
