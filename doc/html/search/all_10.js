@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['wintxt_108',['WinTXT',['../classWinTXT.html',1,'']]]
+  ['wintxt_106',['WinTXT',['../classWinTXT.html',1,'']]]
 ];

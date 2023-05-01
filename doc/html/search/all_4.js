@@ -17,7 +17,6 @@ var searchData=
   ['getx_43',['GetX',['../classBalle.html#a997c895d7694fc7b641ec5edc08d1e38',1,'Balle::GetX()'],['../classCellule.html#acee54592124f163d3fd584bfc1b0d759',1,'Cellule::GetX()'],['../classVecteur.html#ad18cb183ef54429f01caa853fb54a9c7',1,'Vecteur::GetX()']]],
   ['getxy_44',['getXY',['../classTerrain.html#a2b514d413389b481f6511bccfa7628ca',1,'Terrain']]],
   ['gety_45',['GetY',['../classBalle.html#a74cf939ea9f0a336556d80d8f22873c9',1,'Balle::GetY()'],['../classCellule.html#a1590d602c284152b80000c7527952ca8',1,'Cellule::GetY()'],['../classVecteur.html#aa34a23b9280ff0ca4795d8efb2f2b98d',1,'Vecteur::GetY()']]],
-  ['gravite_46',['Gravite',['../classGravite.html',1,'']]],
-  ['gravite_47',['gravite',['../classBalle.html#a310b7a0c49f16a4c86a54b1f5951f691',1,'Balle']]],
-  ['gravite_48',['Gravite',['../classGravite.html#a2b0bfc5e6ca39a8a4c04ec51e62a9847',1,'Gravite']]]
+  ['gravite_46',['Gravite',['../classGravite.html',1,'Gravite'],['../classGravite.html#a2b0bfc5e6ca39a8a4c04ec51e62a9847',1,'Gravite::Gravite()']]],
+  ['gravite_47',['gravite',['../classBalle.html#a310b7a0c49f16a4c86a54b1f5951f691',1,'Balle']]]
 ];

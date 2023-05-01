@@ -90,10 +90,3 @@ Vecteur Vecteur :: Normalized() const
      }
 
 
-double Vecteur :: Recupangle()const
-{
-   double temp;
-    temp = acos(x/Magnitude());
-    return temp;
-
-}
