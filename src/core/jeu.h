@@ -157,18 +157,20 @@ public:
      * 
      */
     int SetScore(int x);
+    int SetCoups(int x);
 
 };
 inline void Jeu::SetFinal(int x){Final=x;}
 inline void Jeu :: ResetScore(){score=1000;}
 inline int Jeu :: GetCoups()const{return nbCoups;}
 inline int Jeu :: SetScore(int x){score=x;}
+inline int Jeu :: SetCoups(int x){nbCoups=x;}
 inline int Jeu :: GetFinal()const{return Final;}
 inline int Jeu :: Getscore()const {return score; std::cout<<score;}
 inline void Jeu :: SScore(const char touche ){ if(Jouer(touche)&& nbCoups<20) {nbCoups++;score=score-5;}}
 inline  Terrain& Jeu :: GetTerrain() {return ter;}
 inline  const Terrain& Jeu :: GetConstTerrain() const {return ter;}
-inline Balle& Jeu :: GetBalle() { return jp;}
+inline Balle& Jeu :: GetBalle() {return jp;}
 inline int Jeu :: GetRaf() const {return Raf;}
 inline void Jeu :: SetRaf(int raf)
 {   Raf = raf;}

@@ -218,6 +218,7 @@ void JeuSDL2 :: BoucleJeu()
     SDL_Event events;
 
     bool quit = false;
+    bool Chgt = false;
     
     //gami.Rejouer(gami.GetTerrain().GetBalle().mouvement)==0
     while(!quit){
@@ -230,24 +231,30 @@ void JeuSDL2 :: BoucleJeu()
                         // Commandes du 1er joueur
                         case SDLK_o:
                             gami.ChangerRafraichissement('o');
+                            Chgt = true;
                             break;
                         case SDLK_l:
                             gami.ChangerRafraichissement('l');
+                            Chgt = true;
                             break;
                         case SDLK_a:
                             Replacer('a');
                             break;
                         case SDLK_z:
                             gami.AngleChoisis('z');
+                            Chgt = true;
                             break;
                         case SDLK_s:
                             gami.AngleChoisis('s');
+                            Chgt = true;
                             break;
                         case SDLK_t:
                             gami.GetPuis('t');
+                            Chgt = true;
                             break;
                         case SDLK_g:
                             gami.GetPuis('g');
+                            Chgt = true;
                             break;
                         case SDLK_j: gami.Jouer('j');gami.SScore('j');
                             if(gami.Jouer('j')) 
@@ -290,8 +297,13 @@ void JeuSDL2 :: BoucleJeu()
             }
             
             SDL_Aff();
-            affiche_info_pui();
-            affiche_infos_ang();          
+            if (Chgt)
+            {
+                affiche_infos_ang();
+                affiche_info_pui();
+            }
+            
+            Chgt = false;        
         SDL_RenderPresent(renderer);
         
         }       
@@ -990,6 +1002,8 @@ void JeuSDL2 ::tab_de_score(){
                     Mix_FreeChunk(wav);
                     ReplacerSansTouche();
                     gami.SetFinal(0);
+                    gami.SetScore(1000);
+                    gami.SetCoups(0);
                     Menu();
                     break;
                 }
@@ -1001,6 +1015,7 @@ void JeuSDL2 ::tab_de_score(){
                     ReplacerSansTouche();
                     gami.SetFinal(0);
                     gami.SetScore(1000);
+                    gami.SetCoups(0);
                     BoucleJeu();
                 }
 

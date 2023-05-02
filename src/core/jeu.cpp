@@ -30,6 +30,7 @@ void Jeu :: ClearRepartition()
 void Jeu :: BackMouvBalle(Balle& b)
 {
     SetFinal(0);
+    
     ter.GetGravite().GetPow();
     ter.GetGravite().AffPR();
     ter.GetGravite().GetAngle();
@@ -58,7 +59,7 @@ void Jeu :: BackMouvBalle(Balle& b)
                 }
                 if (ter.CollisionObsType2(b.adrien)==true)
                     {
-                        std::cout<<"OH! t mort cousin";
+                        std::cout<<"OH! t mort cousin 1";
                         if (GetFinal()==0)
                     {
                         SetFinal(2);
@@ -85,7 +86,7 @@ void Jeu :: BackMouvBalle(Balle& b)
                     }
                     if (ter.CollisionObsType2(b.adrien)==true)
                     {
-                        std::cout<<"OH! t mort cousin";
+                        std::cout<<"OH! t mort cousin 2";
                         if (GetFinal()==0)
                         {
                             SetFinal(2);
@@ -113,7 +114,7 @@ void Jeu :: BackMouvBalle(Balle& b)
                         }
                         if (ter.CollisionObsType2(b.adrien)==true)
                         {
-                            std::cout<<"OH! t mort cousin";
+                            std::cout<<"OH! t mort cousin 3";
                             if (GetFinal()==0)
                             {
                                 SetFinal(2);
@@ -140,7 +141,7 @@ void Jeu :: BackMouvBalle(Balle& b)
                             }
                             if (ter.CollisionObsType2(b.adrien)==true)
                             {
-                                std::cout<<"OH! t mort cousin";
+                                std::cout<<"OH! t mort cousin4 ";
                                 if (GetFinal()==0)
                                 {
                                  SetFinal(2);
